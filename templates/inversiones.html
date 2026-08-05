@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inversiones — FinEdge Hyprland · Educación Financiera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   FINEDGE — HYPRLAND DESIGN SYSTEM v2.0
+   Módulo Inversiones · SENA · Grupo Edge
+   ============================================================ */
+:root {
+  --bg:#05030a;--bg0:#08060e;--bg1:#0a0812;--bg2:#0d0b16;
+  --s0:#100e1a;--s1:#141122;--s2:#1a1630;--s3:#211c3e;--s4:#2a2350;
+  --b0:#2e255a;--b1:#3d3272;--b2:#524494;--b3:#6858b0;
+  --p:#9333ea;--p0:#7c22ce;--p1:#a855f7;--p2:#b87afc;--p3:#cda4fd;
+  --glow:rgba(147,51,234,.5);--glow-s:rgba(147,51,234,.25);
+  --faint:rgba(147,51,234,.06);--faint2:rgba(147,51,234,.03);
+  --line:rgba(147,51,234,.22);--line-s:rgba(147,51,234,.12);
+  --cy:#22d3ee;--cy-g:rgba(34,211,238,.06);--cy-l:rgba(34,211,238,.22);
+  --txt:#f0ecff;--txt2:#c9bdf5;--txt3:#a991e0;
+  --muted:#7a6da8;--dim:#50447a;--dim2:#3a305e;
+  --gold:#fbbf24;--gold-g:rgba(251,191,36,.12);
+  --red:#f87171;--red-g:rgba(248,113,113,.1);
+  --ok:#34d399;--ok-g:rgba(52,211,153,.1);
+  --blue:#60a5fa;--blue-g:rgba(96,165,250,.1);
+  --teal:#14b8a6;--orange:#f97316;
+  --mono:'JetBrains Mono','Fira Code',monospace;
+  --sans:'Space Grotesk','Inter',sans-serif;
+  --gap:1px;
+  --shadow:0 8px 32px rgba(0,0,0,.4),0 2px 8px rgba(0,0,0,.3);
+  --shadow-lg:0 16px 64px rgba(0,0,0,.5),0 4px 16px rgba(0,0,0,.4);
+  --border-window:1px solid var(--b0);
+  --transition:all .2s cubic-bezier(.4,0,.2,1);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--b1) var(--bg);}
+body{font-family:var(--sans);background:var(--bg);color:var(--txt);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.015) 2px,rgba(0,0,0,.015) 4px);opacity:.8;}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,rgba(147,51,234,.035) 1px,transparent 1px);background-size:24px 24px;opacity:.6;}
+
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--b1);}::-webkit-scrollbar-thumb:hover{background:var(--p);}
+::selection{background:rgba(147,51,234,.3);color:var(--txt);}
+.container{max-width:1200px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
+
+#sp{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--p3),var(--p1),var(--cy));z-index:9999;transition:width .1s;box-shadow:0 0 10px var(--glow-s);}
+
+/* NAVBAR */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:40px;background:rgba(8,6,14,.88);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:var(--border-window);box-shadow:0 4px 24px rgba(0,0,0,.4);transition:var(--transition);}
+nav.scrolled{background:rgba(5,3,10,.96);border-bottom-color:var(--b1);box-shadow:0 4px 32px rgba(0,0,0,.6);}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:100%;gap:0;}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;transition:var(--transition);}
+.logo:hover{filter:brightness(1.1);}
+.logo-mark{width:22px;height:22px;background:linear-gradient(135deg,var(--p0),var(--p1));display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.65rem;font-weight:800;color:#fff;border:1px solid var(--p1);flex-shrink:0;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));box-shadow:0 0 12px var(--glow-s);}
+.logo-text{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--txt);letter-spacing:.04em;}
+.logo-text span{color:var(--p1);text-shadow:0 0 20px var(--glow-s);}
+.nav-links{display:flex;align-items:center;gap:var(--gap);list-style:none;background:var(--s0);border:var(--border-window);padding:2px;height:28px;position:absolute;left:50%;transform:translateX(-50%);}
+.nav-links a{display:flex;align-items:center;gap:4px;padding:0 10px;height:24px;font-family:var(--mono);font-size:.62rem;font-weight:500;color:var(--muted);text-decoration:none;border:1px solid transparent;transition:var(--transition);letter-spacing:.04em;position:relative;}
+.nav-links a:hover{color:var(--txt2);background:var(--s1);border-color:var(--b0);}
+.nav-links a.active{color:var(--p2);background:var(--faint);border-color:var(--b1);box-shadow:inset 0 0 12px var(--faint);}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:1px;background:var(--p1);box-shadow:0 0 8px var(--glow-s);}
+.btn-nav{display:inline-flex;align-items:center;gap:6px;padding:0 12px;height:26px;font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.06em;cursor:pointer;text-decoration:none;border:none;transition:var(--transition);background:linear-gradient(135deg,var(--p0),var(--p));color:#fff;border:1px solid var(--p1);box-shadow:0 0 20px var(--glow-s);}
+.btn-nav:hover{background:linear-gradient(135deg,var(--p),var(--p1));box-shadow:0 0 32px var(--glow);}
+.hbg{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:6px;background:none;border:var(--border-window);height:28px;justify-content:center;transition:var(--transition);}
+.hbg:hover{border-color:var(--p);background:var(--faint);}
+.hbg span{display:block;width:16px;height:1.5px;background:var(--txt2);transition:var(--transition);}
+.mm{display:none;position:fixed;top:40px;left:0;right:0;background:rgba(8,6,14,.98);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:var(--border-window);padding:8px 16px 16px;z-index:199;flex-direction:column;gap:var(--gap);box-shadow:var(--shadow-lg);}
+.mm.op{display:flex;}
+.mm a{display:block;padding:8px 12px;font-family:var(--mono);font-size:.72rem;color:var(--muted);text-decoration:none;border:var(--border-window);transition:var(--transition);background:transparent;}
+.mm a:hover{color:var(--p2);border-color:var(--b1);background:var(--s1);}
+.mm a.active{color:var(--p1);background:var(--faint);border-color:var(--b1);}
+.mm .btn-nav{margin-top:8px;justify-content:center;display:flex;}
+
+/* UTILITIES */
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.6rem;font-weight:600;color:var(--p2);letter-spacing:.12em;text-transform:uppercase;border:var(--border-window);background:var(--faint);padding:4px 12px;position:relative;}
+.badge::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(147,51,234,.05),transparent);pointer-events:none;}
+.badge .bd{width:5px;height:5px;background:var(--p1);border-radius:50%;animation:blinkDot 2s ease-in-out infinite;box-shadow:0 0 8px var(--glow-s);}
+@keyframes blinkDot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(.7);}}
+
+.sec{padding:88px 0;position:relative;}
+.sec-sm{padding:56px 0;}
+.sh{text-align:center;margin-bottom:52px;}
+.sh .badge{margin-bottom:14px;}
+.stitle{font-family:var(--sans);font-size:clamp(1.8rem,4vw,3rem);font-weight:700;letter-spacing:-.035em;line-height:1.1;margin-bottom:12px;}
+.stitle em{font-style:normal;background:linear-gradient(90deg,var(--p1),var(--cy));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ssub{font-size:.88rem;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.75;}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1);}
+.rv.in{opacity:1;transform:none;}
+.rv-d1{transition-delay:.1s;}.rv-d2{transition-delay:.2s;}.rv-d3{transition-delay:.3s;}.rv-d4{transition-delay:.4s;}
+
+.sec-div{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--b1),transparent);margin:0;}
+
+/* HERO */
+.hero{min-height:90vh;display:flex;align-items:center;padding:72px 0 60px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(147,51,234,.1) 0%,transparent 70%);top:-100px;left:-150px;pointer-events:none;z-index:0;animation:glowPulse 8s ease-in-out infinite;}
+.hero::after{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(34,211,238,.04) 0%,transparent 70%);bottom:0;right:-80px;pointer-events:none;z-index:0;animation:glowPulse 10s ease-in-out infinite reverse;}
+@keyframes glowPulse{0%,100%{opacity:.6;transform:scale(1);}50%{opacity:1;transform:scale(1.1);}}
+.hero-grid{display:grid;grid-template-columns:1fr 480px;gap:48px;align-items:center;}
+.hbadge{margin-bottom:18px;}
+.htitle{font-family:var(--sans);font-size:clamp(2.6rem,5vw,4.6rem);font-weight:700;line-height:.95;letter-spacing:-.04em;margin-bottom:18px;}
+.htitle .hl{display:block;background:linear-gradient(135deg,var(--p1) 0%,var(--cy) 50%,var(--p2) 100%);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradientShift 6s ease infinite;filter:drop-shadow(0 0 30px var(--glow-s));}
+@keyframes gradientShift{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+.htitle .dm{display:block;color:var(--txt2);}
+.hdesc{font-size:.92rem;color:var(--muted);line-height:1.8;max-width:460px;margin-bottom:28px;}
+.hbtns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;}
+.btn-p{display:inline-flex;align-items:center;gap:8px;padding:0 24px;height:32px;font-family:var(--mono);font-size:.78rem;font-weight:700;letter-spacing:.06em;background:linear-gradient(135deg,var(--p0),var(--p));color:#fff;border:1px solid var(--p1);cursor:pointer;text-decoration:none;box-shadow:0 0 24px var(--glow-s);transition:var(--transition);}
+.btn-p:hover{background:linear-gradient(135deg,var(--p),var(--p1));box-shadow:0 0 36px var(--glow);transform:translateY(-1px);}
+.btn-o{display:inline-flex;align-items:center;gap:8px;padding:0 20px;height:32px;font-family:var(--mono);font-size:.78rem;font-weight:600;background:transparent;color:var(--p1);border:var(--border-window);cursor:pointer;text-decoration:none;transition:var(--transition);}
+.btn-o:hover{background:var(--faint);border-color:var(--p);}
+
+.hkpis{display:flex;border:var(--border-window);background:var(--b0);box-shadow:var(--shadow);}
+.hkpi{background:var(--s0);padding:14px 18px;flex:1;text-align:center;border-right:var(--border-window);transition:var(--transition);position:relative;overflow:hidden;}
+.hkpi:last-child{border-right:none;}
+.hkpi:hover{background:var(--s1);}
+.hkpi::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,var(--faint),transparent);opacity:0;transition:opacity .3s;}
+.hkpi:hover::before{opacity:1;}
+.hkpi-v{font-family:var(--mono);font-size:1.5rem;font-weight:700;color:var(--txt);letter-spacing:-.04em;display:flex;align-items:baseline;gap:2px;justify-content:center;}
+.hkpi-v .u{font-size:.85rem;color:var(--p1);text-shadow:0 0 12px var(--glow-s);}
+.hkpi-l{font-family:var(--mono);font-size:.54rem;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;margin-top:3px;}
+
+/* HERO VISUAL CARD */
+.hv{position:relative;z-index:1;}
+.hv-card{background:var(--s0);border:var(--border-window);position:relative;overflow:hidden;box-shadow:var(--shadow-lg),0 0 40px rgba(147,51,234,.08);transition:var(--transition);}
+.hv-card:hover{box-shadow:var(--shadow-lg),0 0 60px rgba(147,51,234,.14);transform:translateY(-2px);}
+.hv-card::before{content:'finedge — portfolio.dashboard [sim]';display:flex;align-items:center;padding:0 12px;height:26px;font-family:var(--mono);font-size:.56rem;color:var(--dim);background:var(--s1);border-bottom:var(--border-window);}
+.hv-card::after{content:'';position:absolute;top:26px;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--p0),var(--p1),var(--cy),transparent);box-shadow:0 0 12px var(--glow-s);}
+.port-header{display:flex;justify-content:space-between;align-items:center;padding:16px 16px 0;margin-top:12px;}
+.port-tag{font-family:var(--mono);font-size:.56rem;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);}
+.port-live{font-family:var(--mono);font-size:.54rem;color:var(--ok);display:flex;align-items:center;gap:5px;}
+.port-live::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--ok);animation:blinkDot 2s infinite;box-shadow:0 0 6px var(--ok);}
+.port-val{font-family:var(--mono);font-size:2rem;font-weight:700;letter-spacing:-.05em;color:var(--txt);padding:4px 16px 0;}
+.port-val span{color:var(--p1);font-size:1rem;}
+.port-sub{font-family:var(--mono);font-size:.54rem;color:var(--dim);padding:2px 16px 10px;}
+.port-delta{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:.64rem;font-weight:700;padding:3px 10px;background:var(--ok-g);border:1px solid rgba(52,211,153,.3);color:var(--ok);margin:0 16px 12px;}
+.port-bars{padding:0 16px 12px;display:flex;flex-direction:column;gap:8px;}
+.pb-row{display:flex;flex-direction:column;gap:3px;}
+.pb-lbl{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.54rem;}
+.pb-name{color:var(--txt2);}.pb-pct{color:var(--dim);}
+.pb-track{height:3px;background:var(--s3);position:relative;overflow:hidden;}
+.pb-fill{height:100%;transition:width 2s cubic-bezier(.4,0,.2,1);position:relative;}
+.pb-fill::after{content:'';position:absolute;right:0;top:-1px;bottom:-1px;width:5px;background:inherit;filter:brightness(1.3);border-radius:1px;}
+.pb-green{background:linear-gradient(90deg,var(--p0),var(--p1));}
+.pb-blue{background:linear-gradient(90deg,#1d4ed8,var(--blue));}
+.pb-gold{background:linear-gradient(90deg,#92620a,var(--gold));}
+.pb-purple{background:linear-gradient(90deg,#6d28d9,var(--p2));}
+.pb-teal{background:linear-gradient(90deg,#0a7a72,var(--teal));}
+.port-footer{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:var(--border-window);background:var(--s1);}
+.port-footer .tg{font-family:var(--mono);font-size:.5rem;font-weight:700;padding:2px 7px;background:var(--ok-g);border:1px solid rgba(52,211,153,.3);color:var(--ok);letter-spacing:.06em;text-transform:uppercase;}
+.port-footer .nt{font-family:var(--mono);font-size:.54rem;color:var(--dim);}
+.port-footer .nt strong{color:var(--p2);}
+
+/* WHAT GRID */
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);background:var(--b0);border:var(--border-window);box-shadow:var(--shadow);}
+.what-card{background:var(--s0);padding:28px 22px;position:relative;overflow:hidden;transition:var(--transition);}
+.what-card:hover{background:var(--s1);}
+.what-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--p0),var(--p1));transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1);}
+.what-card:hover::before{transform:scaleX(1);}
+.what-card::after{content:'';position:absolute;bottom:0;right:0;width:60px;height:60px;background:radial-gradient(circle,rgba(147,51,234,.06),transparent 70%);opacity:0;transition:opacity .3s;}
+.what-card:hover::after{opacity:1;}
+.wc-num{font-family:var(--mono);font-size:2.6rem;font-weight:700;color:var(--b0);letter-spacing:-.05em;line-height:1;margin-bottom:12px;transition:color .3s;}
+.what-card:hover .wc-num{color:var(--b2);}
+.wc-icon{font-size:1.5rem;margin-bottom:12px;display:block;filter:drop-shadow(0 0 12px rgba(147,51,234,.2));}
+.wc-title{font-family:var(--sans);font-size:.92rem;font-weight:700;color:var(--txt);margin-bottom:6px;}
+.wc-desc{font-size:.76rem;color:var(--muted);line-height:1.65;}
+
+/* TABS */
+.inv-tabs{display:flex;gap:var(--gap);background:var(--b0);border:var(--border-window);margin-bottom:var(--gap);}
+.inv-tab{flex:1;padding:10px 8px;font-family:var(--mono);font-size:.64rem;font-weight:600;text-align:center;cursor:pointer;border:none;background:var(--s0);color:var(--muted);transition:var(--transition);letter-spacing:.05em;text-transform:uppercase;}
+.inv-tab:hover{color:var(--txt2);background:var(--s1);}
+.inv-tab.on{color:var(--p2);background:var(--faint);box-shadow:inset 0 0 12px var(--faint);}
+.inv-tab.on::after{content:'';display:block;height:1px;background:var(--p1);box-shadow:0 0 6px var(--glow-s);margin-top:4px;}
+.inv-panel{display:none;}
+.inv-panel.on{display:block;animation:fadeIn .4s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+.inv-type-card{background:var(--s0);border:var(--border-window);position:relative;overflow:hidden;transition:var(--transition);}
+.inv-type-card:hover{border-color:var(--b1);}
+.inv-type-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--p0),var(--p1),var(--cy),transparent);opacity:.6;}
+.itc-header{display:flex;justify-content:space-between;align-items:flex-start;padding:20px 20px 0;}
+.itc-left{display:flex;gap:14px;align-items:flex-start;}
+.itc-icon{width:48px;height:48px;background:var(--faint);border:var(--border-window);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;box-shadow:inset 0 0 20px var(--faint);}
+.itc-name{font-family:var(--sans);font-size:1.1rem;font-weight:700;margin-bottom:4px;}
+.itc-cat{font-family:var(--mono);font-size:.58rem;color:var(--muted);}
+.itc-rate{text-align:right;}
+.itc-rate-val{font-family:var(--mono);font-size:1.4rem;font-weight:700;color:var(--p1);display:block;text-shadow:0 0 15px var(--glow-s);}
+.itc-rate-lbl{font-family:var(--mono);font-size:.58rem;color:var(--muted);}
+.itc-body{font-size:.8rem;color:var(--muted);line-height:1.7;padding:16px 20px;}
+.itc-meters{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 20px 18px;}
+.meter-lbl{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.58rem;margin-bottom:4px;}
+.meter-name{color:var(--muted);}.meter-val{font-weight:700;}
+.meter-track{height:4px;background:var(--s3);overflow:hidden;}
+.meter-fill{height:100%;transition:width 1.4s ease;}
+.meter-fill.risk-low{background:linear-gradient(90deg,#065f46,var(--ok));}
+.meter-fill.risk-med{background:linear-gradient(90deg,#92620a,var(--gold));}
+.meter-fill.risk-high{background:linear-gradient(90deg,#b91c1c,var(--red));}
+.meter-fill.return-low{background:linear-gradient(90deg,var(--p3),var(--p1));}
+.meter-fill.return-med{background:linear-gradient(90deg,var(--p0),var(--p2));}
+.meter-fill.return-high{background:linear-gradient(90deg,var(--p1),var(--cy));}
+
+/* White tables */
+.wt-wrap{background:#ffffff;border:1px solid #d1d5db;border-radius:2px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.12);margin-bottom:24px;}
+.wt-head{background:#f8fafc;padding:16px 20px;border-bottom:2px solid #9333ea;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.wt-head-title{font-family:var(--sans);font-size:1rem;font-weight:700;color:#111827;}
+.wt-head-badge{font-family:var(--mono);font-size:.6rem;font-weight:700;color:#9333ea;background:#f3e8ff;padding:3px 10px;border:1px solid #d8b4fe;letter-spacing:.06em;text-transform:uppercase;}
+.wt-table{width:100%;border-collapse:collapse;}
+.wt-table thead th{background:#f1f5f9;color:#111827;padding:10px 14px;font-family:var(--mono);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;text-align:left;border-bottom:2px solid #cbd5e1;}
+.wt-table tbody td{padding:11px 14px;color:#1f2937;font-size:.82rem;border-bottom:1px solid #e5e7eb;vertical-align:middle;line-height:1.5;}
+.wt-table tbody tr:hover{background:#faf5ff;}
+.wt-table tbody tr:last-child td{border-bottom:none;}
+.wt-table .wt-num{font-family:var(--mono);font-weight:700;color:#9333ea;font-size:.76rem;}
+.wt-table .wt-highlight{font-family:var(--mono);font-weight:700;color:#059669;font-size:.8rem;}
+.wt-table .wt-warn{font-family:var(--mono);font-weight:700;color:#dc2626;font-size:.8rem;}
+.wt-table .wt-neutral{font-family:var(--mono);font-weight:600;color:#6b7280;font-size:.76rem;}
+.wt-foot{background:#f8fafc;padding:11px 20px;border-top:1px solid #e5e7eb;font-size:.74rem;color:#6b7280;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.wt-foot strong{color:#111827;}
+
+/* ═══ COMPARADOR — REDESIGNADO ═══ */
+.comparador-wrap{background:var(--s0);border:var(--border-window);overflow:hidden;box-shadow:var(--shadow);position:relative;}
+.comp-head{display:flex;align-items:center;justify-content:space-between;padding:0 14px;height:26px;font-family:var(--mono);font-size:.56rem;color:var(--dim);background:var(--s1);border-bottom:var(--border-window);text-transform:uppercase;letter-spacing:.08em;}
+.comp-head-left{display:flex;align-items:center;gap:8px;}
+.comp-head-right{display:flex;align-items:center;gap:4px;}
+.comp-zoom-btn{width:22px;height:18px;display:flex;align-items:center;justify-content:center;background:var(--s0);border:var(--border-window);color:var(--muted);cursor:pointer;transition:var(--transition);font-size:.7rem;}
+.comp-zoom-btn:hover{background:var(--s1);color:var(--p2);border-color:var(--b1);}
+.comp-zoom-btn.active{background:var(--faint);color:var(--p1);border-color:var(--b2);}
+.comp-zoom-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.comp-body{padding:24px;overflow-x:auto;transition:max-height .4s ease;}
+.comp-body.collapsed{max-height:180px;overflow:hidden;position:relative;}
+.comp-body.collapsed::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(transparent,var(--s0));pointer-events:none;}
+.comp-title{font-family:var(--sans);font-size:1rem;font-weight:700;margin-bottom:6px;}
+.comp-sub{font-family:var(--mono);font-size:.62rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:18px;}
+.comp-table{width:100%;border-collapse:collapse;min-width:700px;}
+.comp-table th{background:var(--s2);padding:10px 14px;font-family:var(--mono);font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border:var(--border-window);text-align:center;white-space:nowrap;}
+.comp-table th:first-child{text-align:left;}
+.comp-table td{padding:12px 14px;font-size:.78rem;color:var(--txt2);border:var(--border-window);text-align:center;transition:var(--transition);vertical-align:middle;}
+.comp-table td:first-child{text-align:left;color:var(--txt);font-weight:600;white-space:nowrap;}
+.comp-table tr:hover td{background:var(--faint);color:var(--txt);}
+.comp-table .comp-icon{font-size:1.1rem;margin-right:6px;vertical-align:middle;}
+.comp-table .comp-asset{display:flex;align-items:center;gap:8px;}
+.comp-table .comp-asset-icon{width:28px;height:28px;background:var(--faint);border:var(--border-window);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+.comp-table .comp-asset-name{font-weight:700;color:var(--txt);font-size:.8rem;}
+.comp-table .comp-asset-ticker{font-family:var(--mono);font-size:.54rem;color:var(--dim);margin-top:1px;}
+.comp-risk{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:.66rem;font-weight:700;padding:3px 8px;border:1px solid;}
+.risk-low{color:var(--ok);border-color:rgba(52,211,153,.3);background:var(--ok-g);}
+.risk-med{color:var(--gold);border-color:rgba(251,191,36,.3);background:var(--gold-g);}
+.risk-high{color:var(--red);border-color:rgba(248,113,113,.3);background:var(--red-g);}
+.risk-extreme{color:var(--p2);border-color:rgba(168,85,247,.3);background:var(--faint);}
+.comp-bar{height:6px;background:var(--s3);width:100%;max-width:120px;margin:0 auto;position:relative;overflow:hidden;border-radius:1px;}
+.comp-bar-fill{height:100%;border-radius:1px;transition:width 1.4s ease;}
+.comp-bar-fill.bar-green{background:linear-gradient(90deg,#065f46,var(--ok));}
+.comp-bar-fill.bar-blue{background:linear-gradient(90deg,#1d4ed8,var(--blue));}
+.comp-bar-fill.bar-gold{background:linear-gradient(90deg,#92620a,var(--gold));}
+.comp-bar-fill.bar-red{background:linear-gradient(90deg,#b91c1c,var(--red));}
+.comp-bar-fill.bar-purple{background:linear-gradient(90deg,#6d28d9,var(--p2));}
+
+/* Comparador Modal Fullscreen */
+.comp-modal{display:none;position:fixed;inset:0;z-index:1000;background:rgba(5,3,10,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:40px;overflow-y:auto;animation:modalIn .3s ease;}
+.comp-modal.open{display:flex;flex-direction:column;align-items:center;}
+@keyframes modalIn{from{opacity:0;transform:scale(.96);}to{opacity:1;transform:scale(1);}}
+.comp-modal-inner{max-width:1100px;width:100%;margin:0 auto;}
+.comp-modal-close{position:fixed;top:16px;right:16px;width:36px;height:36px;background:var(--s0);border:var(--border-window);color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;z-index:1001;transition:var(--transition);}
+.comp-modal-close:hover{background:var(--s1);color:var(--red);border-color:var(--b1);}
+
+/* Risk Return Chart */
+.chart-comp-wrap{height:340px;position:relative;padding:20px 0 0;margin-top:1px;background:var(--bg0);border-top:var(--border-window);}
+
+/* PIRÁMIDE */
+.pyramid-section{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:stretch;}
+.pyramid-visual{display:flex;flex-direction:column-reverse;gap:8px;background:linear-gradient(180deg,var(--bg2),var(--s0));border:var(--border-window);padding:24px;box-shadow:var(--shadow);height:100%;justify-content:center;}
+.pyr-level{padding:18px 12px;text-align:center;transition:all .3s ease;border-radius:4px;position:relative;overflow:hidden;backdrop-filter:blur(2px);display:flex;flex-direction:column;justify-content:center;}
+.pyr-level:hover{transform:scale(1.03);filter:brightness(1.2);z-index:10;box-shadow:0 8px 20px rgba(0,0,0,.3);}
+.pl-label{font-family:var(--sans);font-size:1rem;font-weight:700;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,0.8);position:relative;z-index:2;}
+.pl-sub{font-family:var(--mono);font-size:.62rem;color:rgba(255,255,255,.9);text-shadow:0 1px 2px rgba(0,0,0,0.8);margin-top:6px;position:relative;z-index:2;}
+.pl1{width:100%;align-self:center;background:linear-gradient(135deg,rgba(52,211,153,.3),rgba(52,211,153,.1));border:1px solid rgba(52,211,153,.4);}
+.pl2{width:85%;align-self:center;background:linear-gradient(135deg,rgba(96,165,250,.3),rgba(96,165,250,.1));border:1px solid rgba(96,165,250,.4);}
+.pl3{width:70%;align-self:center;background:linear-gradient(135deg,rgba(251,191,36,.3),rgba(251,191,36,.1));border:1px solid rgba(251,191,36,.4);}
+.pl4{width:55%;align-self:center;background:linear-gradient(135deg,rgba(248,113,113,.3),rgba(248,113,113,.1));border:1px solid rgba(248,113,113,.4);}
+.pl5{width:40%;align-self:center;background:linear-gradient(135deg,rgba(147,51,234,.4),rgba(147,51,234,.15));border:1px solid rgba(147,51,234,.5);}
+
+/* CRYPTO */
+.crypto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);background:var(--b0);border:var(--border-window);box-shadow:var(--shadow);}
+.crypto-card{background:var(--s0);padding:20px;position:relative;overflow:hidden;transition:var(--transition);}
+.crypto-card:hover{background:var(--s1);}
+.crypto-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--b2),transparent);}
+.crypto-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.crypto-identity{display:flex;align-items:center;gap:10px;}
+.crypto-logo{width:36px;height:36px;background:var(--faint);border:var(--border-window);display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;}
+.crypto-name{font-family:var(--sans);font-size:.88rem;font-weight:700;}
+.crypto-ticker{font-family:var(--mono);font-size:.56rem;color:var(--dim);margin-top:2px;}
+.crypto-change{font-family:var(--mono);font-size:.66rem;font-weight:700;padding:3px 8px;border:1px solid;text-align:right;}
+.change-up{color:var(--ok);border-color:rgba(52,211,153,.3);background:var(--ok-g);}
+.change-dn{color:var(--red);border-color:rgba(248,113,113,.3);background:var(--red-g);}
+.crypto-price{font-family:var(--mono);font-size:1.2rem;font-weight:700;margin-bottom:4px;}
+.crypto-mcap{font-family:var(--mono);font-size:.56rem;color:var(--dim);margin-bottom:10px;}
+.crypto-desc{font-size:.72rem;color:var(--muted);line-height:1.6;}
+
+/* ═══ CÓMO EMPEZAR — REDESIGNADO ═══ */
+.start-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:stretch;}
+.steps-track{display:flex;flex-direction:column;gap:var(--gap);background:var(--b0);border:var(--border-window);height:100%;justify-content:space-between;}
+.step-item{background:var(--s0);padding:20px;display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start;transition:var(--transition);flex:1;}
+.step-item:hover{background:var(--s1);}
+.step-num{width:36px;height:36px;background:var(--faint);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--p1);flex-shrink:0;box-shadow:0 0 10px var(--faint);}
+.step-lbl{font-family:var(--mono);font-size:.56rem;color:var(--p1);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;}
+.step-title{font-family:var(--sans);font-size:.88rem;font-weight:700;margin-bottom:6px;}
+.step-body{font-size:.74rem;color:var(--muted);line-height:1.65;}
+.step-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;}
+.step-tag{font-family:var(--mono);font-size:.52rem;padding:2px 7px;background:var(--faint);border:var(--border-window);color:var(--muted);}
+
+/* Best / Worst Panel — Rediseñado */
+.bw-panel{display:flex;flex-direction:column;gap:var(--gap);height:100%;}
+.bw-section{background:var(--s0);border:var(--border-window);flex:1 1 0%;display:flex;flex-direction:column;overflow:hidden;min-height:0;}
+.bw-section-head{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:var(--border-window);flex-shrink:0;}
+.bw-section-head.best-head{background:linear-gradient(90deg,rgba(52,211,153,.06),transparent);border-bottom-color:rgba(52,211,153,.15);}
+.bw-section-head.worst-head{background:linear-gradient(90deg,rgba(248,113,113,.06),transparent);border-bottom-color:rgba(248,113,113,.15);}
+.bw-section-icon{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+.bw-section-icon.best-icon{background:var(--ok-g);border:1px solid rgba(52,211,153,.3);color:var(--ok);}
+.bw-section-icon.worst-icon{background:var(--red-g);border:1px solid rgba(248,113,113,.3);color:var(--red);}
+.bw-section-title{font-family:var(--mono);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;}
+.best-head .bw-section-title{color:var(--ok);}
+.worst-head .bw-section-title{color:var(--red);}
+.bw-section-count{font-family:var(--mono);font-size:.52rem;color:var(--dim);margin-left:auto;}
+.bw-section-body{display:flex;flex-direction:column;gap:var(--gap);background:var(--b0);flex:1;overflow-y:auto;}
+.bw-row{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--s0);transition:var(--transition);flex:1 1 0%;}
+.bw-row:hover{background:var(--s1);}
+.bw-rank{width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.6rem;font-weight:700;flex-shrink:0;}
+.bw-section-body .bw-row:nth-child(1) .bw-rank{color:var(--ok);}
+.bw-section-body .bw-row:nth-child(2) .bw-rank{color:var(--p1);}
+.bw-section-body .bw-row:nth-child(3) .bw-rank{color:var(--dim);}
+.bw-row-icon{width:28px;height:28px;background:var(--faint);border:var(--border-window);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+.bw-row-info{flex:1;min-width:0;}
+.bw-row-name{font-family:var(--sans);font-size:.76rem;font-weight:700;color:var(--txt);margin-bottom:1px;}
+.bw-row-desc{font-size:.64rem;color:var(--muted);line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bw-row-meta{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0;}
+.bw-row-return{font-family:var(--mono);font-size:.64rem;font-weight:700;}
+.best-section .bw-row-return{color:var(--ok);}
+.worst-section .bw-row-return{color:var(--red);}
+.bw-row-risk{font-family:var(--mono);font-size:.5rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;}
+
+/* TIPS */
+.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);background:var(--b0);border:var(--border-window);box-shadow:var(--shadow);}
+.tip-card{background:var(--s0);padding:24px;transition:var(--transition);position:relative;overflow:hidden;}
+.tip-card:hover{background:var(--s1);}
+.tip-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--p1),transparent);transform:scaleX(0);transition:transform .4s;}
+.tip-card:hover::before{transform:scaleX(1);}
+.tip-tag{font-family:var(--mono);font-size:.56rem;text-transform:uppercase;letter-spacing:.1em;color:var(--p1);font-weight:600;margin-bottom:8px;display:block;}
+.tip-num{position:absolute;top:16px;right:16px;font-family:var(--mono);font-size:2.4rem;font-weight:700;color:var(--b0);letter-spacing:-.05em;}
+.tip-title{font-family:var(--sans);font-size:.9rem;font-weight:700;margin-bottom:6px;}
+.tip-body{font-size:.74rem;color:var(--muted);line-height:1.65;}
+
+/* GLOSARIO */
+.glos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);background:var(--b0);border:var(--border-window);box-shadow:var(--shadow);}
+.glos-card{background:var(--s0);padding:16px;position:relative;overflow:hidden;transition:var(--transition);}
+.glos-card:hover{background:var(--s1);}
+.glos-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:var(--b2);transition:background .3s;}
+.glos-card:hover::before{background:var(--p1);box-shadow:0 0 8px var(--glow-s);}
+.glos-term{font-family:var(--mono);font-size:.7rem;font-weight:700;color:var(--p1);margin-bottom:6px;}
+.glos-def{font-size:.72rem;color:var(--txt2);line-height:1.6;margin-bottom:8px;}
+.glos-ex{font-family:var(--mono);font-size:.58rem;color:var(--dim);background:var(--bg2);padding:5px 8px;border-left:2px solid var(--b2);line-height:1.5;}
+
+/* CTA */
+.cta-block{background:linear-gradient(140deg,var(--s0),var(--s1));border:var(--border-window);padding:68px 56px;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow-lg);}
+.cta-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(147,51,234,.09) 0%,transparent 65%);pointer-events:none;}
+.cta-block::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--p1),var(--cy),transparent);box-shadow:0 0 20px var(--glow-s);}
+.cta-title{font-family:var(--sans);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:12px;position:relative;}
+.cta-title em{font-style:normal;color:var(--p1);text-shadow:0 0 30px var(--glow-s);}
+.cta-sub{font-size:.87rem;color:var(--muted);max-width:460px;margin:0 auto 28px;line-height:1.75;position:relative;}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative;}
+
+/* FOOTER */
+footer{border-top:var(--border-window);padding:44px 0 26px;position:relative;z-index:1;}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--b1),transparent);}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:32px;}
+.fb p{font-size:.75rem;color:var(--muted);line-height:1.7;max-width:240px;margin-top:12px;}
+.fc h4{font-family:var(--mono);font-size:.6rem;font-weight:700;color:var(--txt);text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px;padding-bottom:8px;border-bottom:var(--border-window);}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.fc a{font-size:.76rem;color:var(--muted);text-decoration:none;transition:var(--transition);padding:2px 0;position:relative;}
+.fc a::before{content:'›';position:absolute;left:-12px;opacity:0;color:var(--p1);transition:opacity .2s,transform .2s;transform:translateX(-4px);}
+.fc a:hover{color:var(--p2);}
+.fc a:hover::before{opacity:1;transform:translateX(0);}
+.foot-bot{padding-top:18px;border-top:var(--border-window);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.copy{font-family:var(--mono);font-size:.6rem;color:var(--dim);letter-spacing:.04em;}
+.sena{font-family:var(--mono);font-size:.6rem;color:var(--dim);letter-spacing:.04em;}
+.sena span{color:var(--p1);font-weight:700;}
+
+/* RESPONSIVE */
+@media(max-width:1040px){
+  .hero-grid{grid-template-columns:1fr;}.hv{display:none;}
+  .what-grid{grid-template-columns:1fr 1fr;}.crypto-grid{grid-template-columns:1fr 1fr;}
+  .glos-grid{grid-template-columns:1fr 1fr;}.foot-grid{grid-template-columns:1fr 1fr;gap:28px;}
+  .start-grid{grid-template-columns:1fr;}.pyramid-section{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .nav-links,.btn-nav{display:none!important;}.hbg{display:flex;}
+  .what-grid,.crypto-grid{grid-template-columns:1fr;}
+  .inv-tabs{flex-wrap:wrap;}.inv-tab{flex-basis:33%;}
+  .tips-grid{grid-template-columns:1fr;}.cta-block{padding:44px 22px;}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:22px;}
+  .hkpis{flex-wrap:wrap;}.hkpi{min-width:50%;border-bottom:var(--border-window);border-right:none;}
+  .comp-modal{padding:16px;}
+}
+@media(max-width:480px){
+  .glos-grid{grid-template-columns:1fr;}
+  .cta-btns,.hbtns{flex-direction:column;align-items:stretch;}.hkpi{min-width:100%;}
+}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:1px solid var(--p1);outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<div id="sp"></div>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">F</div>
+      <span class="logo-text">Fin<span>Edge</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#">Estadísticas</a></li>
+      <li><a href="#">Presupuesto</a></li>
+      <li><a href="#">Créditos</a></li>
+      <li><a href="#" class="active">Inversiones</a></li>
+      <li><a href="#">Emprendimiento</a></li>
+    </ul>
+    <a href="#" class="btn-nav">Hablar con Finn →</a>
+    <button class="hbg" id="hbg" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mm" id="mm">
+  <a href="#">Inicio</a>
+  <a href="#">Estadísticas</a>
+  <a href="#">Presupuesto</a>
+  <a href="#">Créditos</a>
+  <a href="#" class="active">Inversiones</a>
+  <a href="#">Emprendimiento</a>
+  <a href="#" class="btn-nav">Hablar con Finn →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hbadge"><div class="badge"><span class="bd"></span> Módulo Inversiones · Educación Financiera</div></div>
+        <h1 class="htitle">
+          <span class="dm">Tu dinero puede</span><br>
+          <span class="hl">trabajar por ti.</span>
+        </h1>
+        <p class="hdesc">Aprende qué es invertir, para qué sirve, cómo empezar desde $50.000 y cuáles opciones se adaptan a ti: CDT, fondos, acciones, criptomonedas y más. Sin jerga técnica.</p>
+        <div class="hbtns">
+          <a href="#que-es" class="btn-p">¿Qué es invertir? →</a>
+          <a href="#comparador" class="btn-o">Comparar opciones</a>
+        </div>
+        <div class="hkpis">
+          <div class="hkpi"><div class="hkpi-v"><span class="counter" data-t="8">0</span><span class="u">%</span></div><div class="hkpi-l">Rendimiento CDT anual</div></div>
+          <div class="hkpi"><div class="hkpi-v"><span class="counter" data-t="12">0</span><span class="u">%</span></div><div class="hkpi-l">Fondos indexados promedio</div></div>
+          <div class="hkpi"><div class="hkpi-v"><span class="counter" data-t="50">0</span><span class="u">K</span></div><div class="hkpi-l">Para empezar a invertir</div></div>
+        </div>
+      </div>
+      <div class="hv">
+        <div class="hv-card">
+          <div class="port-header"><span class="port-tag">Mi portafolio de ejemplo</span><span class="port-live">Simulación educativa</span></div>
+          <div class="port-val"><span>$</span>2.847.300</div>
+          <div class="port-sub">Valor total simulado · 12 meses</div>
+          <div class="port-delta">▲ +$347.300 (+13,9%)</div>
+          <div class="port-bars">
+            <div class="pb-row"><div class="pb-lbl"><span class="pb-name">Fondos indexados</span><span class="pb-pct">40%</span></div><div class="pb-track"><div class="pb-fill pb-green" style="width:40%"></div></div></div>
+            <div class="pb-row"><div class="pb-lbl"><span class="pb-name">CDT</span><span class="pb-pct">25%</span></div><div class="pb-track"><div class="pb-fill pb-blue" style="width:25%"></div></div></div>
+            <div class="pb-row"><div class="pb-lbl"><span class="pb-name">Acciones colombianas</span><span class="pb-pct">20%</span></div><div class="pb-track"><div class="pb-fill pb-gold" style="width:20%"></div></div></div>
+            <div class="pb-row"><div class="pb-lbl"><span class="pb-name">Criptomonedas</span><span class="pb-pct">10%</span></div><div class="pb-track"><div class="pb-fill pb-purple" style="width:10%"></div></div></div>
+            <div class="pb-row"><div class="pb-lbl"><span class="pb-name">Bonos</span><span class="pb-pct">5%</span></div><div class="pb-track"><div class="pb-fill pb-teal" style="width:5%"></div></div></div>
+          </div>
+          <div class="port-footer"><span class="tg">En progreso</span><span class="nt">Actualizado: <strong>Hoy</strong></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ¿QUÉ ES INVERTIR? -->
+<section class="sec" id="que-es">
+  <div class="container">
+    <div class="sh rv">
+      <div class="badge"><span class="bd"></span> Fundamentos</div>
+      <h2 class="stitle">¿Qué es <em>invertir</em> realmente?</h2>
+      <p class="ssub">No es apostar. Es poner tu dinero a trabajar para que crezca con el tiempo, mientras tú haces otra cosa.</p>
+    </div>
+    <div class="what-grid rv">
+      <div class="what-card"><div class="wc-num">01</div><span class="wc-icon">💎</span><div class="wc-title">Crear riqueza</div><div class="wc-desc">Tu dinero gana dinero. Los intereses y ganancias se suman a tu capital inicial, generando un efecto bola de nieve imparable.</div></div>
+      <div class="what-card"><div class="wc-num">02</div><span class="wc-icon">🛡️</span><div class="wc-title">Vencer la inflación</div><div class="wc-desc">Si tu dinero solo está en la cama, pierde valor cada año. Invertir ayuda a que tu patrimonio mantenga su poder de compra.</div></div>
+      <div class="what-card"><div class="wc-num">03</div><span class="wc-icon">🎯</span><div class="wc-title">Alcanzar metas</div><div class="wc-desc">Un viaje, un carro, la universidad o tu propia casa. Invertir te da un camino real y medible para llegar ahí.</div></div>
+      <div class="what-card"><div class="wc-num">04</div><span class="wc-icon">⏳</span><div class="wc-title">Interés compuesto</div><div class="wc-desc">La ganancia de hoy genera ganancia mañana. Cuanto más tiempo dejes invertido, más potente se vuelve este efecto.</div></div>
+      <div class="what-card"><div class="wc-num">05</div><span class="wc-icon">📊</span><div class="wc-title">Diversificar riesgos</div><div class="wc-desc">No poner todos los huevos en una canasta. Repartir tu dinero entre varias opciones reduce el riesgo total.</div></div>
+      <div class="what-card"><div class="wc-num">06</div><span class="wc-icon">🧠</span><div class="wc-title">Aprender finanzas</div><div class="wc-desc">Invertir te obliga a entender la economía, los mercados y a tomar decisiones informadas sobre tu futuro financiero.</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- TIPOS DE INVERSIÓN -->
+<section class="sec" id="tipos-inv">
+  <div class="container">
+    <div class="sh rv">
+      <div class="badge"><span class="bd"></span> Opciones</div>
+      <h2 class="stitle">Tipos de <em>inversiones</em> para jóvenes</h2>
+      <p class="ssub">Conoce las principales opciones disponibles en Colombia, desde las más seguras hasta las más agresivas.</p>
+    </div>
+    <div class="inv-tabs rv">
+      <button class="inv-tab on" data-tab="cdt">CDT</button>
+      <button class="inv-tab" data-tab="fondos">Fondos</button>
+      <button class="inv-tab" data-tab="acciones">Acciones</button>
+      <button class="inv-tab" data-tab="cripto">Cripto</button>
+      <button class="inv-tab" data-tab="bonos">Bonos</button>
+    </div>
+
+    <!-- CDT -->
+    <div class="inv-panel on" id="panel-cdt">
+      <div class="inv-type-card">
+        <div class="itc-header">
+          <div class="itc-left"><div class="itc-icon">🏦</div><div><div class="itc-name">CDT — Certificado de Depósito a Término</div><div class="itc-cat">Renta fija · Bajo riesgo</div></div></div>
+          <div class="itc-rate"><span class="itc-rate-val">8-11%</span><span class="itc-rate-lbl">EAA anual</span></div>
+        </div>
+        <div class="itc-body">Prestas tu dinero a un banco por un tiempo fijo (30, 60, 90, 180, 360 días). Al final te devuelven el capital más intereses. Es la opción más segura y fácil de entender para empezar.</div>
+        <div class="itc-meters">
+          <div><div class="meter-lbl"><span class="meter-name">Riesgo</span><span class="meter-val" style="color:var(--ok)">Bajo</span></div><div class="meter-track"><div class="meter-fill risk-low" style="width:20%"></div></div></div>
+          <div><div class="meter-lbl"><span class="meter-name">Retorno</span><span class="meter-val" style="color:var(--p1)">Moderado</span></div><div class="meter-track"><div class="meter-fill return-low" style="width:35%"></div></div></div>
+        </div>
+      </div>
+      <div class="wt-wrap" style="margin-top:1px">
+        <div class="wt-head"><span class="wt-head-title">Análisis del CDT para jóvenes</span><span class="wt-head-badge">Recomendado para empezar</span></div>
+        <table class="wt-table"><thead><tr><th>Aspecto</th><th>Detalle</th><th>Impacto</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Monto mínimo</strong></td><td>Desde $50.000 en la mayoría de bancos colombianos</td><td><span class="wt-highlight">Accesible</span></td></tr>
+          <tr><td><strong>Liquidez</strong></td><td>No puedes retirar antes del vencimiento sin penalización</td><td><span class="wt-warn">Baja</span></td></tr>
+          <tr><td><strong>Riesgo</strong></td><td>Cubierto por el FOGAFIN hasta $50 millones</td><td><span class="wt-highlight">Muy bajo</span></td></tr>
+          <tr><td><strong>Tributación</strong></td><td>Retención en la fuente del 4% sobre ganancias</td><td><span class="wt-neutral">Moderado</span></td></tr>
+          <tr><td><strong>Ideal para</strong></td><td>Primeros ahorros, reserva de emergencia con rendimiento</td><td><span class="wt-highlight">★★★★★</span></td></tr>
+        </tbody></table>
+        <div class="wt-foot"><span>💡 <strong>Consejo:</strong> Empieza con un CDT de 90 días para probar cómo se siente ver crecer tu dinero</span><span>Plataformas: Bancolombia, Davivienda, BBVA, Nequi</span></div>
+      </div>
+    </div>
+
+    <!-- Fondos -->
+    <div class="inv-panel" id="panel-fondos">
+      <div class="inv-type-card">
+        <div class="itc-header">
+          <div class="itc-left"><div class="itc-icon">📈</div><div><div class="itc-name">Fondos de Inversión Colectiva (FIC)</div><div class="itc-cat">Renta variable / mixta · Riesgo moderado</div></div></div>
+          <div class="itc-rate"><span class="itc-rate-val">10-15%</span><span class="itc-rate-lbl">EAA promedio</span></div>
+        </div>
+        <div class="itc-body">Un grupo de personas invierten juntas y un gestor profesional decide dónde poner el dinero. Permite diversificar con poco capital y acceder a mercados que normalmente requieren grandes inversiones.</div>
+        <div class="itc-meters">
+          <div><div class="meter-lbl"><span class="meter-name">Riesgo</span><span class="meter-val" style="color:var(--gold)">Moderado</span></div><div class="meter-track"><div class="meter-fill risk-med" style="width:45%"></div></div></div>
+          <div><div class="meter-lbl"><span class="meter-name">Retorno</span><span class="meter-val" style="color:var(--p1)">Alto</span></div><div class="meter-track"><div class="meter-fill return-med" style="width:60%"></div></div></div>
+        </div>
+      </div>
+      <div class="wt-wrap" style="margin-top:1px">
+        <div class="wt-head"><span class="wt-head-title">Análisis de Fondos para jóvenes</span><span class="wt-head-badge">Diversificación fácil</span></div>
+        <table class="wt-table"><thead><tr><th>Aspecto</th><th>Detalle</th><th>Impacto</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Monto mínimo</strong></td><td>Desde $20.000 en plataformas digitales</td><td><span class="wt-highlight">Muy accesible</span></td></tr>
+          <tr><td><strong>Liquidez</strong></td><td>Alta en fondos de renta fija; variable en fondos de renta variable</td><td><span class="wt-highlight">Alta</span></td></tr>
+          <tr><td><strong>Riesgo</strong></td><td>Depende del tipo de fondo. Renta fija = bajo. RV = moderado-alto</td><td><span class="wt-neutral">Variable</span></td></tr>
+          <tr><td><strong>Gestión</strong></td><td>Gestionado por profesionales. Tú solo aportas dinero</td><td><span class="wt-highlight">Pasivo</span></td></tr>
+          <tr><td><strong>Ideal para</strong></td><td>Crecer a largo plazo sin dedicarle tiempo, portafolio inicial</td><td><span class="wt-highlight">★★★★★</span></td></tr>
+        </tbody></table>
+        <div class="wt-foot"><span>💡 <strong>Consejo:</strong> Empieza con fondos de renta fija, luego agrega renta variable al ganar confianza</span><span>Plataformas: Bancolombia, Adcap, Fondo Emprender, Tyba</span></div>
+      </div>
+    </div>
+
+    <!-- Acciones -->
+    <div class="inv-panel" id="panel-acciones">
+      <div class="inv-type-card">
+        <div class="itc-header">
+          <div class="itc-left"><div class="itc-icon">📉</div><div><div class="itc-name">Acciones en la BVC — Bolsa de Valores Colombia</div><div class="itc-cat">Renta variable · Riesgo alto</div></div></div>
+          <div class="itc-rate"><span class="itc-rate-val">12-25%</span><span class="itc-rate-lbl">EAA histórico</span></div>
+        </div>
+        <div class="itc-body">Comprar una fracción de una empresa colombiana (Ecopetrol, Bancolombia, Grupo Aval, etc.). Si la empresa crece, tus acciones valen más. También puedes recibir dividendos. Requiere más conocimiento y tolerancia al riesgo.</div>
+        <div class="itc-meters">
+          <div><div class="meter-lbl"><span class="meter-name">Riesgo</span><span class="meter-val" style="color:var(--red)">Alto</span></div><div class="meter-track"><div class="meter-fill risk-high" style="width:75%"></div></div></div>
+          <div><div class="meter-lbl"><span class="meter-name">Retorno</span><span class="meter-val" style="color:var(--cy)">Muy alto</span></div><div class="meter-track"><div class="meter-fill return-high" style="width:80%"></div></div></div>
+        </div>
+      </div>
+      <div class="wt-wrap" style="margin-top:1px">
+        <div class="wt-head"><span class="wt-head-title">Análisis de Acciones para jóvenes</span><span class="wt-head-badge">Alto riesgo / Alto retorno</span></div>
+        <table class="wt-table"><thead><tr><th>Aspecto</th><th>Detalle</th><th>Impacto</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Monto mínimo</strong></td><td>Desde $50.000 por operación en la BVC</td><td><span class="wt-highlight">Accesible</span></td></tr>
+          <tr><td><strong>Liquidez</strong></td><td>Alta: puedes vender en cualquier momento de operación</td><td><span class="wt-highlight">Alta</span></td></tr>
+          <tr><td><strong>Riesgo</strong></td><td>El precio puede subir o bajar. Puedes perder parte de tu inversión</td><td><span class="wt-warn">Alto</span></td></tr>
+          <tr><td><strong>Conocimiento</strong></td><td>Debes entender análisis fundamental y técnico básico</td><td><span class="wt-neutral">Requerido</span></td></tr>
+          <tr><td><strong>Ideal para</strong></td><td>Inversores con tolerancia al riesgo y disposición a aprender</td><td><span class="wt-highlight">★★★★</span></td></tr>
+        </tbody></table>
+        <div class="wt-foot"><span>💡 <strong>Consejo:</strong> Antes de comprar acciones reales, practica con simuladores bursátiles gratuitos</span><span>Plataformas: Trii, Celsia, Davivienda Corredor</span></div>
+      </div>
+    </div>
+
+    <!-- Cripto -->
+    <div class="inv-panel" id="panel-cripto">
+      <div class="inv-type-card">
+        <div class="itc-header">
+          <div class="itc-left"><div class="itc-icon">₿</div><div><div class="itc-name">Criptomonedas</div><div class="itc-cat">Renta variable · Riesgo muy alto</div></div></div>
+          <div class="itc-rate"><span class="itc-rate-val">Variable</span><span class="itc-rate-lbl">Sin garantía</span></div>
+        </div>
+        <div class="itc-body">Monedas digitales descentralizadas como Bitcoin, Ethereum y miles más. Su valor cambia constantemente y puede subir muchísimo... o caer drásticamente. No están reguladas en Colombia y no hay protección al inversionista.</div>
+        <div class="itc-meters">
+          <div><div class="meter-lbl"><span class="meter-name">Riesgo</span><span class="meter-val" style="color:var(--red)">Extremo</span></div><div class="meter-track"><div class="meter-fill risk-high" style="width:95%"></div></div></div>
+          <div><div class="meter-lbl"><span class="meter-name">Retorno</span><span class="meter-val" style="color:var(--cy)">Impredecible</span></div><div class="meter-track"><div class="meter-fill return-high" style="width:90%"></div></div></div>
+        </div>
+      </div>
+      <div class="wt-wrap" style="margin-top:1px">
+        <div class="wt-head"><span class="wt-head-title">Análisis de Criptomonedas para jóvenes</span><span class="wt-head-badge">Solo para expertos</span></div>
+        <table class="wt-table"><thead><tr><th>Aspecto</th><th>Detalle</th><th>Impacto</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Monto mínimo</strong></td><td>Desde $10.000 en algunos exchanges</td><td><span class="wt-highlight">Muy accesible</span></td></tr>
+          <tr><td><strong>Liquidez</strong></td><td>Alta: operan 24/7 sin horario de mercado</td><td><span class="wt-highlight">Muy alta</span></td></tr>
+          <tr><td><strong>Riesgo</strong></td><td>Volatilidad extrema. Puedes perder todo tu dinero</td><td><span class="wt-warn">Muy alto</span></td></tr>
+          <tr><td><strong>Regulación</strong></td><td>No están reguladas en Colombia. Sin protección legal</td><td><span class="wt-warn">Ninguna</span></td></tr>
+          <tr><td><strong>Ideal para</strong></td><td>Solo dinero que puedas perder sin afectar tu vida</td><td><span class="wt-warn">★★</span></td></tr>
+        </tbody></table>
+        <div class="wt-foot"><span>⚠️ <strong>Advertencia:</strong> Nunca inviertas en cripto dinero que necesitas para vivir. Máximo 5-10% de tu portafolio</span><span>Plataformas: Binance, Bitso, Buda</span></div>
+      </div>
+    </div>
+
+    <!-- Bonos -->
+    <div class="inv-panel" id="panel-bonos">
+      <div class="inv-type-card">
+        <div class="itc-header">
+          <div class="itc-left"><div class="itc-icon">📜</div><div><div class="itc-name">Bonos y TES (Títulos de Deuda Pública)</div><div class="itc-cat">Renta fija · Riesgo bajo-moderado</div></div></div>
+          <div class="itc-rate"><span class="itc-rate-val">9-13%</span><span class="itc-rate-lbl">EAA promedio</span></div>
+        </div>
+        <div class="itc-body">Le prestas dinero al gobierno colombiano (TES) o a empresas grandes (bonos corporativos). A cambio recibes intereses periódicos y la devolución del capital al vencimiento. Más rentables que el CDT pero con un poco más de riesgo.</div>
+        <div class="itc-meters">
+          <div><div class="meter-lbl"><span class="meter-name">Riesgo</span><span class="meter-val" style="color:var(--ok)">Bajo</span></div><div class="meter-track"><div class="meter-fill risk-low" style="width:30%"></div></div></div>
+          <div><div class="meter-lbl"><span class="meter-name">Retorno</span><span class="meter-val" style="color:var(--p1)">Moderado-alto</span></div><div class="meter-track"><div class="meter-fill return-med" style="width:55%"></div></div></div>
+        </div>
+      </div>
+      <div class="wt-wrap" style="margin-top:1px">
+        <div class="wt-head"><span class="wt-head-title">Análisis de Bonos para jóvenes</span><span class="wt-head-badge">Estabilidad + rentabilidad</span></div>
+        <table class="wt-table"><thead><tr><th>Aspecto</th><th>Detalle</th><th>Impacto</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Monto mínimo</strong></td><td>Desde $100.000 por título en la BVC</td><td><span class="wt-neutral">Moderado</span></td></tr>
+          <tr><td><strong>Liquidez</strong></td><td>Media: puedes vender antes del vencimiento en el mercado secundario</td><td><span class="wt-neutral">Media</span></td></tr>
+          <tr><td><strong>Riesgo</strong></td><td>RIESGO SOBERANO (TES) o crédito corporativo. Bajo en general</td><td><span class="wt-highlight">Bajo</span></td></tr>
+          <tr><td><strong>Conocimiento</strong></td><td>Conceptos básicos de tasa de interés y duración</td><td><span class="wt-neutral">Básico</span></td></tr>
+          <tr><td><strong>Ideal para</strong></td><td>Diversificar renta fija con mejor rendimiento que CDT</td><td><span class="wt-highlight">★★★★</span></td></tr>
+        </tbody></table>
+        <div class="wt-foot"><span>💡 <strong>Consejo:</strong> Los TES clase B son excelentes para el mediano plazo si ya tienes tu emergencia cubierta</span><span>Plataformas: Davivienda Corredor, Valores Bancolombia</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══ COMPARADOR — CON LUPAS DE ZOOM ═══ -->
+<section class="sec" id="comparador">
+  <div class="container">
+    <div class="sh rv">
+      <div class="badge"><span class="bd"></span> Comparador</div>
+      <h2 class="stitle">Compara <em>todas</em> las opciones</h2>
+      <p class="ssub">Vista lateral de cada inversión: rendimiento, riesgo, liquidez y cuánto necesitas para empezar.</p>
+    </div>
+    <div class="comparador-wrap rv">
+      <div class="comp-head">
+        <div class="comp-head-left">
+          <span>finedge — investment.comparator</span>
+        </div>
+        <div class="comp-head-right">
+          <button class="comp-zoom-btn" id="zoomCollapse" title="Vista compacta" aria-label="Vista compacta">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16" y2="16"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </button>
+          <button class="comp-zoom-btn" id="zoomExpand" title="Vista expandida" aria-label="Vista expandida">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16" y2="16"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </button>
+          <button class="comp-zoom-btn" id="zoomFullscreen" title="Pantalla completa" aria-label="Pantalla completa">
+            <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="comp-body" id="compBody">
+        <div class="comp-title">Comparador de inversiones</div>
+        <div class="comp-sub">Rendimiento · Riesgo · Liquidez · Monto mínimo</div>
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Activo</th>
+              <th>Rendimiento EAA</th>
+              <th>Nivel de riesgo</th>
+              <th>Liquidez</th>
+              <th>Retorno potencial</th>
+              <th>Monto mín.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="comp-asset"><div class="comp-asset-icon">🏦</div><div><div class="comp-asset-name">CDT</div><div class="comp-asset-ticker">Renta fija</div></div></div></td>
+              <td style="font-family:var(--mono);font-weight:700;color:var(--p1);">8 – 11%</td>
+              <td><span class="comp-risk risk-low">Bajo</span></td>
+              <td style="font-family:var(--mono);font-size:.7rem;color:var(--red);">Baja</td>
+              <td><div class="comp-bar"><div class="comp-bar-fill bar-green" style="width:35%"></div></div></td>
+              <td style="font-family:var(--mono);font-size:.7rem;">$50K</td>
+            </tr>
+            <tr>
+              <td><div class="comp-asset"><div class="comp-asset-icon">📈</div><div><div class="comp-asset-name">Fondos (FIC)</div><div class="comp-asset-ticker">Renta mixta</div></div></div></td>
+              <td style="font-family:var(--mono);font-weight:700;color:var(--p1);">10 – 15%</td>
+              <td><span class="comp-risk risk-med">Moderado</span></td>
+              <td style="font-family:var(--mono);font-size:.7rem;color:var(--ok);">Alta</td>
+              <td><div class="comp-bar"><div class="comp-bar-fill bar-blue" style="width:55%"></div></div></td>
+              <td style="font-family:var(--mono);font-size:.7rem;">$20K</td>
+            </tr>
+            <tr>
+              <td><div class="comp-asset"><div class="comp-asset-icon">📜</div><div><div class="comp-asset-name">Bonos / TES</div><div class="comp-asset-ticker">Renta fija</div></div></div></td>
+              <td style="font-family:var(--mono);font-weight:700;color:var(--p1);">9 – 13%</td>
+              <td><span class="comp-risk risk-low">Bajo</span></td>
+              <td style="font-family:var(--mono);font-size:.7rem;color:var(--gold);">Media</td>
+              <td><div class="comp-bar"><div class="comp-bar-fill bar-green" style="width:45%"></div></div></td>
+              <td style="font-family:var(--mono);font-size:.7rem;">$100K</td>
+            </tr>
+            <tr>
+              <td><div class="comp-asset"><div class="comp-asset-icon">📉</div><div><div class="comp-asset-name">Acciones BVC</div><div class="comp-asset-ticker">Renta variable</div></div></div></td>
+              <td style="font-family:var(--mono);font-weight:700;color:var(--p1);">12 – 25%</td>
+              <td><span class="comp-risk risk-high">Alto</span></td>
+              <td style="font-family:var(--mono);font-size:.7rem;color:var(--ok);">Alta</td>
+              <td><div class="comp-bar"><div class="comp-bar-fill bar-gold" style="width:75%"></div></div></td>
+              <td style="font-family:var(--mono);font-size:.7rem;">$50K</td>
+            </tr>
+            <tr>
+              <td><div class="comp-asset"><div class="comp-asset-icon">₿</div><div><div class="comp-asset-name">Bitcoin</div><div class="comp-asset-ticker">Criptomoneda</div></div></div></td>
+              <td style="font-family:var(--mono);font-weight:700;color:var(--cy);">Variable</td>
+              <td><span class="comp-risk risk-extreme">Extremo</span></td>
+              <td style="font-family:var(--mono);font-size:.7rem;color:var(--ok);">Muy alta</td>
+              <td><div class="comp-bar"><div class="comp-bar-fill bar-purple" style="width:90%"></div></div></td>
+              <td style="font-family:var(--mono);font-size:.7rem;">$10K</td>
+            </tr>
+            <tr>
+              <td><div class="comp-asset"><div class="comp-asset-icon">Ξ</div><div><div class="comp-asset-name">Ethereum</div><div class="comp-asset-ticker">Criptomoneda</div></div></div></td>
+              <td style="font-family:var(--mono);font-weight:700;color:var(--cy);">Variable</td>
+              <td><span class="comp-risk risk-extreme">Extremo</span></td>
+              <td style="font-family:var(--mono);font-size:.7rem;color:var(--ok);">Muy alta</td>
+              <td><div class="comp-bar"><div class="comp-bar-fill bar-purple" style="width:85%"></div></div></td>
+              <td style="font-family:var(--mono);font-size:.7rem;">$10K</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparador Modal Fullscreen -->
+<div class="comp-modal" id="compModal">
+  <button class="comp-modal-close" id="compModalClose" aria-label="Cerrar">✕</button>
+  <div class="comp-modal-inner">
+    <div class="comparador-wrap" style="box-shadow:none;">
+      <div class="comp-head">
+        <div class="comp-head-left"><span>finedge — investment.comparator [fullscreen]</span></div>
+        <div class="comp-head-right"></div>
+      </div>
+      <div class="comp-body" style="padding:32px;">
+        <div class="comp-title">Comparador de inversiones — Vista completa</div>
+        <div class="comp-sub">Rendimiento · Riesgo · Liquidez · Retorno potencial · Monto mínimo</div>
+        <table class="comp-table" style="min-width:auto;">
+          <thead>
+            <tr>
+              <th>Activo</th>
+              <th>Rendimiento EAA</th>
+              <th>Nivel de riesgo</th>
+              <th>Liquidez</th>
+              <th>Retorno potencial</th>
+              <th>Monto mín.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="comp-asset"><div class="comp-asset-icon">🏦</div><div><div class="comp-asset-name">CDT</div><div class="comp-asset-ticker">Renta fija</div></div></div></td>
+              <td style="font-family:var(--mono);font-weight:700;color:var(--p1);">8 – 11%</td>
+              <td><span class="comp-risk risk-low">Bajo</span></td>
+              <td style="font-family:var(--mono);font-size:.7rem;color:var(--red);">Baja</td>
+              <td><div class="comp-bar" style="max-width:160px;"><div class="comp-bar-fill bar-green" style="width:35%"></div></div></td>
+              <td style="font-family:var(--mono);font-size:.7rem;">$50K</td>
+            </tr>
+            <tr>
+              <td><div class="comp-asset"><div class="comp-asset-icon">📈</div><div><div class="comp-asset-name">Fondos (FIC)</div><div class="comp-asset-ticker">Renta mixta</div></div></div></td>
+              <td style="font-family:var(--mono);font-weight:700;color:var(--p1);">10 – 15%</td>
+              <td><span class="comp-risk risk-med">Moderado</span></td>
+              <td style="font-family:var(--mono);font-size:.7rem;color:var(--ok);">Alta</td>
+              <td><div class="comp-bar" style="max-width:160px;"><div class="comp-bar-fill bar-blue" style="width:55%"></div></div></td>
+              <td style="font-family:var(--mono);font-size:.7rem;">$20K</td>
+            </tr>
+            <tr>
+              <td><div class="comp-asset"><div class="comp-asset-icon">📜</div><div><div class="comp-asset-name">Bonos / TES</div><div class="comp-asset-ticker">Renta fija</div></div></div></td>
+              <td style="font-family:var(--mono);font-weight:700;color:var(--p1);">9 – 13%</td>
+              <td><span class="comp-risk risk-low">Bajo</span></td>
+              <td style="font-family:var(--mono);font-size:.7rem;color:var(--gold);">Media</td>
+              <td><div class="comp-bar" style="max-width:160px;"><div class="comp-bar-fill bar-green" style="width:45%"></div></div></td>
+              <td style="font-family:var(--mono);font-size:.7rem;">$100K</td>
+            </tr>
+            <tr>
+              <td><div class="comp-asset"><div class="comp-asset-icon">📉</div><div><div class="comp-asset-name">Acciones BVC</div><div class="comp-asset-ticker">Renta variable</div></div></div></td>
+              <td style="font-family:var(--mono);font-weight:700;color:var(--p1);">12 – 25%</td>
+              <td><span class="comp-risk risk-high">Alto</span></td>
+              <td style="font-family:var(--mono);font-size:.7rem;color:var(--ok);">Alta</td>
+              <td><div class="comp-bar" style="max-width:160px;"><div class="comp-bar-fill bar-gold" style="width:75%"></div></div></td>
+              <td style="font-family:var(--mono);font-size:.7rem;">$50K</td>
+            </tr>
+            <tr>
+              <td><div class="comp-asset"><div class="comp-asset-icon">₿</div><div><div class="comp-asset-name">Bitcoin</div><div class="comp-asset-ticker">Criptomoneda</div></div></div></td>
+              <td style="font-family:var(--mono);font-weight:700;color:var(--cy);">Variable</td>
+              <td><span class="comp-risk risk-extreme">Extremo</span></td>
+              <td style="font-family:var(--mono);font-size:.7rem;color:var(--ok);">Muy alta</td>
+              <td><div class="comp-bar" style="max-width:160px;"><div class="comp-bar-fill bar-purple" style="width:90%"></div></div></td>
+              <td style="font-family:var(--mono);font-size:.7rem;">$10K</td>
+            </tr>
+            <tr>
+              <td><div class="comp-asset"><div class="comp-asset-icon">Ξ</div><div><div class="comp-asset-name">Ethereum</div><div class="comp-asset-ticker">Criptomoneda</div></div></div></td>
+              <td style="font-family:var(--mono);font-weight:700;color:var(--cy);">Variable</td>
+              <td><span class="comp-risk risk-extreme">Extremo</span></td>
+              <td style="font-family:var(--mono);font-size:.7rem;color:var(--ok);">Muy alta</td>
+              <td><div class="comp-bar" style="max-width:160px;"><div class="comp-bar-fill bar-purple" style="width:85%"></div></div></td>
+              <td style="font-family:var(--mono);font-size:.7rem;">$10K</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="sec-div">
+
+<!-- PIRÁMIDE DE RIESGO -->
+<section class="sec" id="piramide">
+  <div class="container">
+    <div class="sh rv">
+      <div class="badge"><span class="bd"></span> Pirámide</div>
+      <h2 class="stitle">Pirámide de <em>riesgo</em></h2>
+      <p class="ssub">De la base más segura a la cima más volátil. Así se distribuye el riesgo en las inversiones.</p>
+    </div>
+    <div class="pyramid-section rv">
+      <div class="pyramid-visual">
+        <div class="pyr-level pl5"><div class="pl-label">Criptomonedas</div><div class="pl-sub">Riesgo extremo · Retorno impredecible</div></div>
+        <div class="pyr-level pl4"><div class="pl-label">Acciones</div><div class="pl-sub">Riesgo alto · Retorno variable 12-25%</div></div>
+        <div class="pyr-level pl3"><div class="pl-label">Fondos RV</div><div class="pl-sub">Riesgo moderado · Retorno 10-15%</div></div>
+        <div class="pyr-level pl2"><div class="pl-label">Bonos / TES</div><div class="pl-sub">Riesgo bajo · Retorno 9-13%</div></div>
+        <div class="pyr-level pl1"><div class="pl-label">CDT / Ahorro</div><div class="pl-sub">Riesgo mínimo · Retorno 8-11%</div></div>
+      </div>
+      <div class="steps-track" style="justify-content:center;">
+        <div class="step-item">
+          <div class="step-num">⚡</div>
+          <div><div class="step-lbl">Regla de oro</div><div class="step-title">Nunca inviertas lo que no puedes perder</div><div class="step-body">La pirámide te muestra que a mayor riesgo, mayor potencial de ganancia... pero también de pérdida. Un portafolio saludable tiene base ancha (CDT, bonos) y punta pequeña (cripto, acciones especulativas).</div></div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">🎯</div>
+          <div><div class="step-lbl">Distribución típica</div><div class="step-title">La regla 80/20 para principiantes</div><div class="step-body">80% en inversiones seguras (CDT, bonos, fondos RF) y máximo 20% en riesgosas (acciones, cripto). Ajusta según tu edad y tolerancia al riesgo.</div></div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">🔄</div>
+          <div><div class="step-lbl">Rebalanceo</div><div class="step-title">Revisa cada 6 meses</div><div class="step-body">Si tu cripto creció mucho y ahora es 40% de tu portafolio, vende parte y vuelve a tu distribución original. Esto es rebalancear.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- CRIPTOMONEDAS -->
+<section class="sec" id="criptos">
+  <div class="container">
+    <div class="sh rv">
+      <div class="badge"><span class="bd"></span> Cripto</div>
+      <h2 class="stitle">Criptomonedas: <em>lo que debes saber</em></h2>
+      <p class="ssub">Antes de poner un solo peso en cripto, entiende los riesgos y las principales monedas del mercado.</p>
+    </div>
+    <div class="crypto-grid rv">
+      <div class="crypto-card">
+        <div class="crypto-header"><div class="crypto-identity"><div class="crypto-logo">₿</div><div><div class="crypto-name">Bitcoin</div><div class="crypto-ticker">BTC</div></div></div><div class="crypto-change change-up">+42%</div></div>
+        <div class="crypto-price">$218.4M COP</div><div class="crypto-mcap">Cap. de mercado: $1.3B USD</div>
+        <div class="crypto-desc">La primera y más grande criptomoneda. Funciona como "oro digital" con oferta limitada (21 millones). Es la menos volátil del ecosistema cripto, pero sigue siendo extremadamente riesgosa vs. inversiones tradicionales.</div>
+      </div>
+      <div class="crypto-card">
+        <div class="crypto-header"><div class="crypto-identity"><div class="crypto-logo">Ξ</div><div><div class="crypto-name">Ethereum</div><div class="crypto-ticker">ETH</div></div></div><div class="crypto-change change-up">+28%</div></div>
+        <div class="crypto-price">$11.2M COP</div><div class="crypto-mcap">Cap. de mercado: $380B USD</div>
+        <div class="crypto-desc">Plataforma para contratos inteligentes y aplicaciones descentralizadas. Más versátil que Bitcoin pero con mayor complejidad técnica. Gas fees pueden ser altos en horas pico.</div>
+      </div>
+      <div class="crypto-card">
+        <div class="crypto-header"><div class="crypto-identity"><div class="crypto-logo">◎</div><div><div class="crypto-name">Solana</div><div class="crypto-ticker">SOL</div></div></div><div class="crypto-change change-dn">-12%</div></div>
+        <div class="crypto-price">$2.1M COP</div><div class="crypto-mcap">Cap. de mercado: $78B USD</div>
+        <div class="crypto-desc">Blockchain rápida y barata. Popular para NFTs y DeFi. Ha sufrido caídas de red. Alta volatilidad: puede subir 50% en una semana o caer 40% en un día.</div>
+      </div>
+      <div class="crypto-card">
+        <div class="crypto-header"><div class="crypto-identity"><div class="crypto-logo">⊡</div><div><div class="crypto-name">Binance Coin</div><div class="crypto-ticker">BNB</div></div></div><div class="crypto-change change-up">+8%</div></div>
+        <div class="crypto-price">$1.8M COP</div><div class="crypto-mcap">Cap. de mercado: $92B USD</div>
+        <div class="crypto-desc">Token del exchange Binance. Útil para pagar comisiones más bajas. Su valor depende mucho de la plataforma Binance. Centralización va contra la filosofía cripto original.</div>
+      </div>
+      <div class="crypto-card">
+        <div class="crypto-header"><div class="crypto-identity"><div class="crypto-logo">₮</div><div><div class="crypto-name">Tether</div><div class="crypto-ticker">USDT</div></div></div><div class="crypto-change change-up" style="color:var(--muted);border-color:var(--b0);background:var(--faint);">0%</div></div>
+        <div class="crypto-price">$4.100 COP</div><div class="crypto-mcap">Cap. de mercado: $95B USD</div>
+        <div class="crypto-desc">Stablecoin: su valor está anclado al dólar (1 USDT ≈ 1 USD). Se usa para mover dinero entre exchanges sin volatilidad. Controversia sobre si realmente está 100% respaldado.</div>
+      </div>
+      <div class="crypto-card">
+        <div class="crypto-header"><div class="crypto-identity"><div class="crypto-logo">🐕</div><div><div class="crypto-name">Dogecoin</div><div class="crypto-ticker">DOGE</div></div></div><div class="crypto-change change-dn">-22%</div></div>
+        <div class="crypto-price">$540 COP</div><div class="crypto-mcap">Cap. de mercado: $22B USD</div>
+        <div class="crypto-desc">Empezó como meme. Sin utilidad real ni oferta limitada. Su precio depende 100% de hype y tuits de celebridades. Ejemplo perfecto de lo que NO es una inversión seria.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══ CÓMO EMPEZAR — REDESIGNADO ═══ -->
+<section class="sec" id="como-empezar">
+  <div class="container">
+    <div class="sh rv">
+      <div class="badge"><span class="bd"></span> Guía práctica</div>
+      <h2 class="stitle">Cómo <em>empezar</em> a invertir</h2>
+      <p class="ssub">Sigue estos pasos y en menos de una semana puedes tener tu primera inversión activa.</p>
+    </div>
+    <div class="start-grid rv">
+      <!-- IZQUIERDA: Pasos -->
+      <div class="steps-track">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div><div class="step-lbl">Paso uno</div><div class="step-title">Crea tu fondo de emergencia</div><div class="step-body">Antes de invertir, ahorra 3-6 meses de gastos en una cuenta separada. Es tu red de seguridad.</div><div class="step-tags"><span class="step-tag">Ahorro</span><span class="step-tag">Seguridad</span></div></div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div><div class="step-lbl">Paso dos</div><div class="step-title">Define tu perfil de riesgo</div><div class="step-body">¿Te aterra perder dinero o puedes dormir si tu inversión baja 20%? Sé honesto contigo mismo.</div><div class="step-tags"><span class="step-tag">Autoconocimiento</span><span class="step-tag">Riesgo</span></div></div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div><div class="step-lbl">Paso tres</div><div class="step-title">Elige 1-2 opciones para empezar</div><div class="step-body">No necesitas 5 inversiones el primer día. Un CDT + un fondo de renta fija es un inicio excelente.</div><div class="step-tags"><span class="step-tag">Simplicidad</span><span class="step-tag">CDT</span></div></div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div><div class="step-lbl">Paso cuatro</div><div class="step-title">Abre tu cuenta e invierte</div><div class="step-body">Bancolombia, Davivienda, Nequi, Trii... Elige tu plataforma, sube tus datos y haz tu primera inversión.</div><div class="step-tags"><span class="step-tag">Acción</span><span class="step-tag">Plataformas</span></div></div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div><div class="step-lbl">Paso cinco</div><div class="step-title">Sé constante, no busques el momento perfecto</div><div class="step-body">Invertir un poco cada mes es mejor que esperar a tener "suficiente". El tiempo en el mercado vence al timing del mercado.</div><div class="step-tags"><span class="step-tag">Disciplina</span><span class="step-tag">Paciencia</span></div></div>
+        </div>
+      </div>
+
+      <!-- DERECHA: Mejores / Peores — Rediseñado -->
+      <div class="bw-panel">
+        <!-- MEJORES PARA EMPEZAR -->
+        <div class="bw-section best-section">
+          <div class="bw-section-head best-head">
+            <div class="bw-section-icon best-icon">✓</div>
+            <div class="bw-section-title">Los mejores para empezar</div>
+            <div class="bw-section-count">3 opciones</div>
+          </div>
+          <div class="bw-section-body">
+            <div class="bw-row">
+              <div class="bw-rank">#1</div>
+              <div class="bw-row-icon">🏦</div>
+              <div class="bw-row-info">
+                <div class="bw-row-name">CDT Bancario</div>
+                <div class="bw-row-desc">Seguro, fácil, cubierto por FOGAFIN</div>
+              </div>
+              <div class="bw-row-meta">
+                <div class="bw-row-return">8-11% EAA</div>
+                <div class="bw-row-risk">Riesgo bajo</div>
+              </div>
+            </div>
+            <div class="bw-row">
+              <div class="bw-rank">#2</div>
+              <div class="bw-row-icon">📈</div>
+              <div class="bw-row-info">
+                <div class="bw-row-name">Fondos de renta fija</div>
+                <div class="bw-row-desc">Diversificación profesional desde $20K</div>
+              </div>
+              <div class="bw-row-meta">
+                <div class="bw-row-return">9-12% EAA</div>
+                <div class="bw-row-risk">Riesgo bajo</div>
+              </div>
+            </div>
+            <div class="bw-row">
+              <div class="bw-rank">#3</div>
+              <div class="bw-row-icon">📜</div>
+              <div class="bw-row-info">
+                <div class="bw-row-name">TES Clase B</div>
+                <div class="bw-row-desc">Deuda del Estado, mejor que CDT a mediano plazo</div>
+              </div>
+              <div class="bw-row-meta">
+                <div class="bw-row-return">10-13% EAA</div>
+                <div class="bw-row-risk">Riesgo bajo-mod</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PEORES PARA EMPEZAR -->
+        <div class="bw-section worst-section">
+          <div class="bw-section-head worst-head">
+            <div class="bw-section-icon worst-icon">✗</div>
+            <div class="bw-section-title">Los peores para empezar</div>
+            <div class="bw-section-count">3 opciones</div>
+          </div>
+          <div class="bw-section-body">
+            <div class="bw-row">
+              <div class="bw-rank">#1</div>
+              <div class="bw-row-icon">₿</div>
+              <div class="bw-row-info">
+                <div class="bw-row-name">Criptomonedas</div>
+                <div class="bw-row-desc">Volatilidad extrema, sin regulación ni protección</div>
+              </div>
+              <div class="bw-row-meta">
+                <div class="bw-row-return">Impredecible</div>
+                <div class="bw-row-risk">Riesgo extremo</div>
+              </div>
+            </div>
+            <div class="bw-row">
+              <div class="bw-rank">#2</div>
+              <div class="bw-row-icon">📉</div>
+              <div class="bw-row-info">
+                <div class="bw-row-name">Day trading</div>
+                <div class="bw-row-desc">Comprar y vender el mismo día requiere experiencia</div>
+              </div>
+              <div class="bw-row-meta">
+                <div class="bw-row-return">-90% pierden</div>
+                <div class="bw-row-risk">Riesgo muy alto</div>
+              </div>
+            </div>
+            <div class="bw-row">
+              <div class="bw-rank">#3</div>
+              <div class="bw-row-icon">🎰</div>
+              <div class="bw-row-info">
+                <div class="bw-row-name">Esquemas piramidales</div>
+                <div class="bw-row-desc">Si prometen retornos garantizados absurdos, es estafa</div>
+              </div>
+              <div class="bw-row-meta">
+                <div class="bw-row-return">Pérdida total</div>
+                <div class="bw-row-risk">Estafa segura</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- TIPS -->
+<section class="sec" id="tips">
+  <div class="container">
+    <div class="sh rv">
+      <div class="badge"><span class="bd"></span> Consejos</div>
+      <h2 class="stitle">6 tips <em>clave</em> antes de invertir</h2>
+      <p class="ssub">Reglas que todo principiante debería tatuar en la mente antes de poner un solo peso.</p>
+    </div>
+    <div class="tips-grid rv">
+      <div class="tip-card"><span class="tip-tag">Regla #1</span><div class="tip-num">01</div><div class="tip-title">Nunca inviertas lo que necesitas para vivir</div><div class="tip-body">Solo usa dinero que no vas a necesitar en los próximos 3-6 meses. Si no tienes emergencia, primero ahorra.</div></div>
+      <div class="tip-card"><span class="tip-tag">Regla #2</span><div class="tip-num">02</div><div class="tip-title">Diversifica siempre</div><div class="tip-body">No pongas todo en un solo activo. Reparte entre CDT, fondos y algo más riesgoso si tu perfil lo permite.</div></div>
+      <div class="tip-card"><span class="tip-tag">Regla #3</span><div class="tip-num">03</div><div class="tip-title">El interés compuesto es tu mejor amigo</div><div class="tip-body">Reinvierte tus ganancias. Con el tiempo, el efecto se vuelve exponencial. Empieza joven, gana más.</div></div>
+      <div class="tip-card"><span class="tip-tag">Regla #4</span><div class="tip-num">04</div><div class="tip-title">Cuidado con las "oportunidades únicas"</div><div class="tip-body">Si alguien te promete retornos garantizados del 20% mensual, es una estafa. No existe la plata fácil.</div></div>
+      <div class="tip-card"><span class="tip-tag">Regla #5</span><div class="tip-num">05</div><div class="tip-title">Invierte periódicamente</div><div class="tip-body">No intentes adivinar el mejor momento. Invertir $50K cada mes genera disciplina y promedía tu costo.</div></div>
+      <div class="tip-card"><span class="tip-tag">Regla #6</span><div class="tip-num">06</div><div class="tip-title">Edúcate antes de arriesgarte</div><div class="tip-body">Lee, ve videos, pregunta. Cada hora que inviertas en aprender te ahorrará miles de pesos en errores.</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- GLOSARIO -->
+<section class="sec" id="glosario">
+  <div class="container">
+    <div class="sh rv">
+      <div class="badge"><span class="bd"></span> Glosario</div>
+      <h2 class="stitle">Términos <em>clave</em></h2>
+      <p class="ssub">El vocabulario que necesitas dominar para tomar decisiones financieras informadas.</p>
+    </div>
+    <div class="glos-grid rv">
+      <div class="glos-card"><div class="glos-term">EAA</div><div class="glos-def">Tasa Efectiva Anual. El rendimiento real que ganas en un año, incluyendo el efecto del interés compuesto.</div><div class="glos-ex">CDT al 10% EAA → $100.000 se vuelven $110.000 en 1 año</div></div>
+      <div class="glos-card"><div class="glos-term">Interés compuesto</div><div class="glos-def">Cuando tus ganancias generan ganancias. El interés se calcula sobre el capital + intereses anteriores.</div><div class="glos-ex">$1M al 10% anual → en 7 años son $2M sin aportar nada más</div></div>
+      <div class="glos-card"><div class="glos-term">Liquidez</div><div class="glos-def">Qué tan rápido puedes convertir tu inversión en efectivo sin perder valor. Efectivo = alta liquidez. Bienes raíces = baja.</div><div class="glos-ex">CDT: liquidez baja (no puedes retirar antes). Acciones: liquidez alta.</div></div>
+      <div class="glos-card"><div class="glos-term">Diversificación</div><div class="glos-def">Repartir tu dinero entre diferentes inversiones para reducir el riesgo total del portafolio.</div><div class="glos-ex">50% CDT + 30% fondos + 15% acciones + 5% cripto</div></div>
+      <div class="glos-card"><div class="glos-term">Volatilidad</div><div class="glos-def">Qué tanto sube y baja el precio de una inversión. Alta volatilidad = grandes subidas y bajadas en poco tiempo.</div><div class="glos-ex">Bitcoin: muy volátil. CDT: volatilidad cero.</div></div>
+      <div class="glos-card"><div class="glos-term">FOGAFIN</div><div class="glos-def">Fondo de Garantía de Instituciones Financieras. Protege tus depósitos hasta $50M si el banco quiebra.</div><div class="glos-ex">Tu CDT de $30M está 100% protegido por FOGAFIN</div></div>
+      <div class="glos-card"><div class="glos-term">Portafolio</div><div class="glos-def">El conjunto de todas tus inversiones. Un portafolio diversificado tiene distintos tipos de activos.</div><div class="glos-ex">Mi portafolio: 3 CDTs, 2 fondos y 1 acción</div></div>
+      <div class="glos-card"><div class="glos-term">Inflación</div><div class="glos-def">Aumento general de precios que reduce el poder de compra de tu dinero. Si tu inversión gana menos que la inflación, pierdes valor real.</div><div class="glos-ex">Inflación 6% + CDT al 8% = ganancia real de 2%</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- CTA -->
+<section class="sec-sm">
+  <div class="container">
+    <div class="cta-block rv">
+      <h2 class="cta-title">¿Listo para que tu <em>dinero trabaje</em>?</h2>
+      <p class="cta-sub">No necesitas ser rico para empezar. Con $50.000, disciplina y conocimiento, puedes construir un futuro financiero sólido. Empieza hoy.</p>
+      <div class="cta-btns">
+        <a href="#tipos-inv" class="btn-p">Ver tipos de inversión →</a>
+        <a href="#como-empezar" class="btn-o">Cómo empezar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="fb">
+        <a href="#" class="logo">
+          <div class="logo-mark">F</div>
+          <span class="logo-text">Fin<span>Edge</span></span>
+        </a>
+        <p>Educación financiera para jóvenes colombianos. Aprende a gestionar tu dinero de forma inteligente y construye tu futuro.</p>
+      </div>
+      <div class="fc">
+        <h4>Módulos</h4>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Estadísticas</a></li>
+          <li><a href="#">Presupuesto</a></li>
+          <li><a href="#">Créditos</a></li>
+          <li><a href="#">Inversiones</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h4>Inversiones</h4>
+        <ul>
+          <li><a href="#que-es">Fundamentos</a></li>
+          <li><a href="#tipos-inv">Tipos</a></li>
+          <li><a href="#comparador">Comparador</a></li>
+          <li><a href="#como-empezar">Cómo empezar</a></li>
+          <li><a href="#glosario">Glosario</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h4>Proyecto</h4>
+        <ul>
+          <li><a href="#">SENA</a></li>
+          <li><a href="#">Grupo Edge</a></li>
+          <li><a href="#">FinEdge</a></li>
+          <li><a href="#">Hablar con Finn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span class="copy">© 2026 FinEdge — Educación Financiera</span>
+      <span class="sena">SENA · Grupo <span>Edge</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════
+   FINEDGE — JAVASCRIPT
+═══════════════════════════════════ */
+
+// Scroll progress
+window.addEventListener('scroll', () => {
+  const sp = document.getElementById('sp');
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  sp.style.width = (window.scrollY / h * 100) + '%';
+});
+
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Hamburger
+const hbg = document.getElementById('hbg');
+const mm = document.getElementById('mm');
+hbg.addEventListener('click', () => {
+  mm.classList.toggle('op');
+  const spans = hbg.querySelectorAll('span');
+  if (mm.classList.contains('op')) {
+    spans[0].style.transform = 'rotate(45deg) translate(3px,3px)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'rotate(-45deg) translate(3px,-3px)';
+  } else {
+    spans[0].style.transform = '';
+    spans[1].style.opacity = '';
+    spans[2].style.transform = '';
+  }
+});
+
+// Tabs
+document.querySelectorAll('.inv-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.inv-tab').forEach(t => t.classList.remove('on'));
+    document.querySelectorAll('.inv-panel').forEach(p => p.classList.remove('on'));
+    tab.classList.add('on');
+    document.getElementById('panel-' + tab.dataset.tab).classList.add('on');
+  });
+});
+
+// Reveal on scroll
+const revealEls = document.querySelectorAll('.rv');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+// Counter animation
+const counters = document.querySelectorAll('.counter');
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.dataset.t);
+      let current = 0;
+      const step = Math.max(1, Math.floor(target / 40));
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(timer); }
+        el.textContent = current;
+      }, 30);
+      counterObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObs.observe(c));
+
+// ═══ COMPARADOR ZOOM CONTROLS ═══
+const compBody = document.getElementById('compBody');
+const zoomCollapse = document.getElementById('zoomCollapse');
+const zoomExpand = document.getElementById('zoomExpand');
+const zoomFullscreen = document.getElementById('zoomFullscreen');
+const compModal = document.getElementById('compModal');
+const compModalClose = document.getElementById('compModalClose');
+
+let currentZoom = 'normal'; // normal | collapsed | expanded
+
+function updateZoomState(state) {
+  currentZoom = state;
+  compBody.classList.remove('collapsed');
+  zoomCollapse.classList.remove('active');
+  zoomExpand.classList.remove('active');
+
+  if (state === 'collapsed') {
+    compBody.classList.add('collapsed');
+    zoomCollapse.classList.add('active');
+  } else if (state === 'expanded') {
+    zoomExpand.classList.add('active');
+  }
+}
+
+zoomCollapse.addEventListener('click', () => {
+  updateZoomState(currentZoom === 'collapsed' ? 'normal' : 'collapsed');
+});
+
+zoomExpand.addEventListener('click', () => {
+  updateZoomState(currentZoom === 'expanded' ? 'normal' : 'expanded');
+});
+
+zoomFullscreen.addEventListener('click', () => {
+  compModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+
+compModalClose.addEventListener('click', () => {
+  compModal.classList.remove('open');
+  document.body.style.overflow = '';
+});
+
+compModal.addEventListener('click', (e) => {
+  if (e.target === compModal) {
+    compModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && compModal.classList.contains('open')) {
+    compModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+</script>
+</body>
+</html>

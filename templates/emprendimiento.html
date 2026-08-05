@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emprendimiento — FinEdge · Educación Financiera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =====================================================
+   FINEDGE — EMPRENDIMIENTO · HYPRLAND DESIGN SYSTEM
+   Proyecto SENA · Grupo Angely · IE Santo Domingo
+   Caucasia, Antioquia · 2025
+   ===================================================== */
+:root {
+  --bg:    #06040c; --bg1: #09070f; --bg2: #0d0a16;
+  --s0:    #110d1c; --s1:  #16102a; --s2:  #1d1638; --s3: #261d46;
+  --b0:    #2a1e4a; --b1:  #3a2a62; --b2:  #4d3a80; --b3: #6245a0;
+  --p:     #9333ea; --p1:  #a855f7; --p2:  #7c3aed; --p3: #6d28d9;
+  --glow:  rgba(147,51,234,.4);
+  --faint: rgba(147,51,234,.07);
+  --line:  rgba(147,51,234,.28);
+  --cy:    #22d3ee; --cy-f: rgba(34,211,238,.07); --cy-l: rgba(34,211,238,.28);
+  --txt:   #ede9fe; --txt2: #c4b5fd; --txt3: #a78bfa;
+  --muted: #7c6fa8; --dim:  #4e4270;
+  --gold:  #fbbf24; --red:  #f87171; --ok: #34d399;
+  --orange:#f97316;
+  --mono:  'JetBrains Mono', monospace;
+  --sans:  'Space Grotesk', sans-serif;
+  --r: 0px; --r2: 2px; --r3: 4px;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--bg);color:var(--txt);overflow-x:hidden;line-height:1.6;}
+
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.025) 3px,rgba(0,0,0,.025) 4px);}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(147,51,234,.055) 1px,transparent 1px);
+  background-size:28px 28px;}
+
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--b1);}
+::-webkit-scrollbar-thumb:hover{background:var(--p2);}
+
+.container{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+#sp{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--p3),var(--p1),var(--cy));z-index:9999;transition:width .1s;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:42px;background:rgba(9,7,15,.88);backdrop-filter:blur(18px) saturate(160%);border-bottom:1px solid var(--b0);transition:background .3s,border-color .3s;}
+nav.sc{background:rgba(6,4,12,.94);border-bottom-color:var(--b1);}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 18px;display:flex;align-items:center;justify-content:space-between;height:100%;}
+.logo{display:flex;align-items:center;gap:7px;text-decoration:none;font-family:var(--mono);font-size:.75rem;font-weight:700;color:var(--txt);letter-spacing:.06em;}
+.logo-mark{width:22px;height:22px;background:var(--p);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.65rem;font-weight:800;color:#fff;border:1px solid var(--p1);clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));flex-shrink:0;}
+.logo-text{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--txt);letter-spacing:.04em;}
+.logo-text span{color:var(--p1);}
+.nl{display:flex;align-items:center;gap:1px;list-style:none;}
+.nl a{display:flex;align-items:center;gap:4px;padding:4px 10px;height:26px;font-family:var(--mono);font-size:.66rem;font-weight:500;color:var(--muted);text-decoration:none;border:1px solid transparent;transition:all .14s;letter-spacing:.05em;}
+.nl a:hover{color:var(--txt2);background:var(--s1);border-color:var(--b0);}
+.nl a.act{color:var(--p1);background:var(--faint);border-color:var(--b1);}
+.btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.06em;cursor:pointer;text-decoration:none;border:none;transition:all .14s;padding:5px 13px;height:26px;}
+.btn-ghost{background:var(--s1);color:var(--txt3);border:1px solid var(--b1);}
+.btn-ghost:hover{border-color:var(--p);color:var(--p1);background:var(--faint);}
+.btn-primary{background:var(--p);color:#fff;border:1px solid var(--p1);box-shadow:0 0 14px rgba(147,51,234,.45);}
+.btn-primary:hover{background:var(--p2);box-shadow:0 0 22px rgba(147,51,234,.65);}
+.btn-outline{background:transparent;color:var(--p1);border:1px solid var(--b2);}
+.btn-outline:hover{background:var(--faint);border-color:var(--p);}
+.hbg{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:6px;background:none;border:none;}
+.hbg span{display:block;width:18px;height:1.5px;background:var(--txt2);transition:all .3s;}
+.mm{display:none;position:fixed;top:42px;left:0;right:0;background:rgba(9,7,15,.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--b0);padding:10px 18px 16px;z-index:199;flex-direction:column;gap:2px;}
+.mm.op{display:flex;}
+.mm a{display:block;padding:7px 10px;font-family:var(--mono);font-size:.72rem;color:var(--muted);text-decoration:none;border:1px solid transparent;transition:all .14s;}
+.mm a:hover{color:var(--p1);border-color:var(--b0);background:var(--s1);}
+
+/* ── COMMONS ── */
+.badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.62rem;font-weight:600;color:var(--p1);letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--b1);background:var(--faint);padding:3px 11px;}
+.badge .dot{width:5px;height:5px;background:var(--p1);border-radius:50%;animation:blinkDot 2.2s ease-in-out infinite;}
+@keyframes blinkDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.75)}}
+
+.sec{padding:88px 0;position:relative;}
+.sec-sm{padding:56px 0;}
+.sh{text-align:center;margin-bottom:52px;}
+.sh .badge{margin-bottom:14px;}
+.sh-title{font-family:var(--sans);font-size:clamp(1.9rem,4vw,3rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:12px;}
+.sh-title em{font-style:normal;background:linear-gradient(90deg,var(--p1),var(--cy));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sh-sub{font-size:.88rem;color:var(--muted);max-width:500px;margin:0 auto;line-height:1.75;}
+.sec-div{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--b1),transparent);margin:0;}
+
+.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+.rv.in{opacity:1;transform:none;}
+.rv-d1{transition-delay:.07s}.rv-d2{transition-delay:.14s}.rv-d3{transition-delay:.21s}.rv-d4{transition-delay:.28s}
+
+/* ── HERO ── */
+.hero{min-height:88vh;padding:80px 0 56px;display:flex;align-items:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;width:560px;height:560px;background:radial-gradient(circle,rgba(147,51,234,.11) 0%,transparent 70%);top:-80px;left:-120px;pointer-events:none;}
+.hero::after{content:'';position:absolute;width:360px;height:360px;background:radial-gradient(circle,rgba(34,211,238,.055) 0%,transparent 70%);bottom:0;right:-60px;pointer-events:none;z-index:0;}
+.hero-grid{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center;}
+.hero-content{z-index:1;}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.62rem;font-weight:600;color:var(--p1);letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--b1);background:var(--faint);padding:3px 11px;margin-bottom:18px;}
+.hero-tag .dot{width:5px;height:5px;background:var(--p1);border-radius:50%;animation:blinkDot 2.2s infinite;}
+.hero-title{font-family:var(--sans);font-size:clamp(2.6rem,5vw,4.6rem);font-weight:700;line-height:1.0;letter-spacing:-.035em;margin-bottom:18px;}
+.hero-title .hl{display:block;background:linear-gradient(90deg,var(--p1) 0%,var(--cy) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-title .dm{display:block;color:var(--txt2);}
+.hero-desc{font-size:.93rem;color:var(--muted);line-height:1.78;max-width:450px;margin-bottom:30px;}
+.hero-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px;}
+
+/* KPI strip */
+.kpi-strip{display:flex;gap:0;border:1px solid var(--b0);background:var(--b0);}
+.kpi{background:var(--s0);padding:13px 20px;flex:1;text-align:center;border-right:1px solid var(--b0);}
+.kpi:last-child{border-right:none;}
+.kpi-val{font-family:var(--mono);font-size:1.35rem;font-weight:700;color:var(--txt);letter-spacing:-.04em;display:flex;align-items:baseline;gap:2px;justify-content:center;}
+.kpi-val .u{font-size:.8rem;color:var(--p1);}
+.kpi-lbl{font-family:var(--mono);font-size:.56rem;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-top:2px;}
+
+/* Hero window */
+.hero-win{position:relative;z-index:1;}
+.win{background:var(--s0);border:1px solid var(--b1);position:relative;overflow:hidden;}
+.win-bar{display:flex;align-items:center;justify-content:space-between;padding:0 12px;height:26px;background:var(--s1);border-bottom:1px solid var(--b0);}
+.win-bar-dots{display:flex;gap:4px;}
+.wdot{width:7px;height:7px;border-radius:50%;}
+.wdot.r{background:#f87171;}.wdot.y{background:#fbbf24;}.wdot.g{background:#34d399;}
+.win-bar-title{font-family:var(--mono);font-size:.57rem;color:var(--dim);letter-spacing:.06em;}
+.win-body{padding:18px;}
+
+/* Hero metrics in window */
+.hm-label{font-family:var(--mono);font-size:.58rem;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;}
+.hm-val{font-family:var(--mono);font-size:1.8rem;font-weight:700;color:var(--txt);letter-spacing:-.04em;margin-bottom:2px;}
+.hm-val span{color:var(--p1);font-size:.9rem;}
+.hm-sub{font-family:var(--mono);font-size:.58rem;color:var(--muted);margin-bottom:16px;}
+.hm-rows{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.hm-row{display:flex;justify-content:space-between;align-items:center;}
+.hm-row-lbl{font-family:var(--mono);font-size:.62rem;color:var(--txt2);}
+.hm-row-val{font-family:var(--mono);font-size:.68rem;font-weight:700;}
+.hm-row-val.g{color:var(--ok);}.hm-row-val.go{color:var(--gold);}.hm-row-val.r{color:var(--red);}
+.hm-bar{height:3px;background:var(--s3);margin-bottom:3px;}
+.hm-fill{height:100%;background:linear-gradient(90deg,var(--p3),var(--p1));transition:width 2s ease;}
+.hm-footer{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--b0);}
+.hm-tag{font-family:var(--mono);font-size:.56rem;font-weight:700;padding:2px 7px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);color:var(--ok);letter-spacing:.06em;text-transform:uppercase;}
+.hm-note{font-family:var(--mono);font-size:.58rem;color:var(--dim);}
+
+/* ── QUÉ ES EMPRENDER — info tiles ── */
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b0);border:1px solid var(--b0);}
+.what-card{background:var(--s0);padding:26px 22px;transition:background .18s;}
+.what-card:hover{background:var(--s1);}
+.what-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--p3),var(--p1));opacity:0;transition:opacity .18s;}
+.what-card:hover::before{opacity:1;}
+.what-card{position:relative;overflow:hidden;}
+.wc-num{font-family:var(--mono);font-size:2.6rem;font-weight:700;color:var(--b2);letter-spacing:-.05em;line-height:1;margin-bottom:12px;}
+.wc-icon{font-size:1.5rem;margin-bottom:12px;display:block;}
+.wc-title{font-family:var(--sans);font-size:.9rem;font-weight:700;color:var(--txt);margin-bottom:6px;}
+.wc-desc{font-size:.76rem;color:var(--muted);line-height:1.65;}
+
+/* ── TIPOS DE EMPRENDIMIENTO — tab system ── */
+.tipo-tabs{display:flex;gap:0;border:1px solid var(--b0);background:var(--b0);margin-bottom:1px;}
+.tipo-tab{
+  flex:1;padding:10px 8px;
+  font-family:var(--mono);font-size:.65rem;font-weight:600;
+  text-align:center;cursor:pointer;border:none;
+  background:var(--s0);color:var(--muted);
+  transition:all .14s;letter-spacing:.05em;text-transform:uppercase;
+  border-right:1px solid var(--b0);
+}
+.tipo-tab:last-child{border-right:none;}
+.tipo-tab:hover{color:var(--txt2);background:var(--s1);}
+.tipo-tab.on{color:var(--p1);background:var(--faint);}
+
+/* FIX: Changed default panel display to block, and applied grid only to type IDs */
+.tipo-panel{display:none;}
+.tipo-panel.on{display:block;animation:fadeIn .3s ease;}
+#tp-comercio.on, #tp-servicios.on, #tp-digital.on, #tp-alimentos.on, #tp-agro.on {
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b0);border:1px solid var(--b0);
+}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.tp-info{background:var(--s0);padding:28px 24px;}
+.tp-head{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.tp-icon{width:44px;height:44px;background:var(--faint);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+.tp-name{font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--txt);}
+.tp-cat{font-family:var(--mono);font-size:.6rem;color:var(--muted);}
+.tp-desc{font-size:.8rem;color:var(--muted);line-height:1.7;margin-bottom:18px;}
+.tp-pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;}
+.pc-col-title{font-family:var(--mono);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.pros .pc-col-title{color:var(--ok);}
+.cons .pc-col-title{color:var(--red);}
+.pc-item{display:flex;gap:7px;align-items:flex-start;font-size:.74rem;color:var(--txt2);margin-bottom:5px;line-height:1.5;}
+.pros .pc-item::before{content:'✓';color:var(--ok);font-size:.65rem;margin-top:2px;flex-shrink:0;}
+.cons .pc-item::before{content:'✕';color:var(--red);font-size:.65rem;margin-top:2px;flex-shrink:0;}
+.tp-pills{display:flex;flex-wrap:wrap;gap:5px;}
+.tp-pill{font-family:var(--mono);font-size:.58rem;font-weight:600;padding:2px 8px;border:1px solid var(--b1);color:var(--dim);letter-spacing:.06em;text-transform:uppercase;}
+
+.tp-chart{background:var(--bg1);padding:28px 24px;}
+.tc-title{font-family:var(--mono);font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;}
+.hbar-wrap{display:flex;flex-direction:column;gap:12px;}
+.hbar-row{display:flex;align-items:center;gap:10px;}
+.hbar-name{font-family:var(--mono);font-size:.6rem;color:var(--txt2);min-width:120px;text-align:right;}
+.hbar-track{flex:1;height:5px;background:var(--s3);}
+.hbar-fill{height:100%;width:0%;transition:width 1.4s cubic-bezier(.22,1,.36,1);}
+.hbar-val{font-family:var(--mono);font-size:.62rem;font-weight:700;color:var(--p1);min-width:36px;}
+.hf-p{background:linear-gradient(90deg,var(--p3),var(--p1));box-shadow:0 0 6px rgba(147,51,234,.4);}
+.hf-g{background:linear-gradient(90deg,#065f46,var(--ok));}
+.hf-b{background:linear-gradient(90deg,#1d4ed8,#60a5fa);}
+.hf-go{background:linear-gradient(90deg,#92620a,var(--gold));}
+.hf-r{background:linear-gradient(90deg,#b91c1c,var(--red));}
+.hf-o{background:linear-gradient(90deg,#9a3412,var(--orange));}
+
+/* ── CÓMO HACERLO — steps vertical ── */
+.steps-track{position:relative;display:flex;flex-direction:column;gap:0;}
+.steps-track::before{content:'';position:absolute;left:22px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--p),rgba(147,51,234,.04));z-index:0;}
+.step-item{display:grid;grid-template-columns:44px 1fr;gap:18px;padding-bottom:36px;position:relative;z-index:1;}
+.step-item:last-child{padding-bottom:0;}
+.step-num{width:44px;height:44px;background:var(--s1);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--muted);transition:all .3s;flex-shrink:0;}
+.step-item.vis .step-num{background:var(--p);color:#fff;border-color:var(--p1);box-shadow:0 0 16px rgba(147,51,234,.4);}
+.step-content{padding-top:10px;}
+.step-lbl{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--p1);margin-bottom:4px;}
+.step-title{font-family:var(--sans);font-size:.96rem;font-weight:700;color:var(--txt);margin-bottom:6px;}
+.step-body{font-size:.78rem;color:var(--muted);line-height:1.7;margin-bottom:10px;}
+.step-chips{display:flex;flex-wrap:wrap;gap:5px;}
+.step-chip{font-family:var(--mono);font-size:.58rem;font-weight:600;padding:2px 8px;border:1px solid var(--b1);color:var(--dim);text-transform:uppercase;letter-spacing:.06em;}
+
+/* Side concepts */
+.concept-stack{display:flex;flex-direction:column;gap:12px;}
+.concept-card{background:var(--s0);border:1px solid var(--b0);padding:16px;transition:all .2s;}
+.concept-card:hover{border-color:var(--b1);}
+.cc-term{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--p1);margin-bottom:4px;}
+.cc-def{font-size:.74rem;color:var(--txt2);line-height:1.6;margin-bottom:6px;}
+.cc-ex{font-family:var(--mono);font-size:.63rem;color:var(--dim);background:var(--bg2);padding:4px 8px;border-left:2px solid var(--b2);line-height:1.5;}
+
+/* ── CUADRE DE CAJA INTERACTIVO ── */
+.caja-wrap{display:grid;grid-template-columns:360px 1fr;border:1px solid var(--b1);background:var(--b0);gap:1px;}
+.caja-form{background:var(--bg2);padding:28px;}
+.caja-form h3{font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--txt);margin-bottom:6px;}
+.caja-form p{font-size:.76rem;color:var(--muted);margin-bottom:22px;line-height:1.6;}
+.caja-fields{display:flex;flex-direction:column;gap:12px;margin-bottom:16px;}
+.cf-label{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:5px;}
+.cf-row{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:end;}
+.cf-input{background:var(--s1);border:1px solid var(--b1);padding:8px 11px;font-family:var(--mono);font-size:.78rem;color:var(--txt);outline:none;transition:border-color .14s;width:100%;}
+.cf-input:focus{border-color:var(--p);}
+.cf-input::placeholder{color:var(--dim);}
+.cf-sign{font-family:var(--mono);font-size:.85rem;font-weight:700;width:26px;text-align:center;padding-bottom:8px;}
+.cf-sign.plus{color:var(--ok);}.cf-sign.minus{color:var(--red);}
+.caja-btn{width:100%;padding:10px;background:var(--p);color:#fff;font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.08em;border:1px solid var(--p1);cursor:pointer;transition:all .14s;box-shadow:0 0 12px rgba(147,51,234,.3);}
+.caja-btn:hover{background:var(--p2);}
+
+.caja-result{background:var(--s0);padding:28px;display:flex;flex-direction:column;gap:14px;}
+.cr-heading{font-family:var(--mono);font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;}
+.cr-rows{display:flex;flex-direction:column;gap:7px;}
+.cr-row{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--bg1);border:1px solid var(--b0);}
+.cr-row-lbl{font-family:var(--mono);font-size:.68rem;color:var(--txt2);}
+.cr-row-val{font-family:var(--mono);font-size:.75rem;font-weight:700;}
+.cr-row-val.g{color:var(--ok);}.cr-row-val.r{color:var(--red);}.cr-row-val.go{color:var(--gold);}
+.cr-row.total{background:var(--s1);border-color:var(--b1);}
+.cr-row.total .cr-row-lbl{color:var(--txt);font-weight:700;}
+.cr-status{padding:10px 14px;border:1px solid;font-family:var(--mono);font-size:.72rem;font-weight:700;text-align:center;letter-spacing:.06em;}
+.cr-status.ok{background:rgba(52,211,153,.07);border-color:rgba(52,211,153,.25);color:var(--ok);}
+.cr-status.warn{background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.25);color:var(--gold);}
+.cr-status.bad{background:rgba(248,113,113,.07);border-color:rgba(248,113,113,.25);color:var(--red);}
+
+/* Mini bar chart in result */
+.cr-chart{display:flex;align-items:flex-end;gap:8px;height:80px;padding-top:10px;}
+.cr-chart > div {display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end;height:100%;gap:4px;}
+.crc-bar{width:100%;max-width:36px;min-height:0;background:var(--p);transition:height 1s ease;}
+.crc-bar.r{background:var(--red);}
+.crc-bar.go{background:var(--gold);}
+.crc-lbl{font-family:var(--mono);font-size:.55rem;color:var(--dim);text-align:center;}
+.cr-chart-wrap{position:relative;}
+
+/* ── PUNTO DE EQUILIBRIO CHART ── */
+.pe-wrap{display:grid;grid-template-columns:300px 1fr;gap:1px;background:var(--b0);border:1px solid var(--b0);}
+.pe-inputs{background:var(--bg2);padding:24px;}
+.pe-chart-panel{background:var(--s0);padding:24px;position:relative;}
+.pe-canvas-wrap{position:relative;height:240px;}
+#peCanvas{width:100%;height:220px;display:block;}
+.pe-result-bar{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+.pe-kpi{background:var(--s1);border:1px solid var(--b0);padding:10px 14px;text-align:center;flex:1;min-width:100px;}
+.pe-kpi-v{font-family:var(--mono);font-size:.9rem;font-weight:700;margin-bottom:2px;}
+.pe-kpi-l{font-family:var(--mono);font-size:.58rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;}
+
+/* ── CICLO DE VIDA ── */
+.lifecycle{display:flex;align-items:flex-end;justify-content:center;gap:0;padding:0 0 28px;position:relative;height:220px;overflow:hidden;}
+.lifecycle::after{content:'';position:absolute;bottom:28px;left:0;right:0;height:1px;background:var(--b0);}
+.lc-bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:0;position:relative;cursor:pointer;}
+.lc-bar-fill{width:100%;transition:height 1.4s cubic-bezier(.22,1,.36,1);position:relative;}
+.lc-bar-fill:hover{filter:brightness(1.2);}
+.lc-label{position:absolute;bottom:-24px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.55rem;color:var(--dim);white-space:nowrap;text-transform:uppercase;letter-spacing:.06em;}
+.lc-tooltip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--s1);border:1px solid var(--b1);padding:5px 9px;font-family:var(--mono);font-size:.62rem;color:var(--txt2);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;z-index:5;}
+.lc-bar:hover .lc-tooltip{opacity:1;}
+
+/* ── ERRORES vs BUENAS PRÁCTICAS ── */
+.evp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b0);border:1px solid var(--b0);}
+.evp-col{background:var(--s0);padding:28px 24px;}
+.evp-col-head{font-family:var(--mono);font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:6px 10px;margin-bottom:14px;border:1px solid;display:inline-flex;align-items:center;gap:6px;}
+.evp-col.bad .evp-col-head{background:rgba(248,113,113,.07);border-color:rgba(248,113,113,.25);color:var(--red);}
+.evp-col.good .evp-col-head{background:rgba(52,211,153,.07);border-color:rgba(52,211,153,.25);color:var(--ok);}
+.evp-item{display:flex;gap:10px;align-items:flex-start;background:var(--bg2);border:1px solid var(--b0);padding:12px;margin-bottom:8px;transition:border-color .15s;}
+.evp-item:last-child{margin-bottom:0;}
+.evp-item:hover{border-color:var(--b1);}
+.evp-ico{font-size:1rem;flex-shrink:0;margin-top:1px;}
+.evp-title{font-size:.78rem;font-weight:700;color:var(--txt);margin-bottom:3px;}
+.evp-body{font-size:.71rem;color:var(--muted);line-height:1.55;}
+
+/* ── GLOSARIO ── */
+.glos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b0);border:1px solid var(--b0);}
+.glos-card{background:var(--s0);padding:18px;transition:background .18s;}
+.glos-card:hover{background:var(--s1);}
+.glos-term{font-family:var(--mono);font-size:.7rem;font-weight:700;color:var(--p1);margin-bottom:6px;}
+.glos-def{font-size:.73rem;color:var(--txt2);line-height:1.6;margin-bottom:7px;}
+.glos-ex{font-family:var(--mono);font-size:.62rem;color:var(--dim);background:var(--bg2);padding:4px 8px;border-left:2px solid var(--b2);line-height:1.5;}
+
+/* ── RECURSOS ── */
+.recursos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b0);border:1px solid var(--b0);}
+.rec-card{background:var(--s0);padding:22px;transition:background .18s;position:relative;overflow:hidden;}
+.rec-card:hover{background:var(--s1);}
+.rec-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--p3),var(--p1));opacity:0;transition:opacity .18s;}
+.rec-card:hover::before{opacity:1;}
+.rec-icon{font-size:1.4rem;margin-bottom:10px;display:block;}
+.rec-name{font-family:var(--sans);font-size:.88rem;font-weight:700;color:var(--txt);margin-bottom:5px;}
+.rec-desc{font-size:.74rem;color:var(--muted);line-height:1.65;margin-bottom:10px;}
+.rec-val{font-family:var(--mono);font-size:.68rem;font-weight:700;color:var(--p1);}
+
+/* ── AHORRO ── */
+.ahorro-wrap{display:grid;grid-template-columns:360px 1fr;border:1px solid var(--b1);background:var(--b0);gap:1px;}
+.ahorro-form{background:var(--bg2);padding:28px;}
+.ahorro-form h3{font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--txt);margin-bottom:6px;}
+.ahorro-form p{font-size:.76rem;color:var(--muted);margin-bottom:22px;line-height:1.6;}
+.ahorro-result{background:var(--s0);padding:28px;}
+
+/* ── CTA ── */
+.cta-block{background:linear-gradient(140deg,var(--s0),var(--s1));border:1px solid var(--b1);padding:68px 56px;text-align:center;position:relative;overflow:hidden;}
+.cta-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(147,51,234,.09) 0%,transparent 65%);pointer-events:none;}
+.cta-title{font-family:var(--sans);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:12px;}
+.cta-title em{font-style:normal;color:var(--p1);}
+.cta-sub{font-size:.87rem;color:var(--muted);max-width:440px;margin:0 auto 26px;line-height:1.75;}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--b0);padding:44px 0 26px;position:relative;z-index:1;}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:32px;}
+.fb p{font-size:.75rem;color:var(--muted);line-height:1.7;max-width:240px;margin-top:12px;}
+.fc h4{font-family:var(--mono);font-size:.6rem;font-weight:700;color:var(--txt);text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px;}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.fc a{font-size:.76rem;color:var(--muted);text-decoration:none;transition:color .14s;}
+.fc a:hover{color:var(--p1);}
+.foot-bot{padding-top:18px;border-top:1px solid var(--b0);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.foot-copy{font-family:var(--mono);font-size:.6rem;color:var(--dim);}
+.foot-sena{font-family:var(--mono);font-size:.6rem;color:var(--dim);}
+.foot-sena span{color:var(--p1);font-weight:700;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1040px){
+  #tp-comercio.on, #tp-servicios.on, #tp-digital.on, #tp-alimentos.on, #tp-agro.on { grid-template-columns:1fr; }
+  .caja-wrap{grid-template-columns:1fr;}
+  .pe-wrap{grid-template-columns:1fr;}
+  .ahorro-wrap{grid-template-columns:1fr;}
+  .glos-grid{grid-template-columns:1fr 1fr;}
+  .recursos-grid{grid-template-columns:1fr 1fr;}
+  .what-grid{grid-template-columns:1fr 1fr;}
+  .evp-grid{grid-template-columns:1fr;}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:28px;}
+}
+@media(max-width:768px){
+  .nl,.nav-btns{display:none;}
+  .hbg{display:flex;}
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-win{display:none;}
+  .kpi-strip{flex-wrap:wrap;}
+  .kpi{min-width:50%;}
+  .what-grid{grid-template-columns:1fr;}
+  .glos-grid{grid-template-columns:1fr;}
+  .recursos-grid{grid-template-columns:1fr;}
+  .cta-block{padding:40px 22px;}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:22px;}
+  .tipo-tabs{flex-wrap:wrap;}
+  .tipo-tab{flex-basis:50%; border-right: 1px solid var(--b0); border-bottom: 1px solid var(--b0);}
+}
+@media(max-width:480px){
+  .foot-grid,.cta-btns{grid-template-columns:1fr;}
+  .cta-btns{flex-direction:column;align-items:center;}
+  .kpi{min-width:100%;}
+  .hero-btns{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<div id="sp"></div>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo">
+      <div class="logo-mark">F</div>
+      <span class="logo-text">Fin<span>Edge</span></span>
+    </a>
+    <ul class="nl">
+      <li><a href="{{ url_for('inicio') }}#modulos">inicio</a></li>
+      <li><a href="{{ url_for('presupuesto') }}">presupuesto</a></li>
+      <li><a href="{{ url_for('credito_casa') }}">créditos</a></li>
+      <li><a href="{{ url_for('inversiones') }}">inversiones</a></li>
+      <li><a href="{{ url_for('emprendimiento') }}" class="act">emprendimiento</a></li>
+      <li><a href="{{ url_for('estadisticas') }}">estadísticas</a></li>
+    </ul>
+    <div class="nav-btns" style="display:flex;align-items:center;gap:6px;">
+      <a href= "{{ url_for('finn') }}" class="btn btn-ghost">finn ia</a>
+      <a href="{{ url_for('inicio') }}#modulos" class="btn btn-primary">← inicio</a>
+    </div>
+    <button class="hbg" id="hbg"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mm" id="mm">
+  <a href="{{ url_for('inicio') }}#modulos">inicio</a>
+  <a href="{{ url_for('presupuesto') }}">Presupuesto</a>
+  <a href="{{ url_for('credito_casa') }}">Créditos</a>
+  <a href="{{ url_for('inversiones') }}">Inversiones</a>
+  <a href="{{ url_for('emprendimiento') }}">Emprendimiento</a>
+  <a href="{{ url_for('estadisticas') }}">Estadísticas</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="inicio">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-tag"><span class="dot"></span>módulo emprendimiento · sena 2025</div>
+        <h1 class="hero-title">
+          <span class="dm">Convierte tu</span>
+          <span class="hl">idea en negocio.</span>
+        </h1>
+        <p class="hero-desc">Guía completa para jóvenes emprendedores de Caucasia. Aprende qué es emprender, cómo hacerlo paso a paso, tipos de negocio, cuadre de caja y cómo acceder a financiamiento real.</p>
+        <div class="hero-btns">
+          <a href="#como-emprender" class="btn btn-primary">→ cómo empezar</a>
+          <a href="#herramientas-glosario" class="btn btn-outline">herramientas ↓</a>
+        </div>
+        <div class="kpi-strip">
+          <div class="kpi"><div class="kpi-val"><span class="counter" data-t="74">0</span><span class="u">%</span></div><div class="kpi-lbl">supervivencia con SENA</div></div>
+          <div class="kpi"><div class="kpi-val"><span class="counter" data-t="114">0</span><span class="u">M</span></div><div class="kpi-lbl">fondo emprender 0%</div></div>
+          <div class="kpi"><div class="kpi-val"><span class="counter" data-t="26">0</span><span class="u">%</span></div><div class="kpi-lbl">sin formación sobreviven</div></div>
+        </div>
+      </div>
+      <div class="hero-win">
+        <div class="win">
+          <div class="win-bar">
+            <div class="win-bar-dots"><div class="wdot r"></div><div class="wdot y"></div><div class="wdot g"></div></div>
+            <div class="win-bar-title">negocio — cuadre_caja_octubre.dashboard</div>
+            <div></div>
+          </div>
+          <div class="win-body">
+            <div class="hm-label">&gt; resumen_diario · oct 15 2025</div>
+            <div class="hm-val"><span>$</span>485.000</div>
+            <div class="hm-sub">ventas totales del día</div>
+            <div class="hm-rows">
+              <div class="hm-row"><span class="hm-row-lbl">📥 Ingresos del día</span><span class="hm-row-val g">+$485.000</span></div>
+              <div class="hm-row"><span class="hm-row-lbl">📤 Gastos operativos</span><span class="hm-row-val r">-$210.000</span></div>
+              <div class="hm-row"><span class="hm-row-lbl">💰 Ganancia neta</span><span class="hm-row-val g">+$275.000</span></div>
+              <div class="hm-row"><span class="hm-row-lbl">📊 Margen del día</span><span class="hm-row-val go">56.7%</span></div>
+            </div>
+            <div class="hm-bar" style="margin-bottom:3px;"><div class="hm-fill" style="width:57%"></div></div>
+            <div class="hm-footer">
+              <span class="hm-tag">✓ CAJA CUADRADA</span>
+              <span class="hm-note">meta diaria: $400K ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══ QUÉ ES EMPRENDER ═══ -->
+<section class="sec" id="que-es">
+  <div class="container">
+    <div class="sh rv">
+      <div class="badge"><span class="dot"></span>fundamentos</div>
+      <h2 class="sh-title">¿Qué es <em>emprender</em>?</h2>
+      <p class="sh-sub">Emprender es crear valor resolviendo un problema real del mercado. No es solo "abrir un negocio" — es identificar una oportunidad, tomar acción y asumir el riesgo con inteligencia.</p>
+    </div>
+    <div class="what-grid rv">
+      <div class="what-card">
+        <div class="wc-num">01</div>
+        <span class="wc-icon">💡</span>
+        <div class="wc-title">¿Qué es realmente?</div>
+        <div class="wc-desc">Emprender es crear una actividad económica propia que genera valor para otros y dinero para ti. Va desde un pequeño negocio de comidas hasta una startup tecnológica. Lo que importa es resolver un problema real.</div>
+      </div>
+      <div class="what-card">
+        <div class="wc-num">02</div>
+        <span class="wc-icon">🎯</span>
+        <div class="wc-title">¿Para qué sirve?</div>
+        <div class="wc-desc">Para generar ingresos propios, crear empleos en tu comunidad, aplicar tus habilidades, construir independencia financiera y — con el tiempo — construir un patrimonio real. En Caucasia, el emprendimiento es una ruta de movilidad social concreta.</div>
+      </div>
+      <div class="what-card">
+        <div class="wc-num">03</div>
+        <span class="wc-icon">🔑</span>
+        <div class="wc-title">¿Quién puede emprender?</div>
+        <div class="wc-desc">Cualquier joven con una idea, ganas y disposición a aprender. NO necesitas mucho capital para empezar. El Fondo Emprender SENA financia hasta $114 millones al 0% de interés para egresados con plan de negocio sólido.</div>
+      </div>
+      <div class="what-card">
+        <div class="wc-num">04</div>
+        <span class="wc-icon">⚡</span>
+        <div class="wc-title">Emprendedor vs. Empleado</div>
+        <div class="wc-desc">El empleado intercambia tiempo por salario fijo. El emprendedor crea un sistema que genera valor con o sin su presencia directa. Los ingresos son variables pero el techo es ilimitado. Cada uno tiene ventajas — la clave es elegir con información.</div>
+      </div>
+      <div class="what-card">
+        <div class="wc-num">05</div>
+        <span class="wc-icon">📊</span>
+        <div class="wc-title">La diferencia con un hobby</div>
+        <div class="wc-desc">Un hobby te cuesta dinero. Un negocio te genera dinero. Si vendes artesanías, cocinas o haces diseños pero no llevas cuentas, no sabes si estás ganando o perdiendo. Sin registros = hobby, no negocio.</div>
+      </div>
+      <div class="what-card">
+        <div class="wc-num">06</div>
+        <span class="wc-icon">🌍</span>
+        <div class="wc-title">Impacto en Caucasia</div>
+        <div class="wc-desc">El proyecto FinEdge quiere que jóvenes del Bajo Cauca accedan a educación financiera real. Con formación SENA, la tasa de supervivencia de negocios pasa del 26% al 74%. Ese es el objetivo del Grupo Angely: cambiar estadísticas con conocimiento.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══ TIPOS DE EMPRENDIMIENTO ═══ -->
+<section class="sec" id="tipos">
+  <div class="container">
+    <div class="sh rv">
+      <div class="badge">explora opciones</div>
+      <h2 class="sh-title">Tipos de <em>emprendimiento</em></h2>
+      <p class="sh-sub">No todos los negocios son iguales. Conoce las categorías, sus ventajas, sus riesgos y cuál se adapta mejor a tu perfil y a las oportunidades del Bajo Cauca.</p>
+    </div>
+    <div class="tipo-tabs rv">
+      <button class="tipo-tab on" onclick="showTipo('comercio',this)">🛍️ Comercio</button>
+      <button class="tipo-tab" onclick="showTipo('servicios',this)">🔧 Servicios</button>
+      <button class="tipo-tab" onclick="showTipo('digital',this)">💻 Digital</button>
+      <button class="tipo-tab" onclick="showTipo('alimentos',this)">🍔 Alimentos</button>
+      <button class="tipo-tab" onclick="showTipo('agro',this)">🌿 Agro</button>
+    </div>
+
+    <!-- COMERCIO -->
+    <div class="tipo-panel on" id="tp-comercio">
+      <div class="tp-info">
+        <div class="tp-head">
+          <div class="tp-icon">🛍️</div>
+          <div><div class="tp-name">Comercio / Tienda</div><div class="tp-cat">Compra y reventa · Capital inicial requerido</div></div>
+        </div>
+        <p class="tp-desc">Comprar productos al por mayor y venderlos al detal. Puede ser una tienda física, un puesto en plaza de mercado o una tienda virtual. En Caucasia, las tiendas de barrio, ferreterías y misceláneas son negocios robustos con clientela fija.</p>
+        <div class="tp-pros-cons">
+          <div class="pros">
+            <div class="pc-col-title">Ventajas</div>
+            <div class="pc-item">Modelo probado y conocido</div>
+            <div class="pc-item">Clientela recurrente y fija</div>
+            <div class="pc-item">Fácil de entender las ganancias</div>
+            <div class="pc-item">Capital inicial moderado</div>
+          </div>
+          <div class="cons">
+            <div class="pc-col-title">Desventajas</div>
+            <div class="pc-item">Requiere inventario constante</div>
+            <div class="pc-item">Alta competencia local</div>
+            <div class="pc-item">Riesgo de pérdidas por mercancía</div>
+            <div class="pc-item">Jornadas largas al inicio</div>
+          </div>
+        </div>
+        <div class="tp-pills">
+          <span class="tp-pill">desde $300K</span><span class="tp-pill">margen 20-35%</span><span class="tp-pill">riesgo medio</span>
+        </div>
+      </div>
+      <div class="tp-chart">
+        <div class="tc-title">&gt; negocios comerciales más rentables · caucasia 2024</div>
+        <div class="hbar-wrap" id="bars-comercio">
+          <div class="hbar-row"><span class="hbar-name">Tienda de barrio</span><div class="hbar-track"><div class="hbar-fill hf-p" data-w="78"></div></div><span class="hbar-val">78%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Ferretería</span><div class="hbar-track"><div class="hbar-fill hf-g" data-w="71"></div></div><span class="hbar-val">71%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Papelería</span><div class="hbar-track"><div class="hbar-fill hf-b" data-w="65"></div></div><span class="hbar-val">65%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Ropa y calzado</span><div class="hbar-track"><div class="hbar-fill hf-go" data-w="60"></div></div><span class="hbar-val">60%</span></div>
+          <div class="hbar-row"><span class="hbar-name">E-commerce local</span><div class="hbar-track"><div class="hbar-fill hf-o" data-w="54"></div></div><span class="hbar-val">54%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICIOS -->
+    <div class="tipo-panel" id="tp-servicios">
+      <div class="tp-info">
+        <div class="tp-head"><div class="tp-icon">🔧</div><div><div class="tp-name">Servicios Técnicos y Personales</div><div class="tp-cat">Habilidad como activo · Poco capital inicial</div></div></div>
+        <p class="tp-desc">Ofreces tu habilidad a cambio de dinero. Incluye barberías, estética, reparación de celulares/electrodomésticos, electricidad, plomería, contabilidad, diseño gráfico, etc. El activo eres tú: tu conocimiento y reputación.</p>
+        <div class="tp-pros-cons">
+          <div class="pros"><div class="pc-col-title">Ventajas</div><div class="pc-item">Inversión inicial muy baja</div><div class="pc-item">Márgenes de ganancia altos</div><div class="pc-item">Sin inventario que perder</div><div class="pc-item">Fácil escalar con reputación</div></div>
+          <div class="cons"><div class="pc-col-title">Desventajas</div><div class="pc-item">Ingresos dependen de tu tiempo</div><div class="pc-item">Requiere formación técnica</div><div class="pc-item">Competencia informal alta</div></div>
+        </div>
+        <div class="tp-pills"><span class="tp-pill">desde $150K</span><span class="tp-pill">margen 40-65%</span><span class="tp-pill">riesgo bajo</span></div>
+      </div>
+      <div class="tp-chart">
+        <div class="tc-title">&gt; servicios más demandados · bajo cauca 2024</div>
+        <div class="hbar-wrap" id="bars-servicios">
+          <div class="hbar-row"><span class="hbar-name">Barbería / Estética</span><div class="hbar-track"><div class="hbar-fill hf-p" data-w="85"></div></div><span class="hbar-val">85%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Soporte técnico</span><div class="hbar-track"><div class="hbar-fill hf-g" data-w="79"></div></div><span class="hbar-val">79%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Electricidad/Plomería</span><div class="hbar-track"><div class="hbar-fill hf-b" data-w="72"></div></div><span class="hbar-val">72%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Diseño gráfico</span><div class="hbar-track"><div class="hbar-fill hf-go" data-w="58"></div></div><span class="hbar-val">58%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Transporte / Mototaxi</span><div class="hbar-track"><div class="hbar-fill hf-r" data-w="66"></div></div><span class="hbar-val">66%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIGITAL -->
+    <div class="tipo-panel" id="tp-digital">
+      <div class="tp-info">
+        <div class="tp-head"><div class="tp-icon">💻</div><div><div class="tp-name">Negocio Digital / Online</div><div class="tp-cat">Internet como canal · Alcance nacional</div></div></div>
+        <p class="tp-desc">Emprendimientos que usan internet como canal principal: tiendas online, contenido en redes sociales, marketing digital, cursos virtuales, dropshipping, etc. Bajo capital inicial, alto potencial de escala.</p>
+        <div class="tp-pros-cons">
+          <div class="pros"><div class="pc-col-title">Ventajas</div><div class="pc-item">Alcance sin límite geográfico</div><div class="pc-item">Muy bajo capital inicial</div><div class="pc-item">Se puede iniciar desde el celular</div><div class="pc-item">Escalable sin contratar personal</div></div>
+          <div class="cons"><div class="pc-col-title">Desventajas</div><div class="pc-item">Requiere conectividad estable</div><div class="pc-item">Alta competencia global</div><div class="pc-item">Curva de aprendizaje digital</div></div>
+        </div>
+        <div class="tp-pills"><span class="tp-pill">desde $0</span><span class="tp-pill">margen 50-80%</span><span class="tp-pill">riesgo bajo-medio</span></div>
+      </div>
+      <div class="tp-chart">
+        <div class="tc-title">&gt; canales digitales más usados · jóvenes caucasia</div>
+        <div class="hbar-wrap" id="bars-digital">
+          <div class="hbar-row"><span class="hbar-name">WhatsApp Business</span><div class="hbar-track"><div class="hbar-fill hf-g" data-w="88"></div></div><span class="hbar-val">88%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Instagram / Reels</span><div class="hbar-track"><div class="hbar-fill hf-p" data-w="74"></div></div><span class="hbar-val">74%</span></div>
+          <div class="hbar-row"><span class="hbar-name">TikTok Shop</span><div class="hbar-track"><div class="hbar-fill hf-o" data-w="62"></div></div><span class="hbar-val">62%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Facebook Marketplace</span><div class="hbar-track"><div class="hbar-fill hf-b" data-w="58"></div></div><span class="hbar-val">58%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Sitio web propio</span><div class="hbar-track"><div class="hbar-fill hf-go" data-w="22"></div></div><span class="hbar-val">22%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALIMENTOS -->
+    <div class="tipo-panel" id="tp-alimentos">
+      <div class="tp-info">
+        <div class="tp-head"><div class="tp-icon">🍔</div><div><div class="tp-name">Alimentos y Bebidas</div><div class="tp-cat">El sector más frecuente en jóvenes · Alta demanda</div></div></div>
+        <p class="tp-desc">Comidas rápidas, empanadas, jugos, postres, heladería, restaurante o catering. El negocio de alimentos es el favorito de jóvenes emprendedores por su bajo costo inicial y alta demanda diaria. Requiere manejo higiénico y control estricto de costos.</p>
+        <div class="tp-pros-cons">
+          <div class="pros"><div class="pc-col-title">Ventajas</div><div class="pc-item">Demanda diaria y constante</div><div class="pc-item">Capital inicial moderado</div><div class="pc-item">Fácil de escalar (delivery)</div><div class="pc-item">Alta rotación de producto</div></div>
+          <div class="cons"><div class="pc-col-title">Desventajas</div><div class="pc-item">Producto perecedero</div><div class="pc-item">Competencia muy alta</div><div class="pc-item">Requiere licencias sanitarias</div></div>
+        </div>
+        <div class="tp-pills"><span class="tp-pill">desde $250K</span><span class="tp-pill">margen 25-45%</span><span class="tp-pill">riesgo medio</span></div>
+      </div>
+      <div class="tp-chart">
+        <div class="tc-title">&gt; negocios de alimentos más exitosos · caucasia</div>
+        <div class="hbar-wrap" id="bars-alimentos">
+          <div class="hbar-row"><span class="hbar-name">Comidas rápidas</span><div class="hbar-track"><div class="hbar-fill hf-o" data-w="82"></div></div><span class="hbar-val">82%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Jugos y bebidas</span><div class="hbar-track"><div class="hbar-fill hf-g" data-w="74"></div></div><span class="hbar-val">74%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Postres y dulces</span><div class="hbar-track"><div class="hbar-fill hf-p" data-w="68"></div></div><span class="hbar-val">68%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Catering/Domicilios</span><div class="hbar-track"><div class="hbar-fill hf-b" data-w="60"></div></div><span class="hbar-val">60%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Restaurante formal</span><div class="hbar-track"><div class="hbar-fill hf-r" data-w="44"></div></div><span class="hbar-val">44%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AGRO -->
+    <div class="tipo-panel" id="tp-agro">
+      <div class="tp-info">
+        <div class="tp-head"><div class="tp-icon">🌿</div><div><div class="tp-name">Agro-negocios Sostenibles</div><div class="tp-cat">Oportunidad del Bajo Cauca · Alta demanda</div></div></div>
+        <p class="tp-desc">Aprovechando la riqueza natural del Bajo Cauca: huertas urbanas, piscicultura, cacao, aguacate, miel, productos orgánicos. Con acceso a Finagro y créditos agropecuarios, esta es una de las apuestas productivas más importantes de la región.</p>
+        <div class="tp-pros-cons">
+          <div class="pros"><div class="pc-col-title">Ventajas</div><div class="pc-item">Acceso a crédito subsidiado (Finagro)</div><div class="pc-item">Mercados locales y exportación</div><div class="pc-item">Alto potencial en el Bajo Cauca</div><div class="pc-item">Apoyo gubernamental disponible</div></div>
+          <div class="cons"><div class="pc-col-title">Desventajas</div><div class="pc-item">Largo ciclo de producción</div><div class="pc-item">Dependencia del clima</div><div class="pc-item">Requiere tierra o arrendamiento</div></div>
+        </div>
+        <div class="tp-pills"><span class="tp-pill">finagro disponible</span><span class="tp-pill">largo plazo</span><span class="tp-pill">riesgo moderado</span></div>
+      </div>
+      <div class="tp-chart">
+        <div class="tc-title">&gt; productos agro con mejor demanda · antioquia 2024</div>
+        <div class="hbar-wrap" id="bars-agro">
+          <div class="hbar-row"><span class="hbar-name">Cacao</span><div class="hbar-track"><div class="hbar-fill hf-go" data-w="86"></div></div><span class="hbar-val">86%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Aguacate Hass</span><div class="hbar-track"><div class="hbar-fill hf-g" data-w="80"></div></div><span class="hbar-val">80%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Piscicultura (Tilapia)</span><div class="hbar-track"><div class="hbar-fill hf-b" data-w="74"></div></div><span class="hbar-val">74%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Huertas orgánicas</span><div class="hbar-track"><div class="hbar-fill hf-p" data-w="66"></div></div><span class="hbar-val">66%</span></div>
+          <div class="hbar-row"><span class="hbar-name">Apicultura (miel)</span><div class="hbar-track"><div class="hbar-fill hf-o" data-w="58"></div></div><span class="hbar-val">58%</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══ CÓMO EMPRENDER — PASOS ═══ -->
+<section class="sec" id="como-emprender">
+  <div class="container">
+    <div class="sh rv">
+      <div class="badge"><span class="dot"></span>guía práctica</div>
+      <h2 class="sh-title">Cómo emprender <em>paso a paso</em></h2>
+      <p class="sh-sub">De la idea a las primeras ventas. Estos son los pasos reales que sigue cualquier negocio exitoso en Colombia.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;" class="rv">
+      <div class="steps-track" id="stepsTrack">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-lbl">antes de todo</div>
+            <div class="step-title">Identifica un problema real</div>
+            <div class="step-body">Todo negocio exitoso resuelve un problema que alguien está dispuesto a pagar para solucionar. Pregúntate: ¿qué le falta a mi barrio? ¿Qué compran mis vecinos y tienen que ir lejos a conseguir? ¿Qué habilidad tengo que otros necesitan?</div>
+            <div class="step-chips"><span class="step-chip">observa tu entorno</span><span class="step-chip">habla con clientes</span><span class="step-chip">encuentra la brecha</span></div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-lbl">valida antes de invertir</div>
+            <div class="step-title">Valida la idea sin gastar</div>
+            <div class="step-body">Antes de gastar un peso, pregúntale a 10 personas si comprarían tu producto y cuánto pagarían. Si no consigues ni 3 personas interesadas, la idea necesita ajustes. La validación te ahorra meses de trabajo y dinero perdido.</div>
+            <div class="step-chips"><span class="step-chip">encuesta informal</span><span class="step-chip">prototipo mínimo</span><span class="step-chip">primera venta simbólica</span></div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-lbl">planificación</div>
+            <div class="step-title">Escribe tu plan de negocio</div>
+            <div class="step-body">No necesita ser un documento de 100 páginas. Con 2 hojas basta: describe tu producto, a quién le vendes, cómo lo vendes, cuánto cuesta producirlo y cuánto cobras. Calcula tu punto de equilibrio. El SENA tiene plantillas gratis para esto.</div>
+            <div class="step-chips"><span class="step-chip">modelo canvas</span><span class="step-chip">análisis de costos</span><span class="step-chip">punto de equilibrio</span></div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-lbl">finanzas</div>
+            <div class="step-title">Separa las finanzas desde el día 1</div>
+            <div class="step-body">Abre una cuenta bancaria exclusiva para el negocio (aunque sea una cuenta de ahorros básica). Nunca mezcles plata del negocio con la personal. Lleva cuadre de caja diario. Esta disciplina es lo que más diferencia negocios que sobreviven de los que cierran.</div>
+            <div class="step-chips"><span class="step-chip">cuenta separada</span><span class="step-chip">cuadre diario</span><span class="step-chip">no mezcles</span></div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <div class="step-lbl">arranque</div>
+            <div class="step-title">Empieza pequeño, crece rápido</div>
+            <div class="step-body">No esperes tener todo perfecto. Empieza con lo mínimo necesario, genera tus primeras ventas, aprende del feedback de tus primeros clientes y mejora. El mejor plan es el que se ejecuta. Perfectionar es un proceso que nunca termina.</div>
+            <div class="step-chips"><span class="step-chip">MVP mínimo viable</span><span class="step-chip">primeras ventas</span><span class="step-chip">escucha al cliente</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="concept-stack">
+        <div style="font-family:var(--mono);font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">conceptos clave</div>
+        <div class="concept-card"><div class="cc-term">Punto de Equilibrio</div><div class="cc-def">Las ventas mínimas para no perder dinero. Por debajo de este número, el negocio opera con pérdida.</div><div class="cc-ex">PE = Gastos fijos ÷ (Precio − Costo unitario)</div></div>
+        <div class="concept-card"><div class="cc-term">Margen de Ganancia</div><div class="cc-def">El porcentaje de ganancia sobre el precio de venta. Si vendes en $10.000 y costó $6.000, tu margen es 40%.</div><div class="cc-ex">Margen = (Precio − Costo) ÷ Precio × 100</div></div>
+        <div class="concept-card"><div class="cc-term">Capital de Trabajo</div><div class="cc-def">El dinero disponible para operar día a día: pagar proveedores, empleados y servicios sin depender de las ventas del día.</div><div class="cc-ex">Mínimo recomendado: 2 meses de gastos fijos</div></div>
+        <div class="concept-card"><div class="cc-term">Flujo de Caja</div><div class="cc-def">El registro de todo el dinero que entra y sale. Un negocio puede tener buenas ventas y seguir quebrando si no controla el flujo.</div><div class="cc-ex">Caja = Saldo anterior + Ingresos − Egresos</div></div>
+        <div class="concept-card"><div class="cc-term">Fondo Emprender SENA</div><div class="cc-def">Crédito para egresados SENA menores de 28 años. Hasta $114M al 0% de interés. Si generas empleo, la deuda se condona al 100%.</div><div class="cc-ex">Requiere: plan de negocio + formación SENA</div></div>
+        <div class="concept-card"><div class="cc-term">Gota a Gota — NUNCA</div><div class="cc-def">Préstamos ilegales con tasas del 10-20% SEMANAL (240%+ anual). La trampa financiera más destructiva para negocios de Caucasia.</div><div class="cc-ex">$200K prestado → $2.4M en 1 año. Ilegal en Colombia.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══ HERRAMIENTAS & GLOSARIO — TABS ═══ -->
+<section class="sec" id="herramientas-glosario">
+  <div class="container">
+    <div class="sh rv">
+      <div class="badge"><span class="dot"></span>recursos prácticos</div>
+      <h2 class="sh-title">Herramientas y <em>glosario</em></h2>
+      <p class="sh-sub">Calcula tu cuadre de caja diario, determina tu punto de equilibrio, consulta el glosario financiero o simula tu ahorro futuro — todo en un solo lugar.</p>
+    </div>
+    <div class="tipo-tabs rv">
+      <button class="tipo-tab on" onclick="showHerramienta('cuadre',this)">🧮 Cuadre de Caja</button>
+      <button class="tipo-tab" onclick="showHerramienta('equilibrio',this)">⚖️ Punto de Equilibrio</button>
+      <button class="tipo-tab" onclick="showHerramienta('glosario',this)">📚 Glosario</button>
+      <button class="tipo-tab" onclick="showHerramienta('ahorro',this)">💰 Ahorro</button>
+    </div>
+
+    <!-- Panel: Cuadre de Caja -->
+    <div class="tipo-panel on" id="hp-cuadre">
+      <div class="caja-wrap">
+        <div class="caja-form">
+          <h3>📒 Registra tu caja diaria</h3>
+          <p>Ingresa los valores del día y el sistema calcula automáticamente si tu caja cuadra, sobra o falta dinero.</p>
+          <div class="caja-fields">
+            <div>
+              <div class="cf-label">Base de caja (saldo con el que abriste)</div>
+              <div class="cf-row">
+                <input type="number" class="cf-input" id="cBase" placeholder="Ej: 200000" value="200000">
+                <span class="cf-sign">$</span>
+              </div>
+            </div>
+            <div>
+              <div class="cf-label">Ventas en efectivo del día (+)</div>
+              <div class="cf-row">
+                <input type="number" class="cf-input" id="cVentas" placeholder="Ej: 485000" value="485000">
+                <span class="cf-sign plus">+</span>
+              </div>
+            </div>
+            <div>
+              <div class="cf-label">Otras entradas (cobros pendientes, etc.)</div>
+              <div class="cf-row">
+                <input type="number" class="cf-input" id="cEntradas" placeholder="Ej: 0" value="0">
+                <span class="cf-sign plus">+</span>
+              </div>
+            </div>
+            <div>
+              <div class="cf-label">Gastos del día — proveedores, servicios (−)</div>
+              <div class="cf-row">
+                <input type="number" class="cf-input" id="cGastos" placeholder="Ej: 210000" value="210000">
+                <span class="cf-sign minus">−</span>
+              </div>
+            </div>
+            <div>
+              <div class="cf-label">Retiros o consignaciones (−)</div>
+              <div class="cf-row">
+                <input type="number" class="cf-input" id="cRetiros" placeholder="Ej: 0" value="0">
+                <span class="cf-sign minus">−</span>
+              </div>
+            </div>
+            <div>
+              <div class="cf-label">Efectivo real contado al cerrar</div>
+              <div class="cf-row">
+                <input type="number" class="cf-input" id="cReal" placeholder="Ej: 475000" value="475000">
+                <span class="cf-sign">✓</span>
+              </div>
+            </div>
+          </div>
+          <button class="caja-btn" onclick="calcCaja()">→ CUADRAR CAJA</button>
+        </div>
+        <div class="caja-result" id="cajaResult">
+          <div class="cr-heading">&gt; resultado_cuadre · esperando datos</div>
+          <div class="cr-rows" id="crRows">
+            <div class="cr-row"><span class="cr-row-lbl">Base de caja</span><span class="cr-row-val">—</span></div>
+            <div class="cr-row"><span class="cr-row-lbl">(+) Ventas del día</span><span class="cr-row-val">—</span></div>
+            <div class="cr-row"><span class="cr-row-lbl">(−) Gastos del día</span><span class="cr-row-val">—</span></div>
+            <div class="cr-row total"><span class="cr-row-lbl">Valor calculado</span><span class="cr-row-val">—</span></div>
+            <div class="cr-row total"><span class="cr-row-lbl">Efectivo real</span><span class="cr-row-val">—</span></div>
+            <div class="cr-row total"><span class="cr-row-lbl">Diferencia</span><span class="cr-row-val">—</span></div>
+          </div>
+          <div class="cr-status" id="crStatus">ingresa los datos y presiona cuadrar caja</div>
+          <div>
+            <div class="cr-heading" style="margin-bottom:8px;">&gt; distribución del día</div>
+            <div class="cr-chart-wrap">
+              <div class="cr-chart" id="crChart">
+                <div><div class="crc-bar" id="cb1" style="height:60px"></div><div class="crc-lbl">ventas</div></div>
+                <div><div class="crc-bar r" id="cb2" style="height:40px"></div><div class="crc-lbl">gastos</div></div>
+                <div><div class="crc-bar go" id="cb3" style="height:20px"></div><div class="crc-lbl">ganancia</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel: Punto de Equilibrio -->
+    <div class="tipo-panel" id="hp-equilibrio">
+      <div class="pe-wrap">
+        <div class="pe-inputs">
+          <div class="cr-heading" style="margin-bottom:16px;">&gt; parámetros del negocio</div>
+          <div class="caja-fields">
+            <div>
+              <div class="cf-label">Gastos fijos mensuales ($)</div>
+              <input type="number" class="cf-input" id="peFijos" placeholder="Ej: 350000" value="350000" oninput="calcPE()">
+            </div>
+            <div>
+              <div class="cf-label">Precio de venta por unidad ($)</div>
+              <input type="number" class="cf-input" id="pePrecio" placeholder="Ej: 10000" value="10000" oninput="calcPE()">
+            </div>
+            <div>
+              <div class="cf-label">Costo de fabricación por unidad ($)</div>
+              <input type="number" class="cf-input" id="peCosto" placeholder="Ej: 4000" value="4000" oninput="calcPE()">
+            </div>
+          </div>
+        </div>
+        <div class="pe-chart-panel">
+          <div class="cr-heading" style="margin-bottom:12px;">&gt; análisis visual</div>
+          <div class="pe-canvas-wrap">
+            <canvas id="peCanvas"></canvas>
+          </div>
+          <div class="pe-result-bar" id="peResults">
+            <div class="pe-kpi"><div class="pe-kpi-v" id="peMargen" style="color:var(--ok)">$6.000</div><div class="pe-kpi-l">margen/unidad</div></div>
+            <div class="pe-kpi"><div class="pe-kpi-v" id="peUnidades" style="color:var(--p1)">59 uds</div><div class="pe-kpi-l">unidades mínimas</div></div>
+            <div class="pe-kpi"><div class="pe-kpi-v" id="peVentas" style="color:var(--gold)">$583K</div><div class="pe-kpi-l">ventas mínimas</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel: Glosario -->
+    <div class="tipo-panel" id="hp-glosario">
+      <div class="glos-grid">
+        <div class="glos-card"><div class="glos-term">Margen bruto</div><div class="glos-def">La ganancia antes de descontar gastos fijos. Muestra si tu precio de venta tiene sentido.</div><div class="glos-ex">Margen = Precio − Costo de producción</div></div>
+        <div class="glos-card"><div class="glos-term">Gastos fijos</div><div class="glos-def">Los que pagas sin importar si vendes o no: arriendo, servicios, sueldo. Son tu "piso de costos".</div><div class="glos-ex">Ej: arriendo $350K/mes, siempre</div></div>
+        <div class="glos-card"><div class="glos-term">Gastos variables</div><div class="glos-def">Los que suben o bajan con tus ventas: insumos, empaque, materia prima.</div><div class="glos-ex">Ej: más ventas = más ingredientes</div></div>
+        <div class="glos-card"><div class="glos-term">Capital de trabajo</div><div class="glos-def">El dinero para operar mientras entran las ventas. Sin él, el negocio para aunque tenga clientes.</div><div class="glos-ex">Mínimo: 2 meses de gastos fijos</div></div>
+        <div class="glos-card"><div class="glos-term">Flujo de caja</div><div class="glos-def">El registro de todo lo que entra y sale de dinero. La herramienta más importante de un negocio.</div><div class="glos-ex">Caja = Base + Entradas − Salidas</div></div>
+        <div class="glos-card"><div class="glos-term">Punto de equilibrio</div><div class="glos-def">El nivel mínimo de ventas para no ganar ni perder. Por debajo: pérdida. Por encima: ganancia.</div><div class="glos-ex">PE = Fijos ÷ (Precio − Costo unitario)</div></div>
+        <div class="glos-card"><div class="glos-term">Modelo de negocio</div><div class="glos-def">La explicación de cómo tu negocio genera dinero: qué vendes, a quién, cómo y por qué te pagan.</div><div class="glos-ex">Herramienta: Canvas de Osterwalder</div></div>
+        <div class="glos-card"><div class="glos-term">Nicho de mercado</div><div class="glos-def">El grupo específico de personas a quienes va dirigido tu producto. Más específico = más fácil vender.</div><div class="glos-ex">No "todo el mundo" — sé específico</div></div>
+        <div class="glos-card"><div class="glos-term">Reinversión</div><div class="glos-def">Usar parte de las ganancias para hacer crecer el negocio. La regla: invierte mínimo el 30% de las ganancias.</div><div class="glos-ex">Compra más inventario, mejora el local</div></div>
+        <div class="glos-card"><div class="glos-term">Fondo Emprender</div><div class="glos-def">Crédito SENA de hasta $114M al 0% para egresados. Condonable si generas empleo. El mejor crédito juvenil.</div><div class="glos-ex">Requiere plan de negocio + formación</div></div>
+        <div class="glos-card"><div class="glos-term">Precio de venta</div><div class="glos-def">Costo de producción + porcentaje de ganancia deseado. Nunca pongas precio sin saber tu costo real.</div><div class="glos-ex">Costo $4K + 60% margen = precio $6.4K</div></div>
+        <div class="glos-card"><div class="glos-term">Cuadre de caja</div><div class="glos-def">Verificación diaria de que el efectivo real coincide con los registros. Detecta errores, robos y olvidos.</div><div class="glos-ex">Real = Calculado → Caja cuadrada ✓</div></div>
+      </div>
+    </div>
+
+    <!-- Panel: Ahorro -->
+    <div class="tipo-panel" id="hp-ahorro">
+      <div class="ahorro-wrap">
+        <div class="ahorro-form">
+          <h3>💰 Calculadora de Ahorro Compuesto</h3>
+          <p>Descubre cuánto puedes acumular si ahorras consistentemente. El interés compuesto es la fuerza más poderosa de las finanzas personales.</p>
+          <div class="caja-fields">
+            <div>
+              <div class="cf-label">Inversión inicial ($)</div>
+              <input type="number" class="cf-input" id="aInicial" placeholder="Ej: 500000" value="500000">
+            </div>
+            <div>
+              <div class="cf-label">Aporte mensual ($)</div>
+              <input type="number" class="cf-input" id="aMensual" placeholder="Ej: 100000" value="100000">
+            </div>
+            <div>
+              <div class="cf-label">Tasa de interés anual (%)</div>
+              <input type="number" class="cf-input" id="aTasa" placeholder="Ej: 8" value="8" step="0.1">
+            </div>
+            <div>
+              <div class="cf-label">Plazo (años)</div>
+              <input type="number" class="cf-input" id="aAnios" placeholder="Ej: 5" value="5" min="1">
+            </div>
+          </div>
+          <button class="caja-btn" onclick="calcAhorro()">→ CALCULAR AHORRO</button>
+        </div>
+        <div class="ahorro-result" id="ahorroResult">
+          <div class="cr-heading">&gt; resultado_ahorro · interés compuesto</div>
+          <div class="cr-rows" id="arRows">
+            <div class="cr-row"><span class="cr-row-lbl">Inversión inicial</span><span class="cr-row-val">—</span></div>
+            <div class="cr-row"><span class="cr-row-lbl">Aportes totales</span><span class="cr-row-val">—</span></div>
+            <div class="cr-row"><span class="cr-row-lbl">Intereses generados</span><span class="cr-row-val">—</span></div>
+            <div class="cr-row total"><span class="cr-row-lbl">Total acumulado</span><span class="cr-row-val">—</span></div>
+          </div>
+          <div class="cr-status" id="arStatus" style="margin-top:10px;">ingresa los datos y presiona calcular</div>
+          <div class="cr-heading" style="margin-top:18px;margin-bottom:8px;">&gt; composición del ahorro</div>
+          <div class="cr-chart">
+            <div><div class="crc-bar hf-p" id="ab1" style="height:10px"></div><div class="crc-lbl">inicial</div></div>
+            <div><div class="crc-bar hf-b" id="ab2" style="height:50px"></div><div class="crc-lbl">aportes</div></div>
+            <div><div class="crc-bar hf-go" id="ab3" style="height:20px"></div><div class="crc-lbl">intereses</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══ CICLO DE VIDA DEL NEGOCIO ═══ -->
+<section class="sec-sm" id="ciclo">
+  <div class="container">
+    <div class="sh rv" style="margin-bottom:32px;">
+      <div class="badge">ciclo de vida</div>
+      <h2 class="sh-title">Fases de un <em>negocio</em></h2>
+      <p class="sh-sub">Todo negocio pasa por estas fases. Saber en cuál estás te ayuda a tomar mejores decisiones.</p>
+    </div>
+    <div class="lifecycle rv" id="lifecycle">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══ ERRORES VS BUENAS PRÁCTICAS ═══ -->
+<section class="sec" id="errores">
+  <div class="container">
+    <div class="sh rv">
+      <div class="badge">aprende de los datos</div>
+      <h2 class="sh-title">Errores frecuentes vs. <em>buenas prácticas</em></h2>
+      <p class="sh-sub">El 68% de negocios juveniles cierra en 3 años. Estos son los errores que los llevan a cerrar — y lo que hacen los que sobreviven.</p>
+    </div>
+    <div class="evp-grid rv">
+      <div class="evp-col bad">
+        <div class="evp-col-head">❌ errores más comunes</div>
+        <div class="evp-item"><span class="evp-ico">💸</span><div><div class="evp-title">Mezclar caja personal con la del negocio</div><div class="evp-body">El 48% de los emprendedores usa el mismo bolsillo para gastos personales y del negocio. Resultado: nunca saben si realmente están ganando o perdiendo.</div></div></div>
+        <div class="evp-item"><span class="evp-ico">📒</span><div><div class="evp-title">No llevar cuadre de caja diario</div><div class="evp-body">Sin registro, los gastos hormiga del negocio se acumulan invisiblemente. Al final del mes el balance no cuadra y no hay forma de saber qué falló.</div></div></div>
+        <div class="evp-item"><span class="evp-ico">⚠️</span><div><div class="evp-title">Financiarse con gota a gota</div><div class="evp-body">La trampa más costosa. A 20% semanal, una deuda de $200.000 se convierte en $2.400.000 en un año. Es la razón número 1 de quiebra en negocios del Bajo Cauca.</div></div></div>
+        <div class="evp-item"><span class="evp-ico">📊</span><div><div class="evp-title">No calcular el punto de equilibrio</div><div class="evp-body">Abrir sin saber cuánto necesitas vender para no perder es navegar sin brújula. El 61% de negocios que cierran nunca calcularon su PE.</div></div></div>
+      </div>
+      <div class="evp-col good">
+        <div class="evp-col-head">✓ buenas prácticas</div>
+        <div class="evp-item"><span class="evp-ico">🏦</span><div><div class="evp-title">Cuenta bancaria exclusiva para el negocio</div><div class="evp-body">Aunque sea básica. Separar el dinero del negocio es el primer paso hacia una contabilidad real. Puedes abrir una cuenta sin costo en Daviplata o Nequi.</div></div></div>
+        <div class="evp-item"><span class="evp-ico">📊</span><div><div class="evp-title">Cuadre de caja diario — 5 minutos</div><div class="evp-body">Los negocios que llevan registro tienen 3.2 veces más probabilidades de sobrevivir al primer año. 5 minutos al cierre del día pueden salvarte el negocio.</div></div></div>
+        <div class="evp-item"><span class="evp-ico">🎓</span><div><div class="evp-title">Acceder al Fondo Emprender SENA</div><div class="evp-body">Con formación SENA y plan de negocio, accedes a crédito de hasta $114M al 0% de interés. Si el negocio genera empleo, la deuda se condona. El mejor crédito en Colombia.</div></div></div>
+        <div class="evp-item"><span class="evp-ico">🎯</span><div><div class="evp-title">Calcular PE antes de abrir</div><div class="evp-body">Saber cuántas unidades necesitas vender para no perder te da claridad y te permite decidir si el negocio tiene sentido ANTES de invertir el dinero.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sec-div">
+
+<!-- ═══ RECURSOS ═══ -->
+<section class="sec-sm" style="padding-bottom:88px;" id="recursos">
+  <div class="container">
+    <div class="sh rv" style="margin-bottom:36px;">
+      <div class="badge"><span class="dot"></span>apoyos disponibles</div>
+      <h2 class="sh-title">Recursos para <em>emprendedores</em></h2>
+      <p class="sh-sub">Programas y entidades que apoyan el emprendimiento juvenil en Colombia — la mayoría son gratuitos.</p>
+    </div>
+    <div class="recursos-grid rv">
+      <div class="rec-card"><span class="rec-icon">🎓</span><div class="rec-name">Fondo Emprender SENA</div><div class="rec-desc">El mejor crédito disponible para jóvenes emprendedores. Hasta $114M al 0% de interés, condonable si generas empleo. Requiere formación SENA y plan de negocio.</div><div class="rec-val">hasta $114M · 0% interés · condonable</div></div>
+      <div class="rec-card"><span class="rec-icon">🌿</span><div class="rec-name">Finagro</div><div class="rec-desc">Fondo de financiamiento del sector agropecuario. Créditos subsidiados para proyectos de cacao, aguacate, piscicultura y otros cultivos con potencial en el Bajo Cauca.</div><div class="rec-val">tasas subsidiadas · sector agro</div></div>
+      <div class="rec-card"><span class="rec-icon">🏦</span><div class="rec-name">Bancóldex</div><div class="rec-desc">Banco de desarrollo empresarial de Colombia. Ofrece líneas de crédito especiales para microempresarios y emprendedores con tasas más bajas que el mercado.</div><div class="rec-val">tasas preferenciales · fácil acceso</div></div>
+      <div class="rec-card"><span class="rec-icon">📱</span><div class="rec-name">Aplicaciones gratuitas</div><div class="rec-desc">Wave, Alegra, Siigo Pyme — apps de contabilidad gratuitas para llevar cuadre de caja, facturación y control de inventario desde el celular.</div><div class="rec-val">gratis · desde el celular</div></div>
+      <div class="rec-card"><span class="rec-icon">🤝</span><div class="rec-name">iNNpulsa Colombia</div><div class="rec-desc">Programa del Gobierno Nacional para emprendedores. Ofrece mentoría, capacitaciones gratuitas, capital semilla y conexión con inversionistas.</div><div class="rec-val">capital semilla · mentoría gratis</div></div>
+      <div class="rec-card"><span class="rec-icon">🤖</span><div class="rec-name">Finn IA — FinEdge</div><div class="rec-desc">Nuestro asistente de IA disponible 24/7 para responder dudas sobre finanzas, ayudarte a calcular costos, revisar tu plan de negocio y orientarte en créditos.</div><div class="rec-val">gratuito · 24/7 disponible</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="sec-sm" style="padding-bottom:88px;">
+  <div class="container">
+    <div class="cta-block rv">
+      <div class="badge" style="margin-bottom:18px;"><span class="dot"></span>da el primer paso</div>
+      <h2 class="cta-title">Tu negocio empieza<br><em>con información real.</em></h2>
+      <p class="cta-sub">Con educación financiera del SENA, tu tasa de supervivencia pasa del 26% al 74%. Ese es exactamente el objetivo de FinEdge y del Grupo Angely.</p>
+      <div class="cta-btns">
+        <a href="/ia" class="btn btn-primary">→ pregúntale a finn</a>
+        <a href="/presupuesto" class="btn btn-outline">ver presupuesto</a>
+        <a href="/credito-casa" class="btn btn-outline">ver créditos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="fb">
+        <a href="/" class="logo"><div class="logo-mark">F</div><span class="logo-text">Fin<span>Edge</span></span></a>
+        <p>Plataforma de educación financiera y comercial para jóvenes. Proyecto de grado SENA — Grupo Finedge · Caucasia, Antioquia.</p>
+      </div>
+      <div class="fc">
+        <h4>módulos</h4>
+        <ul>
+          <li><a href="{{ url_for('presupuesto') }}">Presupuesto</a></li>
+          <li><a href="{{ url_for('credito_casa') }}">Créditos</a></li>
+          <li><a href="{{ url_for('inversiones') }}">Inversiones</a></li>
+          <li><a href="{{ url_for('emprendimiento') }}">Emprendimiento</a></li>
+          <li><a href="{{ url_for('estadisticas') }}">Estadísticas</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h4>en esta página</h4>
+        <ul>
+          <li><a href="#que-es">¿Qué es emprender?</a></li>
+          <li><a href="#tipos">Tipos de negocio</a></li>
+          <li><a href="#como-emprender">Cómo empezar</a></li>
+          <li><a href="#herramientas-glosario">Herramientas</a></li>
+          <li><a href="#recursos">Recursos</a></li>
+        </ul>
+      </div>
+      <div class="fc">
+        <h4>proyecto sena</h4>
+        <ul>
+          <li><a href="/">FinEdge inicio</a></li>
+          <li><a href="/ia">Finn IA</a></li>
+          <li><a href="/estadisticas">Estadísticas</a></li>
+          <li><a href="/inversiones">Inversiones</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span class="foot-copy">© 2026 FinEdge — Educación financiera gratuita para jóvenes</span>
+      <span class="foot-sena">Proyecto SENA · <span>Grupo Finedge</span> · IE Santo Domingo · Caucasia</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── nav scroll ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('sc',scrollY>40);
+  document.getElementById('sp').style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';
+});
+document.getElementById('hbg').addEventListener('click',()=>document.getElementById('mm').classList.toggle('op'));
+document.querySelectorAll('.mm a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mm').classList.remove('op')));
+
+// ── reveal ──
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// ── counters ──
+function animC(el){const t=parseInt(el.dataset.t),dur=1600,s=performance.now();const u=n=>{const p=Math.min((n-s)/dur,1),e=1-Math.pow(1-p,3);el.textContent=Math.floor(e*t);if(p<1)requestAnimationFrame(u);else el.textContent=t;};requestAnimationFrame(u);}
+const cObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.counter').forEach(c=>animC(c));cObs.unobserve(e.target);}}),{threshold:.3});
+document.querySelectorAll('.kpi-strip').forEach(el=>cObs.observe(el));
+
+// ── steps highlight ──
+const sObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.4});
+document.querySelectorAll('.step-item').forEach(el=>sObs.observe(el));
+
+// ── smooth scroll ──
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  const h=a.getAttribute('href');if(h==='#')return;
+  const el=document.querySelector(h);if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
+}));
+
+// ── tipo tabs (scoped) ──
+function showTipo(id,btn){
+  document.querySelectorAll('.tipo-panel[id^="tp-"]').forEach(p=>p.classList.remove('on'));
+  btn.parentElement.querySelectorAll('.tipo-tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tp-'+id).classList.add('on');
+  btn.classList.add('on');
+  animateBarsIn('bars-'+id);
+}
+
+// ── herramienta tabs (scoped) ──
+function showHerramienta(id,btn){
+  document.querySelectorAll('.tipo-panel[id^="hp-"]').forEach(p=>p.classList.remove('on'));
+  btn.parentElement.querySelectorAll('.tipo-tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('hp-'+id).classList.add('on');
+  btn.classList.add('on');
+  if(id==='ahorro') calcAhorro();
+  if(id==='equilibrio') setTimeout(calcPE,100);
+  if(id==='cuadre') calcCaja();
+}
+
+// ── bar animations ──
+function animateBarsIn(containerId){
+  const c=document.getElementById(containerId);if(!c)return;
+  c.querySelectorAll('.hbar-fill').forEach(b=>{
+    const w=b.dataset.w||0;b.style.width='0%';
+    setTimeout(()=>{b.style.transition='width 1.2s cubic-bezier(.22,1,.36,1)';b.style.width=w+'%';},80);
+  });
+}
+setTimeout(()=>animateBarsIn('bars-comercio'),400);
+
+// Bar obs for sections
+const barObs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    e.target.querySelectorAll('.hbar-fill').forEach(b=>{const w=b.dataset.w||0;b.style.width='0%';setTimeout(()=>{b.style.transition='width 1.2s cubic-bezier(.22,1,.36,1)';b.style.width=w+'%';},100);});
+    barObs.unobserve(e.target);
+  }
+}),{threshold:.2});
+document.querySelectorAll('.hbar-wrap').forEach(el=>barObs.observe(el));
+
+// ── CUADRE DE CAJA ──
+const fmt=n=>'$'+Math.round(Math.abs(n)).toLocaleString('es-CO');
+function calcCaja(){
+  const base=parseFloat(document.getElementById('cBase').value)||0;
+  const ventas=parseFloat(document.getElementById('cVentas').value)||0;
+  const entradas=parseFloat(document.getElementById('cEntradas').value)||0;
+  const gastos=parseFloat(document.getElementById('cGastos').value)||0;
+  const retiros=parseFloat(document.getElementById('cRetiros').value)||0;
+  const real=parseFloat(document.getElementById('cReal').value)||0;
+  const calc=base+ventas+entradas-gastos-retiros;
+  const dif=real-calc;
+  const ganancia=ventas+entradas-gastos;
+  const rows=document.getElementById('crRows');
+  rows.innerHTML=`
+    <div class="cr-row"><span class="cr-row-lbl">Base de caja</span><span class="cr-row-val">${fmt(base)}</span></div>
+    <div class="cr-row"><span class="cr-row-lbl">(+) Ventas del día</span><span class="cr-row-val g">+${fmt(ventas)}</span></div>
+    <div class="cr-row"><span class="cr-row-lbl">(+) Otras entradas</span><span class="cr-row-val g">+${fmt(entradas)}</span></div>
+    <div class="cr-row"><span class="cr-row-lbl">(−) Gastos del día</span><span class="cr-row-val r">−${fmt(gastos)}</span></div>
+    <div class="cr-row"><span class="cr-row-lbl">(−) Retiros</span><span class="cr-row-val r">−${fmt(retiros)}</span></div>
+    <div class="cr-row total"><span class="cr-row-lbl">Valor calculado</span><span class="cr-row-val">${fmt(calc)}</span></div>
+    <div class="cr-row total"><span class="cr-row-lbl">Efectivo real</span><span class="cr-row-val">${fmt(real)}</span></div>
+    <div class="cr-row total"><span class="cr-row-lbl">Diferencia</span><span class="cr-row-val ${Math.abs(dif)<1?'g':dif>0?'go':'r'}">${dif>=0?'+':''}${fmt(dif)}</span></div>`;
+  const st=document.getElementById('crStatus');
+  if(Math.abs(dif)<1){st.className='cr-status ok';st.textContent='✓ CAJA CUADRADA PERFECTAMENTE';}
+  else if(dif>0){st.className='cr-status warn';st.textContent='⚠ SOBRANTE: '+fmt(dif)+' — revisa si olvidaste registrar un gasto';}
+  else{st.className='cr-status bad';st.textContent='✕ FALTANTE: '+fmt(Math.abs(dif))+' — revisa tus registros de ventas';}
+  const maxV=Math.max(ventas,gastos,Math.max(ganancia,0),1);
+  document.getElementById('cb1').style.height=((ventas/maxV)*70)+'px';
+  document.getElementById('cb2').style.height=((gastos/maxV)*70)+'px';
+  document.getElementById('cb3').style.height=((Math.max(ganancia,0)/maxV)*70)+'px';
+}
+
+// ── PUNTO DE EQUILIBRIO ──
+function calcPE(){
+  const fijos=parseFloat(document.getElementById('peFijos').value)||350000;
+  const precio=parseFloat(document.getElementById('pePrecio').value)||10000;
+  const costo=parseFloat(document.getElementById('peCosto').value)||4000;
+  const margen=precio-costo;
+  if(margen<=0)return;
+  const unidades=Math.ceil(fijos/margen);
+  const ventas=unidades*precio;
+  document.getElementById('peMargen').textContent=fmt(margen);
+  document.getElementById('peUnidades').textContent=unidades+' uds';
+  document.getElementById('peVentas').textContent='$'+Math.round(ventas/1000)+'K';
+  drawPE(fijos,precio,costo,margen,unidades);
+}
+function drawPE(fijos,precio,costo,margen,pe){
+  const canvas=document.getElementById('peCanvas');
+  if(!canvas)return;
+  const W=canvas.parentElement.clientWidth||500,H=220;
+  canvas.width=W;canvas.height=H;
+  const ctx=canvas.getContext('2d');
+  ctx.clearRect(0,0,W,H);
+  const maxU=pe*2.2;
+  const maxV=maxU*precio;
+  const pad={t:20,r:20,b:32,l:10};
+  const cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
+  const xPos=u=>pad.l+(u/maxU)*cW;
+  const yPos=v=>pad.t+cH-((v/maxV)*cH);
+  // Grid
+  ctx.strokeStyle='rgba(74,58,122,.25)';ctx.lineWidth=1;
+  [0,0.25,0.5,0.75,1].forEach(f=>{const y=pad.t+f*cH;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+cW,y);ctx.stroke();});
+  // Fixed cost line
+  ctx.strokeStyle='rgba(248,113,113,.6)';ctx.lineWidth=1.5;ctx.setLineDash([5,4]);
+  ctx.beginPath();ctx.moveTo(xPos(0),yPos(fijos));ctx.lineTo(xPos(maxU),yPos(fijos));ctx.stroke();ctx.setLineDash([]);
+  // Total cost area
+  const gcost=ctx.createLinearGradient(0,pad.t,0,H);
+  gcost.addColorStop(0,'rgba(248,113,113,.15)');gcost.addColorStop(1,'transparent');
+  ctx.beginPath();ctx.moveTo(xPos(0),yPos(fijos));ctx.lineTo(xPos(maxU),yPos(fijos+maxU*costo));
+  ctx.lineTo(xPos(maxU),H);ctx.lineTo(xPos(0),H);ctx.closePath();ctx.fillStyle=gcost;ctx.fill();
+  ctx.strokeStyle='rgba(248,113,113,.5)';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(xPos(0),yPos(fijos));ctx.lineTo(xPos(maxU),yPos(fijos+maxU*costo));ctx.stroke();
+  // Revenue area
+  const grev=ctx.createLinearGradient(0,pad.t,0,H);
+  grev.addColorStop(0,'rgba(147,51,234,.2)');grev.addColorStop(1,'transparent');
+  ctx.beginPath();ctx.moveTo(xPos(0),yPos(0));ctx.lineTo(xPos(maxU),yPos(maxU*precio));
+  ctx.lineTo(xPos(maxU),H);ctx.lineTo(xPos(0),H);ctx.closePath();ctx.fillStyle=grev;ctx.fill();
+  ctx.strokeStyle='rgba(168,85,247,.8)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(xPos(0),yPos(0));ctx.lineTo(xPos(maxU),yPos(maxU*precio));ctx.stroke();
+  // PE vertical
+  ctx.strokeStyle='rgba(34,211,238,.7)';ctx.lineWidth=1.5;ctx.setLineDash([3,3]);
+  ctx.beginPath();ctx.moveTo(xPos(pe),pad.t);ctx.lineTo(xPos(pe),H-pad.b);ctx.stroke();ctx.setLineDash([]);
+  // PE dot
+  ctx.fillStyle='#22d3ee'; // Fixed CSS variable to hex
+  ctx.beginPath();ctx.arc(xPos(pe),yPos(pe*precio),5,0,Math.PI*2);ctx.fill();
+  // Labels
+  ctx.fillStyle='rgba(125,111,168,.6)';ctx.font='10px JetBrains Mono';ctx.textAlign='center';
+  ctx.fillText('PE: '+pe+' uds',xPos(pe),pad.t+8);
+  ctx.textAlign='left';ctx.fillStyle='rgba(248,113,113,.6)';
+  ctx.fillText('costo total',xPos(10),yPos(fijos)-6);
+  ctx.fillStyle='rgba(168,85,247,.8)';
+  ctx.fillText('ingresos',xPos(10),yPos(maxU/10*precio)+14);
+  // Axis
+  ctx.strokeStyle='rgba(74,58,122,.3)';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,H-pad.b);ctx.lineTo(W-pad.r,H-pad.b);ctx.stroke();
+}
+
+// ── CALCULADORA DE AHORRO ──
+function calcAhorro(){
+  const inicial=parseFloat(document.getElementById('aInicial').value)||0;
+  const mensual=parseFloat(document.getElementById('aMensual').value)||0;
+  const tasa=parseFloat(document.getElementById('aTasa').value)||0;
+  const anios=parseInt(document.getElementById('aAnios').value)||1;
+  const meses=anios*12;
+  const r=(tasa/100)/12;
+  let total=inicial;
+  for(let i=0;i<meses;i++){total=(total+mensual)*(1+r);}
+  const aportesTotal=mensual*meses;
+  const intereses=Math.max(0,total-inicial-aportesTotal);
+  document.getElementById('arRows').innerHTML=`
+    <div class="cr-row"><span class="cr-row-lbl">Inversión inicial</span><span class="cr-row-val">${fmt(inicial)}</span></div>
+    <div class="cr-row"><span class="cr-row-lbl">Aportes totales (${meses} meses)</span><span class="cr-row-val">${fmt(aportesTotal)}</span></div>
+    <div class="cr-row"><span class="cr-row-lbl">Intereses generados</span><span class="cr-row-val go">+${fmt(intereses)}</span></div>
+    <div class="cr-row total"><span class="cr-row-lbl">Total acumulado</span><span class="cr-row-val ok">${fmt(total)}</span></div>`;
+  const st=document.getElementById('arStatus');
+  if(intereses>0){st.className='cr-status ok';st.textContent='✓ Tus ahorros crecen con interés compuesto — sigue así';}
+  else if(total>inicial){st.className='cr-status warn';st.textContent='⚠ Apenas cubres inflación — considera mayor tasa o aporte';}
+  else{st.className='cr-status bad';st.textContent='✕ Sin rendimientos, tu dinero pierde valor con el tiempo';}
+  const maxV=Math.max(inicial,aportesTotal,intereses,1);
+  document.getElementById('ab1').style.height=((inicial/maxV)*70)+'px';
+  document.getElementById('ab2').style.height=((aportesTotal/maxV)*70)+'px';
+  document.getElementById('ab3').style.height=((intereses/maxV)*70)+'px';
+}
+
+// ── LIFECYCLE CHART ──
+const lcData=[
+  {label:'Idea',h:15,color:'rgba(147,51,234,.4)',tip:'Semana 1–4: detectas oportunidad'},
+  {label:'Arranque',h:30,color:'rgba(147,51,234,.6)',tip:'Mes 1–3: primeras ventas, flujo inestable'},
+  {label:'Equilibrio',h:50,color:'rgba(147,51,234,.8)',tip:'Mes 4–8: ventas cubren gastos fijos'},
+  {label:'Crecimiento',h:75,color:'rgba(168,85,247,.9)',tip:'Mes 9–18: ganancia real, reinversión'},
+  {label:'Consolidación',h:90,color:'rgba(34,211,238,.8)',tip:'Año 2+: negocio sostenible'},
+  {label:'Expansión',h:100,color:'rgba(34,211,238,1)',tip:'Año 3+: nuevos productos o sucursales'},
+];
+function buildLifecycle(){
+  const el=document.getElementById('lifecycle');
+  el.innerHTML=lcData.map(d=>`
+    <div class="lc-bar" style="flex:1">
+      <div class="lc-bar-fill" style="height:0%;background:${d.color};width:90%;margin:0 auto;transition:height 1.4s ease;">
+        <div class="lc-tooltip">${d.tip}</div>
+      </div>
+      <div class="lc-label" style="position:absolute;bottom:-24px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.52rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;">${d.label}</div>
+    </div>`).join('');
+  const lcObs=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.lc-bar-fill').forEach((b,i)=>{setTimeout(()=>{b.style.height=lcData[i].h+'%';},i*120);});
+      lcObs.unobserve(e.target);
+    }
+  }),{threshold:.2});
+  lcObs.observe(el);
+}
+buildLifecycle();
+
+// Init
+calcCaja();
+calcPE();
+window.addEventListener('resize',()=>calcPE());
+</script>
+</body>
+</html>

@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Créditos — FinEdge · Educación Financiera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05030a;--bg0:#08060e;--bg1:#0a0812;--bg2:#0d0b16;--s0:#100e1a;--s1:#141122;--s2:#1a1630;--s3:#211c3e;--s4:#2a2350;--b0:#2e255a;--b1:#3d3272;--b2:#524494;--b3:#6858b0;--p:#9333ea;--p0:#7c22ce;--p1:#a855f7;--p2:#b87afc;--p3:#cda4fd;--glow:rgba(147,51,234,.5);--glow-s:rgba(147,51,234,.25);--faint:rgba(147,51,234,.06);--faint2:rgba(147,51,234,.03);--line:rgba(147,51,234,.22);--line-s:rgba(147,51,234,.12);--cy:#22d3ee;--txt:#f0ecff;--txt2:#c9bdf5;--txt3:#a991e0;--muted:#7a6da8;--dim:#50447a;--dim2:#3a305e;--gold:#fbbf24;--gold-g:rgba(251,191,36,.12);--red:#f87171;--red-g:rgba(248,113,113,.1);--ok:#34d399;--ok-g:rgba(52,211,153,.1);--blue:#60a5fa;--blue-g:rgba(96,165,250,.1);--teal:#14b8a6;--orange:#f97316;--mono:'JetBrains Mono','Fira Code',monospace;--sans:'Space Grotesk','Inter',sans-serif;--gap:1px;--shadow:0 8px 32px rgba(0,0,0,.4),0 2px 8px rgba(0,0,0,.3);--shadow-lg:0 16px 64px rgba(0,0,0,.5),0 4px 16px rgba(0,0,0,.4);--bw:1px solid var(--b0);--tr:all .2s cubic-bezier(.4,0,.2,1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--b1) var(--bg)}
+body{font-family:var(--sans);background:var(--bg);color:var(--txt);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.015) 2px,rgba(0,0,0,.015) 4px)}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,rgba(147,51,234,.035) 1px,transparent 1px);background-size:24px 24px;opacity:.6}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--b1)}
+::selection{background:rgba(147,51,234,.3);color:var(--txt)}
+.container{max-width:1200px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+#sp{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--p3),var(--p1),var(--cy));z-index:9999;transition:width .1s;box-shadow:0 0 10px var(--glow-s)}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:42px;background:rgba(8,6,14,.88);backdrop-filter:blur(24px) saturate(180%);border-bottom:var(--bw);box-shadow:0 4px 24px rgba(0,0,0,.4);transition:var(--tr)}
+nav.sc{background:rgba(5,3,10,.96);border-bottom-color:var(--b1)}
+.ni{display:flex;align-items:center;justify-content:space-between;height:100%;max-width:1200px;margin:0 auto;padding:0 18px}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;transition:var(--tr)}
+.logo:hover{filter:brightness(1.1)}
+.lm{width:22px;height:22px;background:linear-gradient(135deg,var(--p0),var(--p1));display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.65rem;font-weight:800;color:#fff;border:1px solid var(--p1);flex-shrink:0;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));box-shadow:0 0 12px var(--glow-s)}
+.lt{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--txt);letter-spacing:.04em}
+.lt span{color:var(--p1);text-shadow:0 0 20px var(--glow-s)}
+.nl{display:flex;align-items:center;gap:var(--gap);list-style:none;background:var(--s0);border:var(--bw);padding:2px;height:28px}
+.nl a{display:flex;align-items:center;gap:4px;padding:0 10px;height:24px;font-family:var(--mono);font-size:.62rem;font-weight:500;color:var(--muted);text-decoration:none;border:1px solid transparent;transition:var(--tr);letter-spacing:.04em;position:relative}
+.nl a:hover{color:var(--txt2);background:var(--s1);border-color:var(--b0)}
+.nl a.act{color:var(--p2);background:var(--faint);border-color:var(--b1);box-shadow:inset 0 0 12px var(--faint)}
+.nl a.act::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:1px;background:var(--p1);box-shadow:0 0 8px var(--glow-s)}
+.btn-nav{display:inline-flex;align-items:center;gap:6px;padding:0 12px;height:26px;font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.06em;cursor:pointer;text-decoration:none;border:none;transition:var(--tr);background:linear-gradient(135deg,var(--p0),var(--p));color:#fff;border:1px solid var(--p1);box-shadow:0 0 20px var(--glow-s)}
+.btn-nav:hover{background:linear-gradient(135deg,var(--p),var(--p1));box-shadow:0 0 32px var(--glow)}
+.hbg{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:6px;background:none;border:var(--bw);height:28px;justify-content:center;transition:var(--tr)}
+.hbg:hover{border-color:var(--p);background:var(--faint)}
+.hbg span{display:block;width:16px;height:1.5px;background:var(--txt2);transition:var(--tr)}
+.mm{display:none;position:fixed;top:42px;left:0;right:0;background:rgba(8,6,14,.98);backdrop-filter:blur(24px);border-bottom:var(--bw);padding:8px 18px 16px;z-index:199;flex-direction:column;gap:var(--gap);box-shadow:var(--shadow-lg)}
+.mm.op{display:flex}
+.mm a{display:block;padding:8px 12px;font-family:var(--mono);font-size:.72rem;color:var(--muted);text-decoration:none;border:var(--bw);transition:var(--tr);background:transparent}
+.mm a:hover{color:var(--p2);border-color:var(--b1);background:var(--s1)}
+.mm a.act{color:var(--p1);background:var(--faint);border-color:var(--b1)}
+
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.6rem;font-weight:600;color:var(--p2);letter-spacing:.12em;text-transform:uppercase;border:var(--bw);background:var(--faint);padding:4px 12px}
+.badge .bd{width:5px;height:5px;background:var(--p1);border-radius:50%;animation:blinkDot 2s ease-in-out infinite;box-shadow:0 0 8px var(--glow-s)}
+@keyframes blinkDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+.sec{padding:88px 0;position:relative}
+.sh{text-align:center;margin-bottom:52px}
+.sh .badge{margin-bottom:14px}
+.stitle{font-family:var(--sans);font-size:clamp(1.8rem,4vw,3rem);font-weight:700;letter-spacing:-.035em;line-height:1.1;margin-bottom:12px}
+.stitle em{font-style:normal;background:linear-gradient(90deg,var(--p1),var(--cy));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ssub{font-size:.88rem;color:var(--muted);max-width:520px;margin:0 auto;line-height:1.75}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}
+.sec-div{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--b1),transparent);margin:0}
+
+.hero{min-height:90vh;display:flex;align-items:center;padding:72px 0 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(147,51,234,.1) 0%,transparent 70%);top:-100px;left:-150px;pointer-events:none;z-index:0;animation:glowP 8s ease-in-out infinite}
+.hero::after{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(34,211,238,.04) 0%,transparent 70%);bottom:0;right:-80px;pointer-events:none;z-index:0;animation:glowP 10s ease-in-out infinite reverse}
+@keyframes glowP{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.1)}}
+.hero-grid{display:grid;grid-template-columns:1fr 480px;gap:48px;align-items:center}
+.hbadge{margin-bottom:18px}
+.htitle{font-family:var(--sans);font-size:clamp(2.6rem,5vw,4.6rem);font-weight:700;line-height:.95;letter-spacing:-.04em;margin-bottom:18px}
+.htitle .hl{display:block;background:linear-gradient(135deg,var(--p1) 0%,var(--cy) 50%,var(--p2) 100%);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 6s ease infinite}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.htitle .dm{display:block;color:var(--txt2)}
+.hdesc{font-size:.92rem;color:var(--muted);line-height:1.8;max-width:460px;margin-bottom:28px}
+.hbtns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px}
+.btn-p{display:inline-flex;align-items:center;gap:8px;padding:0 24px;height:32px;font-family:var(--mono);font-size:.78rem;font-weight:700;letter-spacing:.06em;background:linear-gradient(135deg,var(--p0),var(--p));color:#fff;border:1px solid var(--p1);cursor:pointer;text-decoration:none;box-shadow:0 0 24px var(--glow-s);transition:var(--tr)}
+.btn-p:hover{background:linear-gradient(135deg,var(--p),var(--p1));box-shadow:0 0 36px var(--glow);transform:translateY(-1px)}
+.btn-o{display:inline-flex;align-items:center;gap:8px;padding:0 20px;height:32px;font-family:var(--mono);font-size:.78rem;font-weight:600;background:transparent;color:var(--p1);border:var(--bw);cursor:pointer;text-decoration:none;transition:var(--tr)}
+.btn-o:hover{background:var(--faint);border-color:var(--p)}
+.hkpis{display:flex;border:var(--bw);background:var(--b0);box-shadow:var(--shadow)}
+.hkpi{background:var(--s0);padding:14px 18px;flex:1;text-align:center;border-right:var(--bw);transition:var(--tr)}
+.hkpi:last-child{border-right:none}
+.hkpi:hover{background:var(--s1)}
+.hkpi-v{font-family:var(--mono);font-size:1.5rem;font-weight:700;color:var(--txt);letter-spacing:-.04em;display:flex;align-items:baseline;gap:2px;justify-content:center}
+.hkpi-v .u{font-size:.85rem;color:var(--p1)}
+.hkpi-l{font-family:var(--mono);font-size:.54rem;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;margin-top:3px}
+
+.hv{position:relative;z-index:1}
+.hv-card{background:#fff;border:1px solid #d1d5db;position:relative;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,.12);transition:var(--tr)}
+.hv-card:hover{box-shadow:0 16px 56px rgba(0,0,0,.18);transform:translateY(-2px)}
+.hv-card::before{content:none!important}
+.hv-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#9333ea,#22d3ee)}
+.ph{display:flex;justify-content:space-between;align-items:center;padding:16px 20px 0;margin-top:4px}
+.ph-tag{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;font-weight:700}
+.ph-live{font-family:var(--mono);font-size:.58rem;color:#059669;font-weight:600;display:flex;align-items:center;gap:5px}
+.ph-live::before{content:'';width:6px;height:6px;border-radius:50%;background:#059669;animation:blinkDot 2s infinite}
+.ph-amt{font-family:var(--mono);font-size:2.4rem;font-weight:700;letter-spacing:-.05em;color:#111827;padding:4px 20px 0}
+.ph-amt span{color:#9333ea;font-size:1.2rem}
+.ph-sub{font-family:var(--mono);font-size:.58rem;color:#9ca3af;padding:2px 20px 14px}
+.ph-rows{padding:0 20px 14px;display:flex;flex-direction:column;gap:8px}
+.ph-row{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.72rem}
+.ph-row .pl{color:#374151}.ph-row .pv{font-weight:700}
+.pv-g{color:#059669}.pv-go{color:#d97706}.pv-r{color:#dc2626}.pv-b{color:#2563eb}
+.ph-bar{margin:0 20px 8px}
+.ph-bar-lbl{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.56rem;color:#6b7280;margin-bottom:4px}
+.ph-bar-track{height:4px;background:#e5e7eb;overflow:hidden}
+.ph-bar-fill{height:100%;transition:width 2s ease}
+.ph-bar-fill.pf{background:linear-gradient(90deg,#7c22ce,#a855f7)}
+.ph-bar-fill.pf2{background:linear-gradient(90deg,#92620a,#fbbf24)}
+.ph-ftr{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-top:1px solid #e5e7eb;background:#f8fafc}
+.ph-ftr .tg{font-family:var(--mono);font-size:.54rem;font-weight:700;padding:2px 8px;background:#ecfdf5;border:1px solid #a7f3d0;color:#059669;letter-spacing:.06em;text-transform:uppercase}
+.ph-ftr .nt{font-family:var(--mono);font-size:.58rem;color:#9ca3af}
+.ph-ftr .nt strong{color:#9333ea}
+
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);background:var(--b0);border:var(--bw);box-shadow:var(--shadow)}
+.tcard{background:var(--s0);padding:24px 20px;position:relative;overflow:hidden;transition:var(--tr)}
+.tcard:hover{background:var(--s1)}
+.tcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--p0),var(--p1));transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.tcard:hover::before{transform:scaleX(1)}
+.tc-ico{font-size:1.4rem;margin-bottom:10px;display:block;filter:drop-shadow(0 0 10px rgba(147,51,234,.2))}
+.tc-name{font-family:var(--sans);font-size:.9rem;font-weight:700;color:var(--txt);margin-bottom:5px}
+.tc-desc{font-size:.74rem;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.tc-rate{position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:.56rem;font-weight:700;color:var(--p1);background:var(--faint);border:var(--bw);padding:2px 7px}
+.tc-pills{display:flex;flex-wrap:wrap;gap:3px}
+.pill{font-family:var(--mono);font-size:.52rem;font-weight:600;padding:2px 7px;border:var(--bw);color:var(--dim);text-transform:uppercase;letter-spacing:.03em;background:var(--faint2);transition:var(--tr)}
+.pill.pg{border-color:var(--b1);color:var(--p1);background:var(--faint)}
+.pill.pr{border-color:rgba(248,113,113,.25);color:var(--red);background:var(--red-g)}
+.pill.pb{border-color:rgba(96,165,250,.25);color:var(--blue);background:var(--blue-g)}
+.pill.po{border-color:rgba(251,191,36,.25);color:var(--gold);background:var(--gold-g)}
+.pill.pt{border-color:rgba(20,184,166,.25);color:var(--teal);background:rgba(20,184,166,.06)}
+
+.wt-wrap{background:#fff;border:1px solid #d1d5db;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.12);margin-bottom:24px}
+.wt-head{background:#f8fafc;padding:18px 24px;border-bottom:2px solid #9333ea;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.wt-head-title{font-family:var(--sans);font-size:1.05rem;font-weight:700;color:#111827}
+.wt-head-badge{font-family:var(--mono);font-size:.58rem;font-weight:700;color:#9333ea;background:#f3e8ff;padding:3px 10px;border:1px solid #d8b4fe;letter-spacing:.06em;text-transform:uppercase}
+.wt-table{width:100%;border-collapse:collapse}
+.wt-table thead th{background:#f1f5f9;color:#111827;padding:11px 14px;font-family:var(--mono);font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;text-align:left;border-bottom:2px solid #cbd5e1}
+.wt-table tbody td{padding:11px 14px;color:#1f2937;font-size:.82rem;border-bottom:1px solid #e5e7eb;vertical-align:middle;line-height:1.5}
+.wt-table tbody tr:hover{background:#faf5ff}
+.wt-table tbody tr:last-child td{border-bottom:none}
+.wt-num{font-family:var(--mono);font-weight:700;color:#9333ea;font-size:.76rem}
+.wt-hi{font-family:var(--mono);font-weight:700;color:#059669}
+.wt-warn{font-family:var(--mono);font-weight:700;color:#dc2626}
+.wt-neut{font-family:var(--mono);font-weight:600;color:#6b7280}
+.wt-foot{background:#f8fafc;padding:12px 24px;border-top:1px solid #e5e7eb;font-size:.74rem;color:#6b7280;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.wt-foot strong{color:#111827}
+
+.sim-win{background:var(--s0);border:var(--bw);overflow:hidden;box-shadow:var(--shadow-lg);position:relative}
+.sim-win::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--p0),var(--p1),var(--cy),transparent);box-shadow:0 0 12px var(--glow-s);z-index:2}
+.sim-tb{display:flex;align-items:center;padding:0 14px;height:28px;background:var(--s1);border-bottom:var(--bw);font-family:var(--mono);font-size:.56rem;color:var(--dim);letter-spacing:.05em;gap:8px;position:relative;z-index:1}
+.sim-tb::before{content:'';width:8px;height:8px;background:var(--red);box-shadow:12px 0 0 var(--gold),24px 0 0 var(--ok);flex-shrink:0}
+.sim-grid{display:grid;grid-template-columns:320px 1fr}
+.sim-sb{background:var(--bg2);border-right:var(--bw);display:flex;flex-direction:column;overflow-y:auto}
+.sim-sb::-webkit-scrollbar{width:3px}
+.sim-sb::-webkit-scrollbar-thumb{background:var(--b1)}
+.sb-hd{padding:16px 16px 12px;border-bottom:var(--bw);position:sticky;top:0;background:var(--bg2);z-index:3}
+.sb-hd-t{font-family:var(--sans);font-size:.9rem;font-weight:700;margin-bottom:2px}
+.sb-hd-s{font-family:var(--mono);font-size:.58rem;color:var(--dim)}
+.stabs{display:flex;gap:var(--gap);border-bottom:var(--bw)}
+.stab{flex:1;padding:7px 4px;font-family:var(--mono);font-size:.56rem;font-weight:600;text-align:center;cursor:pointer;border:none;background:var(--s0);color:var(--muted);transition:var(--tr);letter-spacing:.04em;text-transform:uppercase}
+.stab:hover{color:var(--txt2);background:var(--s1)}
+.stab.on{color:var(--p2);background:var(--faint);box-shadow:inset 0 0 12px var(--faint)}
+.sb-body{padding:14px 16px;flex:1;display:flex;flex-direction:column;gap:12px}
+.sbp{display:none;flex-direction:column;gap:12px}
+.sbp.on{display:flex}
+.ig{display:flex;flex-direction:column;gap:4px}
+.ig label{font-family:var(--mono);font-size:.56rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+input[type="range"]{-webkit-appearance:none;width:100%;height:4px;background:var(--s3);outline:none;cursor:pointer}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:var(--p1);box-shadow:0 0 10px var(--glow);cursor:pointer;transition:transform .15s}
+input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+.rvrow{display:flex;justify-content:space-between;align-items:center;margin-top:3px}
+.rvval{font-family:var(--mono);font-size:.82rem;font-weight:700;color:var(--txt)}
+.rvmm{font-family:var(--mono);font-size:.52rem;color:var(--dim)}
+.nsel{width:100%;background:var(--s0);border:var(--bw);padding:7px 10px;color:var(--txt);font-family:var(--mono);font-size:.68rem;outline:none;cursor:pointer;transition:var(--tr)}
+.nsel:focus{border-color:var(--p)}
+.nsel option{background:var(--s0)}
+
+.et-tl{font-family:var(--mono);font-size:.56rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.et-box{background:var(--s0);border:var(--bw);padding:10px;margin-top:3px}
+.et-lbl{font-family:var(--mono);font-size:.52rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.et-val{font-family:var(--mono);font-size:1.2rem;font-weight:700;color:var(--red)}
+.et-add{display:grid;grid-template-columns:1fr 70px 60px auto;gap:3px;margin-top:6px}
+.et-inp{background:var(--s0);border:var(--bw);padding:6px 7px;color:var(--txt);font-family:var(--mono);font-size:.64rem;outline:none;width:100%;transition:var(--tr)}
+.et-inp:focus{border-color:var(--p)}
+.et-inp::placeholder{color:var(--dim2)}
+.et-sel{background:var(--s0);border:var(--bw);padding:6px 7px;color:var(--txt);font-family:var(--mono);font-size:.6rem;outline:none;cursor:pointer;width:100%}
+.et-sel option{background:var(--s0)}
+.et-btn{padding:6px 8px;background:var(--faint);border:var(--bw);color:var(--p1);font-weight:700;cursor:pointer;font-family:var(--mono);font-size:.68rem;transition:var(--tr);white-space:nowrap}
+.et-btn:hover{background:var(--p);color:#fff}
+.et-list{display:flex;flex-direction:column;gap:4px;max-height:220px;overflow-y:auto;margin-top:5px}
+.et-list::-webkit-scrollbar{width:3px}
+.et-list::-webkit-scrollbar-thumb{background:var(--b1)}
+.et-item{display:flex;align-items:center;justify-content:space-between;background:var(--s0);border:var(--bw);padding:8px 28px 8px 10px;transition:var(--tr);animation:slideIn .25s ease;position:relative;min-height:36px}
+.et-item:hover{border-color:var(--b1);background:var(--s1)}
+.et-left{display:flex;align-items:center;gap:6px;flex:1;min-width:0}
+.et-name{font-family:var(--mono);font-size:.64rem;color:var(--txt2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.et-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.et-v{font-family:var(--mono);font-size:.68rem;font-weight:700;color:var(--red)}
+.et-del{position:absolute;top:4px;right:5px;background:var(--s2);border:var(--bw);color:var(--dim);cursor:pointer;font-size:.62rem;transition:var(--tr);padding:0;width:16px;height:16px;display:flex;align-items:center;justify-content:center;line-height:1;border-radius:2px}
+.et-del:hover{color:var(--red);border-color:rgba(248,113,113,.4);background:var(--red-g)}
+
+/* --- Ficheros de análisis --- */
+.fichero{background:var(--s0);border:var(--bw);overflow:hidden;transition:var(--tr)}
+.fichero:hover{border-color:var(--b1)}
+.fichero-hd{padding:8px 12px;border-bottom:var(--bw);display:flex;align-items:center;justify-content:space-between}
+.fichero-hd-t{font-family:var(--mono);font-size:.52rem;font-weight:700;color:var(--p1);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:5px}
+.fichero-hd-s{font-family:var(--mono);font-size:.46rem;color:var(--dim)}
+.fichero-body{padding:10px 12px}
+
+/* Desglose bar */
+.desglose-bar{height:10px;background:var(--s3);border-radius:5px;overflow:hidden;display:flex;margin-bottom:6px}
+.desglose-bar .seg{height:100%;transition:width .6s cubic-bezier(.4,0,.2,1);min-width:1px}
+.desglose-bar .seg-cuota{background:linear-gradient(90deg,var(--p0),var(--p1))}
+.desglose-bar .seg-gastos{background:linear-gradient(90deg,var(--gold),#d97706)}
+.desglose-bar .seg-libre{background:linear-gradient(90deg,var(--ok),#059669)}
+.desglose-legend{display:flex;gap:8px;flex-wrap:wrap}
+.desglose-legend-item{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:.5rem;color:var(--muted)}
+.desglose-legend-item .dot{width:6px;height:6px;border-radius:1px;flex-shrink:0}
+.desglose-vals{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px}
+.desglose-val{text-align:center}
+.desglose-val-n{font-family:var(--mono);font-size:.68rem;font-weight:700}
+.desglose-val-l{font-family:var(--mono);font-size:.42rem;color:var(--dim);text-transform:uppercase;letter-spacing:.04em;margin-top:1px}
+
+/* Categoría cards */
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.cat-card{background:var(--bg2);border:var(--bw);padding:8px 10px;text-align:center;transition:var(--tr)}
+.cat-card:hover{border-color:var(--b1)}
+.cat-card-ico{font-size:.9rem;margin-bottom:3px}
+.cat-card-lbl{font-family:var(--mono);font-size:.44rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.cat-card-val{font-family:var(--mono);font-size:.78rem;font-weight:700;color:var(--txt)}
+.cat-card-n{font-family:var(--mono);font-size:.46rem;color:var(--dim);margin-top:1px}
+
+/* Gauge de capacidad */
+.gauge-wrap{display:flex;align-items:center;gap:12px}
+.gauge-svg{flex-shrink:0}
+.gauge-info{display:flex;flex-direction:column;gap:3px}
+.gauge-pct{font-family:var(--mono);font-size:1.1rem;font-weight:700}
+.gauge-label{font-family:var(--mono);font-size:.48rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.gauge-status{font-family:var(--mono);font-size:.56rem;font-weight:700;padding:2px 8px;border:1px solid;display:inline-flex;align-items:center;gap:4px;width:fit-content}
+.gauge-status.ok{color:var(--ok);border-color:rgba(52,211,153,.3);background:var(--ok-g)}
+.gauge-status.warn{color:var(--gold);border-color:rgba(251,191,36,.3);background:var(--gold-g)}
+.gauge-status.bad{color:var(--red);border-color:rgba(248,113,113,.3);background:var(--red-g)}
+
+.bk-card{background:var(--s0);border:var(--bw);padding:12px;cursor:pointer;transition:var(--tr);margin-bottom:var(--gap)}
+.bk-card:hover{border-color:var(--b1);background:var(--s1)}
+.bk-card.on{border-color:var(--p);background:var(--faint)}
+.bk-name{font-family:var(--sans);font-size:.78rem;font-weight:700;margin-bottom:4px}
+.bk-row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.58rem;padding:2px 0;color:var(--muted)}
+.bk-row .bv{color:var(--txt2);font-weight:600}
+
+.sb-insight{background:var(--s1);border:var(--bw);padding:14px;margin-top:auto;flex-shrink:0}
+.sb-insight-ico{font-size:1.1rem;margin-bottom:6px}
+.sb-insight-t{font-family:var(--mono);font-size:.6rem;font-weight:700;color:var(--p1);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.sb-insight-b{font-size:.7rem;color:var(--muted);line-height:1.6}
+.sb-insight-v{font-family:var(--mono);font-size:.85rem;font-weight:700;color:var(--txt);margin-top:6px}
+
+/* --- Contexto Económico Colombia --- */
+.co-ctx{background:var(--s1);border:var(--bw);overflow:hidden;margin-top:auto;flex-shrink:0}
+.co-ctx-hd{padding:10px 14px;border-bottom:var(--bw);display:flex;align-items:center;justify-content:space-between}
+.co-ctx-hd-t{font-family:var(--mono);font-size:.6rem;font-weight:700;color:var(--p1);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px}
+.co-ctx-hd-s{font-family:var(--mono);font-size:.5rem;color:var(--dim)}
+.co-ctx-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b0)}
+.co-ctx-item{background:var(--s1);padding:8px 12px;display:flex;flex-direction:column;gap:2px}
+.co-ctx-item-l{font-family:var(--mono);font-size:.48rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.co-ctx-item-v{font-family:var(--mono);font-size:.78rem;font-weight:700;color:var(--txt);display:flex;align-items:baseline;gap:2px}
+.co-ctx-item-v .u{font-size:.56rem;color:var(--p1);font-weight:600}
+.co-ctx-item-v.warn{color:var(--red)}
+.co-ctx-item-v.ok{color:var(--ok)}
+.co-ctx-item-v.gold{color:var(--gold)}
+.co-ctx-foot{padding:8px 14px;border-top:var(--bw);background:var(--bg2);display:flex;align-items:center;gap:6px}
+.co-ctx-foot-ico{font-size:.7rem}
+.co-ctx-foot-txt{font-family:var(--mono);font-size:.48rem;color:var(--dim);line-height:1.5}
+
+.sim-rp{padding:22px;display:flex;flex-direction:column;gap:18px;position:relative;overflow:hidden}
+.sim-rp::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 10%,rgba(147,51,234,.05) 0%,transparent 60%);pointer-events:none}
+.rp-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);background:var(--b0);border:var(--bw)}
+.rk{background:var(--s0);padding:12px;text-align:center;transition:var(--tr)}
+.rk:hover{background:var(--s1)}
+.rk-v{font-family:var(--mono);font-size:.95rem;font-weight:700;margin-bottom:2px}
+.rk-l{font-family:var(--mono);font-size:.5rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.st-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;font-family:var(--mono);font-size:.68rem;font-weight:600;width:100%;justify-content:center;border:1px solid}
+.st-pill.ok{background:var(--faint);border-color:var(--b1);color:var(--ok)}
+.st-pill.warn{background:var(--gold-g);border-color:rgba(251,191,36,.25);color:var(--gold)}
+.st-pill.bad{background:var(--red-g);border-color:rgba(248,113,113,.25);color:var(--red)}
+
+/* --- Mini donut chart --- */
+.mini-donut-wrap{display:flex;align-items:center;gap:20px;background:var(--s0);border:var(--bw);padding:16px 18px;position:relative;overflow:hidden}
+.mini-donut-wrap::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(147,51,234,.04) 0%,transparent 60%);pointer-events:none}
+.donut-chart{flex-shrink:0;position:relative}
+.donut-chart svg{display:block}
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.donut-center-pct{font-family:var(--mono);font-size:.88rem;font-weight:700;color:var(--txt);line-height:1}
+.donut-center-lbl{font-family:var(--mono);font-size:.42rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.donut-legend{display:flex;flex-direction:column;gap:10px;flex:1;position:relative}
+.donut-legend-item{display:flex;flex-direction:column;gap:2px}
+.donut-legend-row{display:flex;align-items:center;gap:6px}
+.donut-legend-dot{width:8px;height:8px;flex-shrink:0;border-radius:1px}
+.donut-legend-name{font-family:var(--mono);font-size:.6rem;color:var(--muted);flex:1}
+.donut-legend-pct{font-family:var(--mono);font-size:.64rem;font-weight:700;color:var(--txt)}
+.donut-legend-val{font-family:var(--mono);font-size:.72rem;font-weight:700}
+.donut-legend-bar{height:3px;background:var(--s3);border-radius:2px;overflow:hidden;margin-top:2px}
+.donut-legend-bar-fill{height:100%;transition:width .6s ease}
+.donut-cost{margin-top:8px;padding-top:8px;border-top:var(--bw)}
+.donut-cost-lbl{font-family:var(--mono);font-size:.44rem;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.donut-cost-val{font-family:var(--mono);font-size:.76rem;font-weight:700;color:var(--red)}
+
+.amort-chart{display:flex;align-items:flex-end;gap:1px;height:140px;padding-bottom:20px;position:relative;overflow:hidden}
+.amort-chart::after{content:'';position:absolute;bottom:20px;left:0;right:0;height:1px;background:var(--b0)}
+.ac-bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:1px;cursor:pointer;position:relative;min-width:3px}
+.ac-bar:hover .ac-cap{opacity:1}
+.ac-cap{position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:var(--s1);border:var(--bw);padding:3px 7px;font-family:var(--mono);font-size:.56rem;color:var(--txt);white-space:nowrap;z-index:5;opacity:0;transition:opacity .2s;pointer-events:none}
+.ac-k{border-radius:1px 1px 0 0;background:linear-gradient(180deg,var(--p1),var(--p0));transition:height 1.4s ease}
+.ac-i{background:linear-gradient(180deg,var(--gold),#92620a)}
+.ac-lbl{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.42rem;color:var(--dim2);white-space:nowrap}
+
+.at-wrap{overflow-x:auto}
+.at-table{width:100%;border-collapse:separate;border-spacing:0 4px;min-width:520px}
+.at-table th{font-family:var(--mono);font-size:.56rem;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);padding:0 10px 6px;font-weight:600;text-align:right}
+.at-table th:first-child{text-align:left}
+.at-table td{background:var(--bg2);border-top:1px solid rgba(46,37,90,.4);border-bottom:1px solid rgba(46,37,90,.4);padding:8px 10px;font-family:var(--mono);font-size:.74rem;text-align:right}
+.at-table tr td:first-child{border-radius:6px 0 0 6px;border-left:1px solid rgba(46,37,90,.4);text-align:left;color:var(--muted)}
+.at-table tr td:last-child{border-radius:0 6px 6px 0;border-right:1px solid rgba(46,37,90,.4)}
+.at-table tr:hover td{background:var(--s0)}
+.at-table .ag{color:var(--ok);font-weight:700}
+.at-table .ao{color:var(--gold)}
+.at-table .ab{color:var(--blue)}
+.at-table .ar{color:var(--red)}
+.at-pag{display:flex;gap:4px;justify-content:center;margin-top:10px;flex-wrap:wrap}
+.apg{padding:4px 10px;font-family:var(--mono);font-size:.64rem;font-weight:600;cursor:pointer;border:var(--bw);background:transparent;color:var(--muted);transition:var(--tr)}
+.apg:hover{color:var(--txt);border-color:var(--b1)}
+.apg.on{background:var(--faint);border-color:var(--b1);color:var(--p2)}
+
+.steps-track{display:flex;flex-direction:column;gap:0;position:relative}
+.steps-track::before{content:'';position:absolute;left:22px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--p),rgba(147,51,234,.04));z-index:0}
+.step-item{display:grid;grid-template-columns:44px 1fr;gap:16px;padding-bottom:30px;position:relative;z-index:1}
+.step-item:last-child{padding-bottom:0}
+.step-num{width:44px;height:44px;background:var(--s1);border:var(--bw);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--mono);font-size:.92rem;font-weight:700;color:var(--muted);transition:var(--tr)}
+.step-item.visible .step-num{background:var(--p);color:#fff;border-color:var(--p1);box-shadow:0 0 16px var(--glow-s)}
+.step-content{padding-top:8px}
+.step-lbl{font-family:var(--mono);font-size:.56rem;text-transform:uppercase;letter-spacing:.1em;color:var(--p1);font-weight:600;margin-bottom:3px}
+.step-title{font-family:var(--sans);font-size:.92rem;font-weight:700;color:var(--txt);margin-bottom:5px}
+.step-body{font-size:.76rem;color:var(--muted);line-height:1.7;margin-bottom:8px}
+.step-tags{display:flex;flex-wrap:wrap;gap:3px}
+.step-tag{font-family:var(--mono);font-size:.52rem;font-weight:600;padding:2px 7px;border:var(--bw);color:var(--dim);text-transform:uppercase;letter-spacing:.04em;background:var(--faint2);transition:var(--tr)}
+.step-tag:hover{border-color:var(--b1);color:var(--txt3)}
+
+.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);background:var(--b0);border:var(--bw);box-shadow:var(--shadow)}
+.tip-card{background:var(--s0);padding:22px;transition:var(--tr);position:relative;overflow:hidden}
+.tip-card:hover{background:var(--s1)}
+.tip-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--p1),transparent);transform:scaleX(0);transition:transform .4s}
+.tip-card:hover::before{transform:scaleX(1)}
+.tip-tag{font-family:var(--mono);font-size:.56rem;text-transform:uppercase;letter-spacing:.1em;color:var(--p1);font-weight:600;margin-bottom:6px;display:block}
+.tip-num{position:absolute;top:16px;right:16px;font-family:var(--mono);font-size:2.2rem;font-weight:700;color:var(--b0);letter-spacing:-.05em}
+.tip-title{font-family:var(--sans);font-size:.88rem;font-weight:700;margin-bottom:5px}
+.tip-body{font-size:.72rem;color:var(--muted);line-height:1.6}
+
+.cta-block{background:linear-gradient(140deg,var(--s0),var(--s1));border:var(--bw);padding:68px 56px;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow-lg)}
+.cta-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(147,51,234,.09) 0%,transparent 65%);pointer-events:none}
+.cta-block::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--p1),var(--cy),transparent);box-shadow:0 0 20px var(--glow-s)}
+.cta-title{font-family:var(--sans);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:12px;position:relative}
+.cta-title em{font-style:normal;color:var(--p1);text-shadow:0 0 30px var(--glow-s)}
+.cta-sub{font-size:.87rem;color:var(--muted);max-width:460px;margin:0 auto 28px;line-height:1.75;position:relative}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative}
+
+footer{border-top:var(--bw);padding:44px 0 26px;position:relative;z-index:1}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--b1),transparent)}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:32px}
+.fb p{font-size:.75rem;color:var(--muted);line-height:1.7;max-width:240px;margin-top:12px}
+.fc h4{font-family:var(--mono);font-size:.6rem;font-weight:700;color:var(--txt);text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px;padding-bottom:8px;border-bottom:var(--bw)}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.fc a{font-size:.76rem;color:var(--muted);text-decoration:none;transition:var(--tr);padding:2px 0;position:relative}
+.fc a::before{content:'›';position:absolute;left:-12px;opacity:0;color:var(--p1);transition:opacity .2s,transform .2s;transform:translateX(-4px)}
+.fc a:hover{color:var(--p2)}
+.fc a:hover::before{opacity:1;transform:translateX(0)}
+.foot-bot{padding-top:18px;border-top:var(--bw);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.copy{font-family:var(--mono);font-size:.6rem;color:var(--dim);letter-spacing:.04em}
+.sena{font-family:var(--mono);font-size:.6rem;color:var(--dim);letter-spacing:.04em}
+.sena span{color:var(--p1);font-weight:700}
+
+@media(max-width:1040px){.hero-grid{grid-template-columns:1fr}.hv{display:none}.tgrid{grid-template-columns:1fr 1fr}.sim-grid{grid-template-columns:1fr}.sim-sb{max-height:none;border-right:none;border-bottom:var(--bw)}.rp-kpis{grid-template-columns:1fr 1fr}.foot-grid{grid-template-columns:1fr 1fr;gap:28px}.mini-donut-wrap{flex-direction:column;align-items:stretch}.donut-chart{align-self:center}}
+@media(max-width:768px){.nl,.btn-nav{display:none!important}.hbg{display:flex}.tgrid{grid-template-columns:1fr}.tips-grid{grid-template-columns:1fr}.cta-block{padding:44px 22px}.foot-grid{grid-template-columns:1fr 1fr;gap:22px}.hkpis{flex-wrap:wrap}.hkpi{min-width:50%;border-bottom:var(--bw);border-right:none}.amort-chart{height:100px}.co-ctx-grid{grid-template-columns:1fr}.mini-donut-wrap{flex-direction:column;align-items:stretch}.donut-chart{align-self:center}}
+@media(max-width:480px){.rp-kpis{grid-template-columns:1fr 1fr}.cta-btns,.hbtns{flex-direction:column;align-items:stretch}.hkpi{min-width:100%}.foot-grid{grid-template-columns:1fr}.cat-grid{grid-template-columns:1fr}.desglose-vals{grid-template-columns:1fr}}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:1px solid var(--p1);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="sp"></div>
+<nav id="nav"><div class="ni">
+<a href="{{ url_for('inicio') }}" class="logo"><div class="lm">F</div><span class="lt">Fin<span>Edge</span></span></a>
+<ul class="nl">
+<li><a href="{{ url_for('inicio') }}">Inicio</a></li>
+<li><a href="{{ url_for('estadisticas') }}">Estadísticas</a></li>
+<li><a href="{{ url_for('presupuesto') }}">Presupuesto</a></li>
+<li><a href="{{ url_for('credito_casa') }}" class="act">Créditos</a></li>
+<li><a href="{{ url_for('inversiones') }}">Inversiones</a></li>
+<li><a href="{{ url_for('emprendimiento') }}">Emprendimiento</a></li>
+</ul>
+<a href="{{ url_for('finn') }}" class="btn-nav">Hablar con Finn →</a>
+<button class="hbg" id="hbg" aria-label="Menú"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mm" id="mm">
+<a href="{{ url_for('inicio') }}">Inicio</a><a href="{{ url_for('estadisticas') }}">Estadísticas</a>
+<a href="{{ url_for('presupuesto') }}">Presupuesto</a><a href="{{ url_for('credito_casa') }}" class="act">Créditos</a>
+<a href="{{ url_for('inversiones') }}">Inversiones</a><a href="{{ url_for('emprendimiento') }}">Emprendimiento</a>
+<a href="{{ url_for('finn') }}" class="btn-nav" style="margin-top:8px;justify-content:center;">Hablar con Finn →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+<div class="container"><div class="hero-grid">
+<div>
+<div class="hbadge"><div class="badge"><span class="bd"></span> Módulo Créditos · Finanzas Básicas</div></div>
+<h1 class="htitle"><span class="dm">Entiende un crédito</span><br><span class="hl">antes de pedirlo.</span></h1>
+<p class="hdesc">Aprende cómo funcionan los créditos, los intereses, las tasas y cómo se calculan tus cuotas. Simula cualquier préstamo y toma decisiones inteligentes antes de firmar.</p>
+<div class="hbtns">
+<a href="#simulador" class="btn-p">Simular mi crédito →</a>
+<a href="#como-funciona" class="btn-o">¿Cómo funciona?</a>
+</div>
+<div class="hkpis">
+<div class="hkpi"><div class="hkpi-v"><span class="counter" data-t="26">0</span><span class="u">%</span></div><div class="hkpi-l">Consumo promedio E.A.</div></div>
+<div class="hkpi"><div class="hkpi-v"><span class="counter" data-t="240">0</span><span class="u">%</span></div><div class="hkpi-l">Gota a gota (ilegal)</div></div>
+<div class="hkpi"><div class="hkpi-v"><span class="counter" data-t="18">0</span><span class="u">%</span></div><div class="hkpi-l">Microcrédito joven</div></div>
+</div>
+</div>
+<div class="hv">
+<div class="hv-card">
+<div class="ph"><span class="ph-tag">Simulación activa</span><span class="ph-live">Calculando</span></div>
+<div class="ph-amt"><span>$</span>5.000.000</div>
+<div class="ph-sub">Libre inversión · 24 meses · 26% E.A.</div>
+<div class="ph-rows">
+<div class="ph-row"><span class="pl">📅 Cuota mensual</span><span class="pv pv-g">$249.810</span></div>
+<div class="ph-row"><span class="pl">💰 Total a pagar</span><span class="pv pv-go">$5.995.440</span></div>
+<div class="ph-row"><span class="pl">📈 Intereses totales</span><span class="pv pv-r">$995.440</span></div>
+<div class="ph-row"><span class="pl">🏦 Entidad ejemplo</span><span class="pv pv-b">Bancolombia</span></div>
+</div>
+<div class="ph-bar"><div class="ph-bar-lbl"><span>Capital pagado al mes 12</span><span>50%</span></div><div class="ph-bar-track"><div class="ph-bar-fill pf" style="width:50%"></div></div></div>
+<div class="ph-bar"><div class="ph-bar-lbl"><span>Intereses acumulados</span><span>66%</span></div><div class="ph-bar-track"><div class="ph-bar-fill pf2" style="width:66%"></div></div></div>
+<div class="ph-ftr"><span class="tg">✓ Cálculo real</span><span class="nt">Cuota/Ingreso: <strong>19.2%</strong></span></div>
+</div>
+</div>
+</div></div>
+</section>
+
+<hr class="sec-div">
+
+<!-- TIPOS DE CRÉDITO -->
+<section class="sec" id="tipos">
+<div class="container">
+<div class="sh rv"><div class="badge"><span class="bd"></span> Conoce tus opciones</div>
+<h2 class="stitle">Tipos de <em>crédito</em> que existen</h2>
+<p class="ssub">No todos los créditos son iguales. Conoce cuál se adapta mejor a tu situación antes de solicitarlo.</p></div>
+<div class="tgrid rv">
+<div class="tcard"><span class="tc-rate">13% E.A.</span><span class="tc-ico">🏠</span><div class="tc-name">Crédito de Vivienda</div><div class="tc-desc">Para comprar, construir o remodelar. Las mejores tasas del mercado, plazos hasta 30 años. Requiere cuota inicial del 20-30%.</div><div class="tc-pills"><span class="pill pg">Tasas bajas</span><span class="pill pb">Hasta 30 años</span><span class="pill po">Cuota inicial</span></div></div>
+<div class="tcard"><span class="tc-rate">24% E.A.</span><span class="tc-ico">💳</span><div class="tc-name">Libre Inversión</div><div class="tc-desc">Sin restricción de destino. Viaje, estudio, negocio, emergencia. Trámite rápido, montos variados. La tasa más común en Colombia.</div><div class="tc-pills"><span class="pill pg">Rápido</span><span class="pill pb">1-7 años</span><span class="pill po">Sin garantía</span></div></div>
+<div class="tcard"><span class="tc-rate">26% E.A.</span><span class="tc-ico">🚀</span><div class="tc-name">Microcrédito</div><div class="tc-desc">Para pequeños negocios. Montos menores, requisitos simples. Acceso vía Bancóldex o cooperativas. Tasa de usura más alta.</div><div class="tc-pills"><span class="pill pg">Negocios</span><span class="pill pt">Bancóldex</span><span class="pill po">Acompañamiento</span></div></div>
+<div class="tcard"><span class="tc-rate">11% E.A.</span><span class="tc-ico">📚</span><div class="tc-name">Crédito Educativo</div><div class="tc-desc">ICETEX financia estudios técnicos y universitarios. Tasas subsidiadas, pago diferido mientras estudias. Líneas ICETEX a tasa privilegio.</div><div class="tc-pills"><span class="pill pg">ICETEX</span><span class="pill pb">Subsidiado</span><span class="pill pt">Gracia</span></div></div>
+<div class="tcard"><span class="tc-rate">16% E.A.</span><span class="tc-ico">🚗</span><div class="tc-name">Crédito de Vehículo</div><div class="tc-desc">El vehículo sirve como garantía. Tasas intermedias entre vivienda y consumo, plazos de 1 a 5 años.</div><div class="tc-pills"><span class="pill po">Garantía real</span><span class="pill pb">1-5 años</span></div></div>
+<div class="tcard"><span class="tc-rate" style="color:var(--red);border-color:rgba(248,113,113,.3);background:var(--red-g)">240% E.A.</span><span class="tc-ico">⚠️</span><div class="tc-name" style="color:var(--red)">Gota a Gota (¡Evítalo!)</div><div class="tc-desc">Préstamos ilegales con tasas del 10-20% semanal. Lo que parece ayuda es una trampa. En Colombia es delito.</div><div class="tc-pills"><span class="pill pr">ILEGAL</span><span class="pill pr">240%+ E.A.</span><span class="pill pr">Extorsión</span><span class="pill pr">Peligroso</span></div></div>
+</div>
+
+<div class="wt-wrap rv" style="margin-top:24px">
+<div class="wt-head"><span class="wt-head-title">Comparativa completa de créditos — Colombia 2025</span><span class="wt-head-badge">Referencia educativa</span></div>
+<table class="wt-table">
+<thead><tr><th>Tipo</th><th>Tasa E.A.</th><th>Tasa mensual</th><th>Plazo</th><th>Monto típico</th><th>Garantía</th><th>Ideal para</th></tr></thead>
+<tbody>
+<tr><td><strong>🏠 Vivienda</strong></td><td class="wt-num">11-17%</td><td class="wt-neut">0,87-1,32%</td><td>Hasta 30 años</td><td>$30M-$600M</td><td>Inmueble (hipoteca)</td><td>Jóvenes con ahorro inicial</td></tr>
+<tr><td><strong>💳 Libre inversión</strong></td><td class="wt-num">18-32%</td><td class="wt-neut">1,39-2,34%</td><td>1-7 años</td><td>$500K-$50M</td><td>No requerida</td><td>Emergencias, proyectos</td></tr>
+<tr><td><strong>🚀 Microcrédito</strong></td><td class="wt-num">22-33%</td><td class="wt-neut">1,66-2,42%</td><td>1-5 años</td><td>$100K-$25M</td><td>Prendaria / ninguna</td><td>Emprendedores</td></tr>
+<tr><td><strong>📚 Educativo</strong></td><td class="wt-num">8-16%</td><td class="wt-neut">0,64-1,25%</td><td>Hasta 20 años</td><td>$2M-$50M</td><td>No requerida</td><td>Estudiantes ICETEX</td></tr>
+<tr><td><strong>🚗 Vehículo</strong></td><td class="wt-num">14-22%</td><td class="wt-neut">1,10-1,67%</td><td>1-5 años</td><td>$5M-$120M</td><td>El vehículo</td><td>Transporte, trabajo</td></tr>
+<tr><td><strong>💳 Tarjeta</strong></td><td class="wt-num">24-36%</td><td class="wt-neut">1,80-2,59%</td><td>Revolvente</td><td>Según cupo</td><td>Ninguna</td><td>Solo compra puntual</td></tr>
+<tr><td><strong>⚠️ Gota a gota</strong></td><td class="wt-warn">200-500%+</td><td class="wt-warn">15-40% mensual</td><td>Semanas</td><td>$50K-$500K</td><td>Extorsión</td><td class="wt-warn">¡NADIE! Es delito</td></tr>
+</tbody>
+</table>
+<div class="wt-foot"><span>💡 <strong>Nota:</strong> Tasas de usura vigentes fijadas por la Superfinanciera. Las tasas mensuales se calculan como (1+EA)^(1/12)-1</span><span>Referencia: Enero-Junio 2025</span></div>
+</div>
+</div>
+</section>
+
+<hr class="sec-div">
+
+<!-- SIMULADOR -->
+<section class="sec" id="simulador">
+<div class="container">
+<div class="sh rv"><div class="badge"><span class="bd"></span> Herramienta interactiva</div>
+<h2 class="stitle">Simulador de <em>crédito real</em></h2>
+<p class="ssub">Configura monto, tasa y plazo. Calcula tu cuota, tabla de amortización y te dice si es viable para tu ingreso.</p></div>
+<div class="sim-win rv">
+<div class="sim-tb">simulador — credito.calculadora [colombia_2025]</div>
+<div class="sim-grid">
+<!-- SIDEBAR -->
+<div class="sim-sb">
+<div class="sb-hd"><div class="sb-hd-t">⚙️ Panel de control</div><div class="sb-hd-s">Configura tu crédito · Datos Colombia 2025</div></div>
+<div class="stabs">
+<button class="stab on" onclick="switchTab('t1',this)">Crédito</button>
+<button class="stab" onclick="switchTab('t2',this)">Gastos</button>
+<button class="stab" onclick="switchTab('t3',this)">Banco</button>
+</div>
+<div class="sb-body">
+<!-- Tab 1: Crédito -->
+<div class="sbp on" id="t1">
+<div class="ig"><label>Tipo de crédito</label>
+<select class="nsel" id="tipoCred" onchange="calcular()">
+<option value="13">🏠 Vivienda (13% E.A.)</option>
+<option value="24" selected>💳 Libre inversión (24% E.A.)</option>
+<option value="26">🚀 Microcrédito (26% E.A.)</option>
+<option value="11">📚 Educativo ICETEX (11% E.A.)</option>
+<option value="16">🚗 Vehículo (16% E.A.)</option>
+<option value="29">💳 Tarjeta de crédito (29% E.A.)</option>
+</select></div>
+<div class="ig"><label>Monto del crédito</label>
+<input type="range" id="rMonto" min="500000" max="100000000" step="100000" value="5000000" oninput="calcular()">
+<div class="rvrow"><span class="rvval" id="lMonto">$5.000.000</span><span class="rvmm">$500K — $100M</span></div></div>
+<div class="ig"><label>Tasa efectiva anual</label>
+<input type="range" id="rTasa" min="5" max="40" step="0.5" value="24" oninput="calcular()">
+<div class="rvrow"><span class="rvval" id="lTasa">24% E.A.</span><span class="rvmm">5% — 40%</span></div></div>
+<div class="ig"><label>Plazo en meses</label>
+<input type="range" id="rPlazo" min="6" max="360" step="6" value="24" oninput="calcular()">
+<div class="rvrow"><span class="rvval" id="lPlazo">24 meses</span><span class="rvmm">6 — 360</span></div></div>
+<div class="ig"><label>Tu ingreso mensual neto</label>
+<input type="range" id="rIngreso" min="1423500" max="15000000" step="50000" value="1423500" oninput="calcular()">
+<div class="rvrow"><span class="rvval" id="lIngreso">$1.423.500</span><span class="rvmm">SMLMV — $15M</span></div></div>
+
+<div class="sb-insight">
+<div class="sb-insight-ico">📊</div>
+<div class="sb-insight-t">Capacidad de endeudamiento</div>
+<div class="sb-insight-b" id="insightText">Ajusta los parámetros para ver tu análisis personalizado.</div>
+<div class="sb-insight-v" id="insightVal"></div>
+</div>
+
+<div class="co-ctx">
+<div class="co-ctx-hd">
+<span class="co-ctx-hd-t">🇨🇴 Contexto Económico Colombia</span>
+<span class="co-ctx-hd-s">2025</span>
+</div>
+<div class="co-ctx-grid">
+<div class="co-ctx-item"><span class="co-ctx-item-l">SMLMV 2025</span><span class="co-ctx-item-v ok">$1.423.500</span></div>
+<div class="co-ctx-item"><span class="co-ctx-item-l">Aux. transporte</span><span class="co-ctx-item-v">$200.000</span></div>
+<div class="co-ctx-item"><span class="co-ctx-item-l">Inflación</span><span class="co-ctx-item-v gold">5,2%<span class="u">anual</span></span></div>
+<div class="co-ctx-item"><span class="co-ctx-item-l">Tasa intervención</span><span class="co-ctx-item-v">9,5%<span class="u">BanRep</span></span></div>
+<div class="co-ctx-item"><span class="co-ctx-item-l">Usura consumo</span><span class="co-ctx-item-v warn">32,7%<span class="u">E.A.</span></span></div>
+<div class="co-ctx-item"><span class="co-ctx-item-l">Usura microcrédito</span><span class="co-ctx-item-v warn">37,6%<span class="u">E.A.</span></span></div>
+</div>
+<div class="co-ctx-foot">
+<span class="co-ctx-foot-ico">⚖️</span>
+<span class="co-ctx-foot-txt">Ningún banco puede cobrarte por encima de la tasa de usura. Si lo hace, es delito. Denuncia ante la Superfinanciera.</span>
+</div>
+</div>
+</div>
+<!-- Tab 2: Gastos -->
+<div class="sbp" id="t2">
+<div class="et-tl">💵 Registra tus gastos mensuales</div>
+<div class="et-box"><div class="et-lbl">Total gastos registrados</div><div class="et-val" id="etTotal">$0</div></div>
+<div class="et-add">
+<input class="et-inp" id="etName" placeholder="Nombre gasto">
+<select class="et-sel" id="etCat"><option value="fijo">Fijo</option><option value="variable">Variable</option></select>
+<input class="et-inp" id="etVal" type="number" placeholder="$">
+<button class="et-btn" onclick="addGasto()">+</button>
+</div>
+<div class="et-list" id="etList"></div>
+
+<!-- Fichero 1: Desglose de ingreso -->
+<div class="fichero" id="ficheroDesglose">
+<div class="fichero-hd">
+<span class="fichero-hd-t">📊 Desglose de ingreso</span>
+<span class="fichero-hd-s">Distribución mensual</span>
+</div>
+<div class="fichero-body">
+<div class="desglose-bar">
+<div class="seg seg-cuota" id="segCuota" style="width:0%"></div>
+<div class="seg seg-gastos" id="segGastos" style="width:0%"></div>
+<div class="seg seg-libre" id="segLibre" style="width:0%"></div>
+</div>
+<div class="desglose-legend">
+<span class="desglose-legend-item"><span class="dot" style="background:var(--p1)"></span>Cuota crédito</span>
+<span class="desglose-legend-item"><span class="dot" style="background:var(--gold)"></span>Gastos</span>
+<span class="desglose-legend-item"><span class="dot" style="background:var(--ok)"></span>Libre</span>
+</div>
+<div class="desglose-vals">
+<div class="desglose-val"><div class="desglose-val-n" id="dValCuota" style="color:var(--p1)">$0</div><div class="desglose-val-l">Cuota</div></div>
+<div class="desglose-val"><div class="desglose-val-n" id="dValGastos" style="color:var(--gold)">$0</div><div class="desglose-val-l">Gastos</div></div>
+<div class="desglose-val"><div class="desglose-val-n" id="dValLibre" style="color:var(--ok)">$0</div><div class="desglose-val-l">Libre</div></div>
+</div>
+</div>
+</div>
+
+<!-- Fichero 2: Gastos por categoría -->
+<div class="fichero" id="ficheroCategorias">
+<div class="fichero-hd">
+<span class="fichero-hd-t">📁 Gastos por categoría</span>
+<span class="fichero-hd-s">Fijos vs variables</span>
+</div>
+<div class="fichero-body">
+<div class="cat-grid">
+<div class="cat-card">
+<div class="cat-card-ico">📌</div>
+<div class="cat-card-lbl">Gastos fijos</div>
+<div class="cat-card-val" id="catFijoVal">$0</div>
+<div class="cat-card-n" id="catFijoN">0 items</div>
+</div>
+<div class="cat-card">
+<div class="cat-card-ico">🔄</div>
+<div class="cat-card-lbl">Gastos variables</div>
+<div class="cat-card-val" id="catVarVal">$0</div>
+<div class="cat-card-n" id="catVarN">0 items</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Fichero 3: Capacidad de endeudamiento -->
+<div class="fichero" id="ficheroCapacidad">
+<div class="fichero-hd">
+<span class="fichero-hd-t">🎯 Capacidad de endeudamiento</span>
+<span class="fichero-hd-s">Límite recomendado: 30%</span>
+</div>
+<div class="fichero-body">
+<div class="gauge-wrap">
+<div class="gauge-svg" id="gaugeSvg"></div>
+<div class="gauge-info">
+<div class="gauge-pct" id="gaugePct">0%</div>
+<div class="gauge-label">Cuota + gastos / ingreso</div>
+<div class="gauge-status ok" id="gaugeStatus">✓ Sin datos</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Fichero 4: Resumen financiero -->
+<div class="sb-insight" style="margin-top:0">
+<div class="sb-insight-ico">📋</div>
+<div class="sb-insight-t">Resumen financiero</div>
+<div class="sb-insight-b" id="gastoInsight">Agrega tus gastos para ver cuánto dinero libre te queda después de las cuotas del crédito.</div>
+<div class="sb-insight-v" id="gastoVal"></div>
+</div>
+</div>
+<!-- Tab 3: Banco -->
+<div class="sbp" id="t3">
+<div class="et-tl">🏦 Compara entidades colombianas</div>
+<div class="bk-card on" onclick="selectBank(this,24)" data-tasa="24"><div class="bk-name">Bancolombia</div><div class="bk-row"><span>Tasa libre inv.</span><span class="bv">24% E.A.</span></div><div class="bk-row"><span>Plazo máx.</span><span class="bv">84 meses</span></div><div class="bk-row"><span>Estudio</span><span class="bv">1-3 días</span></div><div class="bk-row"><span>Tipo</span><span class="bv">Banco tradicional</span></div></div>
+<div class="bk-card" onclick="selectBank(this,26)" data-tasa="26"><div class="bk-name">Davivienda</div><div class="bk-row"><span>Tasa libre inv.</span><span class="bv">26% E.A.</span></div><div class="bk-row"><span>Plazo máx.</span><span class="bv">72 meses</span></div><div class="bk-row"><span>Estudio</span><span class="bv">2-5 días</span></div><div class="bk-row"><span>Tipo</span><span class="bv">Banco tradicional</span></div></div>
+<div class="bk-card" onclick="selectBank(this,22)" data-tasa="22"><div class="bk-name">BBVA Colombia</div><div class="bk-row"><span>Tasa libre inv.</span><span class="bv">22% E.A.</span></div><div class="bk-row"><span>Plazo máx.</span><span class="bv">60 meses</span></div><div class="bk-row"><span>Estudio</span><span class="bv">2-4 días</span></div><div class="bk-row"><span>Tipo</span><span class="bv">Banco tradicional</span></div></div>
+<div class="bk-card" onclick="selectBank(this,20)" data-tasa="20"><div class="bk-name">Nu Colombia</div><div class="bk-row"><span>Tasa crédito</span><span class="bv">20% E.A.</span></div><div class="bk-row"><span>Plazo máx.</span><span class="bv">36 meses</span></div><div class="bk-row"><span>Estudio</span><span class="bv">Instantáneo</span></div><div class="bk-row"><span>Tipo</span><span class="bv">Neobanco</span></div></div>
+<div class="bk-card" onclick="selectBank(this,25)" data-tasa="25"><div class="bk-name">Banco de Bogotá</div><div class="bk-row"><span>Tasa libre inv.</span><span class="bv">25% E.A.</span></div><div class="bk-row"><span>Plazo máx.</span><span class="bv">60 meses</span></div><div class="bk-row"><span>Estudio</span><span class="bv">2-4 días</span></div><div class="bk-row"><span>Tipo</span><span class="bv">Banco tradicional</span></div></div>
+<div class="bk-card" onclick="selectBank(this,23)" data-tasa="23"><div class="bk-name">Bancóldex</div><div class="bk-row"><span>Tasa microcrédito</span><span class="bv">23% E.A.</span></div><div class="bk-row"><span>Plazo máx.</span><span class="bv">60 meses</span></div><div class="bk-row"><span>Estudio</span><span class="bv">3-7 días</span></div><div class="bk-row"><span>Tipo</span><span class="bv">Banco desarrollo</span></div></div>
+
+<div class="sb-insight" style="margin-top:12px">
+<div class="sb-insight-ico">💡</div>
+<div class="sb-insight-t">Dato importante</div>
+<div class="sb-insight-b">Las tasas varían según tu historial crediticio (Datacrédito), ingresos y relación deuda/ingreso. Un buen score puede reducir tu tasa hasta 5 puntos.</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RESULTS -->
+<div class="sim-rp">
+<div class="rp-kpis">
+<div class="rk"><div class="rk-v" id="rCuota">$0</div><div class="rk-l">Cuota mensual</div></div>
+<div class="rk"><div class="rk-v" id="rTotal">$0</div><div class="rk-l">Total a pagar</div></div>
+<div class="rk"><div class="rk-v" id="rInteres">$0</div><div class="rk-l">Intereses totales</div></div>
+<div class="rk"><div class="rk-v" id="rRatio">0%</div><div class="rk-l">Cuota/Ingreso</div></div>
+</div>
+<div id="rStatus" class="st-pill ok">✓ Configura los datos para ver el resultado</div>
+
+<!-- Mini donut chart -->
+<div class="mini-donut-wrap" id="miniDonutWrap">
+<div class="donut-chart" id="donutChart">
+<svg width="130" height="130" viewBox="0 0 130 130" id="donutSvg">
+<circle cx="65" cy="65" r="50" fill="none" stroke="var(--s3)" stroke-width="14"/>
+<circle cx="65" cy="65" r="50" fill="none" stroke="var(--p1)" stroke-width="14" stroke-dasharray="0 314.16" stroke-dashoffset="0" transform="rotate(-90 65 65)" id="donutCap" style="transition:stroke-dasharray .8s cubic-bezier(.4,0,.2,1)"/>
+<circle cx="65" cy="65" r="50" fill="none" stroke="var(--gold)" stroke-width="14" stroke-dasharray="0 314.16" stroke-dashoffset="0" transform="rotate(-90 65 65)" id="donutInt" style="transition:stroke-dasharray .8s cubic-bezier(.4,0,.2,1),stroke-dashoffset .8s cubic-bezier(.4,0,.2,1)"/>
+</svg>
+<div class="donut-center">
+<div class="donut-center-pct" id="donutPct">0%</div>
+<div class="donut-center-lbl">Intereses</div>
+</div>
+</div>
+<div class="donut-legend">
+<div class="donut-legend-item">
+<div class="donut-legend-row">
+<span class="donut-legend-dot" style="background:var(--p1)"></span>
+<span class="donut-legend-name">Capital</span>
+<span class="donut-legend-pct" id="donutCapPct">0%</span>
+</div>
+<div class="donut-legend-val" id="donutCapVal" style="color:var(--p1)">$0</div>
+<div class="donut-legend-bar"><div class="donut-legend-bar-fill" id="donutCapBar" style="width:0%;background:var(--p1)"></div></div>
+</div>
+<div class="donut-legend-item">
+<div class="donut-legend-row">
+<span class="donut-legend-dot" style="background:var(--gold)"></span>
+<span class="donut-legend-name">Intereses</span>
+<span class="donut-legend-pct" id="donutIntPct">0%</span>
+</div>
+<div class="donut-legend-val" id="donutIntVal" style="color:var(--gold)">$0</div>
+<div class="donut-legend-bar"><div class="donut-legend-bar-fill" id="donutIntBar" style="width:0%;background:var(--gold)"></div></div>
+</div>
+<div class="donut-cost">
+<div class="donut-cost-lbl">Costo total del crédito</div>
+<div class="donut-cost-val" id="donutCostVal">$0</div>
+</div>
+</div>
+</div>
+
+<!-- Gráfico barras apiladas -->
+<div>
+
+<div style="display:flex;gap:16px;margin-bottom:8px">
+
+</div>
+<div class="amort-chart" id="amortChart"></div>
+</div>
+
+<!-- Tabla amortización -->
+<div>
+<div style="font-family:var(--mono);font-size:.82rem;font-weight:700;margin-bottom:2px">Tabla de amortización</div>
+<div style="font-family:var(--mono);font-size:.58rem;color:var(--dim);margin-bottom:10px">Desglose mes a mes de cada cuota</div>
+<div class="at-wrap"><table class="at-table" id="amortTable">
+<thead><tr><th>Mes</th><th>Cuota</th><th>Interés</th><th>Capital</th><th>Saldo</th></tr></thead>
+<tbody id="amortBody"></tbody>
+</table></div>
+<div class="at-pag" id="amortPag"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<hr class="sec-div">
+
+<!-- GOTA A GOTA -->
+<section class="sec" id="gota">
+<div class="container">
+<div class="sh rv"><div class="badge"><span class="bd"></span> Alerta importante</div>
+<h2 class="stitle">La trampa del <em>gota a gota</em></h2>
+<p class="ssub">Lo que parece una ayuda rápida puede destruir tu vida financiera. Entiende por qué debes alejarte.</p></div>
+<div class="wt-wrap rv">
+<div class="wt-head"><span class="wt-head-title">¿Por qué el gota a gota es una trampa?</span><span class="wt-head-badge" style="color:#dc2626;background:#fef2f2;border-color:#fecaca">⚠️ Peligro</span></div>
+<table class="wt-table">
+<thead><tr><th>Concepto</th><th>Gota a gota</th><th>Crédito bancario</th><th>Diferencia</th></tr></thead>
+<tbody>
+<tr><td><strong>Tasa semanal</strong></td><td class="wt-warn">10-20%</td><td class="wt-hi">N/A (es mensual)</td><td class="wt-warn">Te cobran cada semana</td></tr>
+<tr><td><strong>Tasa anual real</strong></td><td class="wt-warn">240% — 1.040%</td><td class="wt-hi">11-32%</td><td class="wt-warn">Hasta 80 veces más caro</td></tr>
+<tr><td><strong>$500.000 en 10 semanas</strong></td><td class="wt-warn">Pagas ~$750.000-$1.000.000</td><td class="wt-hi">Pagas ~$515.000</td><td class="wt-warn">Pierdes $250K-$485K extra</td></tr>
+<tr><td><strong>Si no pagas a tiempo</strong></td><td class="wt-warn">Amenazas, acoso, violencia</td><td class="wt-hi">Reporte a centrales, cobro jurídico</td><td class="wt-warn">Pones en riesgo tu vida</td></tr>
+<tr><td><strong>Legalidad</strong></td><td class="wt-warn">DELITO en Colombia</td><td class="wt-hi">Regulado por SFC</td><td class="wt-warn">Puedes denunciar</td></tr>
+</tbody>
+</table>
+<div class="wt-foot"><span>📞 <strong>Línea gratuita contra gota a gota:</strong> 01-8000-910-675 (Superfinanciera) · <strong>Policía:</strong> 123</span><span>No tengas vergüenza de pedir ayuda. Es un delito, no tu culpa.</span></div>
+</div>
+</div>
+</section>
+
+<hr class="sec-div">
+
+<!-- CÓMO FUNCIONA -->
+<section class="sec" id="como-funciona">
+<div class="container">
+<div class="sh rv"><div class="badge"><span class="bd"></span> Guía paso a paso</div>
+<h2 class="stitle">Cómo funciona un <em>crédito</em></h2>
+<p class="ssub">Desde la solicitud hasta el último pago, entendido en español simple.</p></div>
+<div class="steps-track rv" id="stepsTrack">
+<div class="step-item visible"><div class="step-num">1</div><div class="step-content"><div class="step-lbl">Paso inicial</div><div class="step-title">Solicitas el crédito</div><div class="step-body">Presentas documentos: cédula, certificado de ingresos, historia laboral. El banco verifica tu capacidad de pago consultando centrales de riesgo (Datacrédito y TransUnion CIFIN).</div><div class="step-tags"><span class="step-tag">Cédula</span><span class="step-tag">Certificado ingreso</span><span class="step-tag">Datacrédito</span></div></div></div>
+<div class="step-item visible"><div class="step-num">2</div><div class="step-content"><div class="step-lbl">Aprobación</div><div class="step-title">El banco aprueba o rechaza</div><div class="step-body">Evalúan tu scoring: ingreso, deudas actuales, historial. Si tu cuota del nuevo crédito supera 30-40% de tu ingreso, probablemente te nieguen el crédito. La Superfinanciera regula este proceso.</div><div class="step-tags"><span class="step-tag">Scoring</span><span class="step-tag">Capacidad de pago</span><span class="step-tag">30% regla</span><span class="step-tag">SFC</span></div></div></div>
+<div class="step-item visible"><div class="step-num">3</div><div class="step-content"><div class="step-lbl">Desembolso</div><div class="step-title">Te entregan el dinero</div><div class="step-body">Firman el contrato con todas las condiciones: tasa, plazo, cuota mensual, seguros. El dinero llega a tu cuenta o se paga directamente al vendedor (si es vivienda o vehículo).</div><div class="step-tags"><span class="step-tag">Firma</span><span class="step-tag">Contrato</span><span class="step-tag">Desembolso</span></div></div></div>
+<div class="step-item visible"><div class="step-num">4</div><div class="step-content"><div class="step-lbl">Pago mensual</div><div class="step-title">Pagas tu cuota cada mes</div><div class="step-body">Cada cuota se divide en interés y capital. Al inicio pagas más interés que capital. Puedes hacer abonos extraordinarios para reducir el total de intereses.</div><div class="step-tags"><span class="step-tag">Cuota fija</span><span class="step-tag">Amortización</span><span class="step-tag">Abonos extra</span></div></div></div>
+<div class="step-item visible"><div class="step-num">5</div><div class="step-content"><div class="step-lbl">Finalización</div><div class="step-title">Terminas de pagar</div><div class="step-body">Al pagar la última cuota, el crédito queda cerrado. El banco reporta el pago completo a Datacrédito, mejorando tu historial crediticio para futuros préstamos.</div><div class="step-tags"><span class="step-tag">Historial positivo</span><span class="step-tag">Score mejora</span><span class="step-tag">Libre deuda</span></div></div></div>
+</div>
+</div>
+</section>
+
+<hr class="sec-div">
+
+<!-- TIPS -->
+<section class="sec" id="tips">
+<div class="container">
+<div class="sh rv"><div class="badge"><span class="bd"></span> Consejos clave</div>
+<h2 class="stitle">Tips antes de <em>pedir un crédito</em></h2>
+<p class="ssub">Consejos prácticos para que no termines pagando de más o metido en deudas.</p></div>
+<div class="tips-grid rv">
+<div class="tip-card"><span class="tip-tag">Regla de oro</span><span class="tip-num">01</span><div class="tip-title">Nunca supere el 30% de tu ingreso</div><div class="tip-body">La cuota del crédito no debe pasar el 30% de tu ingreso mensual neto. Si ganas SMLMV ($1.423.500), tu cuota máxima debería ser ~$427.000.</div></div>
+<div class="tip-card"><span class="tip-tag">Comparación</span><span class="tip-num">02</span><div class="tip-title">Compara al menos 3 entidades</div><div class="tip-body">Bancos, cooperativas y neobancos tienen tasas diferentes. Una diferencia de 2% en tasa puede ahorrarte cientos de miles de pesos.</div></div>
+<div class="tip-card"><span class="tip-tag">Prevención</span><span class="tip-num">03</span><div class="tip-title">Verifica la tasa de usura</div><div class="tip-body">La Superfinanciera publica las tasas máximas legales cada trimestre. Si te cobran más, es ilegal. Consumo ordinario: 32,7% E.A. (2025).</div></div>
+<div class="tip-card"><span class="tip-tag">Historial</span><span class="tip-num">04</span><div class="tip-title">Cuida tu Datacrédito</div><div class="tip-body">Un reporte negativo te cierra puertas por años. Paga a tiempo, nunca te retrases más de 30 días. Consulta tu reporte gratis cada mes.</div></div>
+<div class="tip-card"><span class="tip-tag">Estrategia</span><span class="tip-num">05</span><div class="tip-title">Haz abonos extraordinarios</div><div class="tip-body">Si tienes plata extra, abónala al capital. Reduce el plazo y los intereses totales. Un abono de $500K puede ahorrarte más de $300K en intereses.</div></div>
+<div class="tip-card"><span class="tip-tag">Alerta</span><span class="tip-num">06</span><div class="tip-title">Nunca recurras al gota a gota</div><div class="tip-body">Si no te aprueban un crédito formal, busca alternativas: cooperativas, Bancóldex, líneas del SENA, programas del gobierno. El gota a gota es una trampa.</div></div>
+</div>
+</div>
+</section>
+
+<hr class="sec-div">
+
+<!-- CTA -->
+<section class="sec" id="cta">
+<div class="container">
+<div class="cta-block rv">
+<h2 class="cta-title">¿Listo para tomar <em>decisiones inteligentes</em>?</h2>
+<p class="cta-sub">Habla con Finn, tu asistente financiero, y recibe recomendaciones personalizadas basadas en tu situación real en Colombia.</p>
+<div class="cta-btns">
+<a href="{{ url_for('finn') }}" class="btn-p">Hablar con Finn →</a>
+<a href="#simulador" class="btn-o">Volver al simulador</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+<div class="foot-grid">
+<div class="fb">
+<a href="{{ url_for('inicio') }}" class="logo"><div class="lm">F</div><span class="lt">Fin<span>Edge</span></span></a>
+<p>Educación financiera para jóvenes colombianos. Aprende a manejar tu plata, no que tu plata te maneje a ti.</p>
+</div>
+<div class="fc"><h4>Módulos</h4><ul>
+<li><a href="{{ url_for('estadisticas') }}">Estadísticas</a></li>
+<li><a href="{{ url_for('presupuesto') }}">Presupuesto</a></li>
+<li><a href="{{ url_for('credito_casa') }}">Créditos</a></li>
+<li><a href="{{ url_for('inversiones') }}">Inversiones</a></li>
+<li><a href="{{ url_for('emprendimiento') }}">Emprendimiento</a></li>
+</ul></div>
+<div class="fc"><h4>Recursos</h4><ul>
+<li><a href="#">Superfinanciera</a></li>
+<li><a href="#">Datacrédito</a></li>
+<li><a href="#">ICETEX</a></li>
+<li><a href="#">Bancóldex</a></li>
+<li><a href="#">Banco de la República</a></li>
+</ul></div>
+<div class="fc"><h4>Legal</h4><ul>
+<li><a href="#">Términos de uso</a></li>
+<li><a href="#">Política de privacidad</a></li>
+<li><a href="#">Contenido educativo</a></li>
+<li><a href="#">Contacto</a></li>
+</ul></div>
+</div>
+<div class="foot-bot">
+<span class="copy">© 2026 FinEdge · Educación Financiera</span>
+<span class="sena">Proyecto <span>SENA</span> · Todos los derechos reservados</span>
+</div>
+</div>
+</footer>
+
+<script>
+// === SCROLL PROGRESS ===
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('sp').style.width=(window.scrollY/h*100)+'%';
+  document.getElementById('nav').classList.toggle('sc',window.scrollY>60);
+});
+
+// === MOBILE MENU ===
+document.getElementById('hbg').addEventListener('click',()=>{
+  document.getElementById('mm').classList.toggle('op');
+});
+
+// === SCROLL REVEAL ===
+const revObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');revObs.unobserve(e.target)}});
+},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>revObs.observe(el));
+
+// === COUNTERS ===
+const cObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const t=+e.target.dataset.t;let c=0;const d=40;const s=t/d;
+      const iv=setInterval(()=>{c+=s;if(c>=t){c=t;clearInterval(iv)}e.target.textContent=Math.round(c)},30);
+      cObs.unobserve(e.target);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('.counter').forEach(el=>cObs.observe(el));
+
+// === FORMAT COP ===
+function fCOP(n){return '$'+Math.round(n).toLocaleString('es-CO')}
+
+// === TAB SWITCHING ===
+function switchTab(id,btn){
+  document.querySelectorAll('.sbp').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+}
+
+// === GASTOS ===
+let gastos=[
+  {name:'Arriendo',cat:'fijo',val:850000},
+  {name:'Alimentación',cat:'variable',val:450000},
+  {name:'Transporte',cat:'fijo',val:180000},
+  {name:'Servicios públicos',cat:'fijo',val:120000}
+];
+
+function addGasto(){
+  const n=document.getElementById('etName').value.trim();
+  const c=document.getElementById('etCat').value;
+  const v=parseFloat(document.getElementById('etVal').value);
+  if(!n||!v||v<=0)return;
+  gastos.push({name:n,cat:c,val:v});
+  document.getElementById('etName').value='';
+  document.getElementById('etVal').value='';
+  renderGastos();
+  calcular();
+}
+function delGasto(i){gastos.splice(i,1);renderGastos();calcular();}
+
+function renderGastos(){
+  const list=document.getElementById('etList');
+  const totalGastos=gastos.reduce((s,g)=>s+g.val,0);
+  const totalFijos=gastos.filter(g=>g.cat==='fijo').reduce((s,g)=>s+g.val,0);
+  const totalVars=gastos.filter(g=>g.cat==='variable').reduce((s,g)=>s+g.val,0);
+  const nFijos=gastos.filter(g=>g.cat==='fijo').length;
+  const nVars=gastos.filter(g=>g.cat==='variable').length;
+
+  document.getElementById('etTotal').textContent=fCOP(totalGastos);
+
+  // Render gasto items with X button
+  list.innerHTML=gastos.map((g,i)=>`<div class="et-item"><div class="et-left"><span class="et-name">${g.name}</span><span class="pill ${g.cat==='fijo'?'po':'pt'}" style="font-size:.48rem;padding:1px 5px">${g.cat}</span></div><div class="et-right"><span class="et-v">${fCOP(g.val)}</span></div><button class="et-del" onclick="delGasto(${i})" title="Eliminar gasto">✕</button></div>`).join('');
+
+  // Fichero 2: Categorías
+  document.getElementById('catFijoVal').textContent=fCOP(totalFijos);
+  document.getElementById('catFijoN').textContent=nFijos+' item'+(nFijos!==1?'s':'');
+  document.getElementById('catVarVal').textContent=fCOP(totalVars);
+  document.getElementById('catVarN').textContent=nVars+' item'+(nVars!==1?'s':'');
+
+  updateFicheros();
+}
+
+function updateFicheros(){
+  const ingreso=+document.getElementById('rIngreso').value;
+  const cuota=calcCuota();
+  const totalGastos=gastos.reduce((s,g)=>s+g.val,0);
+  const libre=ingreso-cuota-totalGastos;
+  const pctCuota=ingreso>0?(cuota/ingreso*100):0;
+  const pctGastos=ingreso>0?(totalGastos/ingreso*100):0;
+  const pctLibre=ingreso>0?Math.max(0,libre/ingreso*100):0;
+  const pctComprometido=ingreso>0?((cuota+totalGastos)/ingreso*100):0;
+
+  // Fichero 1: Desglose
+  const total=pctCuota+pctGastos+pctLibre;
+  document.getElementById('segCuota').style.width=Math.min(pctCuota,100)+'%';
+  document.getElementById('segGastos').style.width=Math.min(pctGastos,100-pctCuota)+'%';
+  document.getElementById('segLibre').style.width=Math.max(0,Math.min(pctLibre,100-pctCuota-pctGastos))+'%';
+  document.getElementById('dValCuota').textContent=fCOP(cuota);
+  document.getElementById('dValGastos').textContent=fCOP(totalGastos);
+  document.getElementById('dValLibre').textContent=fCOP(Math.max(0,libre));
+  document.getElementById('dValLibre').style.color=libre>0?'var(--ok)':'var(--red)';
+
+  // Fichero 3: Gauge
+  renderGauge(pctComprometido);
+
+  // Fichero 4: Resumen
+  const el=document.getElementById('gastoInsight');
+  const ev=document.getElementById('gastoVal');
+  if(gastos.length>0){
+    el.textContent=`Cuota + gastos = ${pctComprometido.toFixed(1)}% de tu ingreso. Dinero libre: ${fCOP(libre)}/mes.`;
+    ev.textContent=libre>0?fCOP(libre)+'/mes libre':'⚠️ Balance negativo';
+    ev.style.color=libre>0?'var(--ok)':'var(--red)';
+  } else {
+    el.textContent='Agrega tus gastos para ver cuánto dinero libre te queda después de las cuotas del crédito.';
+    ev.textContent='';
+  }
+}
+
+// === GAUGE SVG ===
+function renderGauge(pct){
+  const container=document.getElementById('gaugeSvg');
+  const clampedPct=Math.min(pct,100);
+  const r=36;
+  const c=2*Math.PI*r;
+  const filled=(clampedPct/100)*c;
+  const offset=c-filled;
+
+  let color='var(--ok)';
+  let statusClass='ok';
+  let statusText='✓ Saludable';
+  if(pct>60){color='var(--red)';statusClass='bad';statusText='✗ Sobreendeudado';}
+  else if(pct>40){color='var(--gold)';statusClass='warn';statusText='⚠ Ajustado';}
+  else if(pct>30){color='var(--gold)';statusClass='warn';statusText='⚠ Al límite';}
+
+  container.innerHTML=`
+    <svg width="88" height="88" viewBox="0 0 88 88">
+      <circle cx="44" cy="44" r="${r}" fill="none" stroke="var(--s3)" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="44" cy="44" r="${r}" fill="none" stroke="${color}" stroke-width="8" stroke-dasharray="${filled} ${offset}" stroke-dashoffset="0" transform="rotate(-90 44 44)" stroke-linecap="round" style="transition:stroke-dasharray .6s ease,stroke .3s"/>
+      <text x="44" y="42" text-anchor="middle" font-family="var(--mono)" font-size="14" font-weight="700" fill="var(--txt)">${Math.round(clampedPct)}%</text>
+      <text x="44" y="54" text-anchor="middle" font-family="var(--mono)" font-size="6" fill="var(--dim)" letter-spacing="0.5">COMPROMETIDO</text>
+    </svg>`;
+
+  const gs=document.getElementById('gaugeStatus');
+  gs.className='gauge-status '+statusClass;
+  gs.textContent=statusText;
+  document.getElementById('gaugePct').textContent=Math.round(clampedPct)+'%';
+  document.getElementById('gaugePct').style.color=color;
+}
+
+// === SELECT BANK ===
+function selectBank(el,tasa){
+  document.querySelectorAll('.bk-card').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('rTasa').value=tasa;
+  calcular();
+}
+
+// === CALC CUOTA (helper) ===
+function calcCuota(){
+  const P=+document.getElementById('rMonto').value;
+  const ea=+document.getElementById('rTasa').value/100;
+  const n=+document.getElementById('rPlazo').value;
+  const r=Math.pow(1+ea,1/12)-1;
+  if(r===0)return P/n;
+  return P*r/(1-Math.pow(1+r,-n));
+}
+
+// === AMORTIZATION DATA ===
+let amortData=[];
+let amortPage=0;
+const PER_PAGE=12;
+
+// === MINI DONUT ===
+function updateDonut(capital,intereses){
+  const total=capital+intereses;
+  if(total===0)return;
+  const circ=2*Math.PI*50; // ~314.16
+  const capPct=capital/total;
+  const intPct=intereses/total;
+  const capDash=capPct*circ;
+  const intDash=intPct*circ;
+  const intOffset=-capDash;
+
+  document.getElementById('donutCap').setAttribute('stroke-dasharray',capDash+' '+(circ-capDash));
+  document.getElementById('donutInt').setAttribute('stroke-dasharray',intDash+' '+(circ-intDash));
+  document.getElementById('donutInt').setAttribute('stroke-dashoffset',intOffset);
+
+  document.getElementById('donutPct').textContent=Math.round(intPct*100)+'%';
+  document.getElementById('donutCapPct').textContent=Math.round(capPct*100)+'%';
+  document.getElementById('donutIntPct').textContent=Math.round(intPct*100)+'%';
+  document.getElementById('donutCapVal').textContent=fCOP(capital);
+  document.getElementById('donutIntVal').textContent=fCOP(intereses);
+  document.getElementById('donutCapBar').style.width=Math.round(capPct*100)+'%';
+  document.getElementById('donutIntBar').style.width=Math.round(intPct*100)+'%';
+  document.getElementById('donutCostVal').textContent=fCOP(intereses);
+}
+
+// === CALCULAR ===
+function calcular(){
+  const P=+document.getElementById('rMonto').value;
+  const ea=+document.getElementById('rTasa').value/100;
+  const n=+document.getElementById('rPlazo').value;
+  const ingreso=+document.getElementById('rIngreso').value;
+  const tipo=document.getElementById('tipoCred');
+
+  // Update labels
+  document.getElementById('lMonto').textContent=fCOP(P);
+  document.getElementById('lTasa').textContent=document.getElementById('rTasa').value+'% E.A.';
+  document.getElementById('lPlazo').textContent=n+' meses';
+  document.getElementById('lIngreso').textContent=fCOP(ingreso);
+
+  // Monthly rate from EA
+  const r=Math.pow(1+ea,1/12)-1;
+  const cuota=r===0?P/n:P*r/(1-Math.pow(1+r,-n));
+
+  // Amortization
+  amortData=[];
+  let saldo=P;
+  for(let i=1;i<=n;i++){
+    const interes=saldo*r;
+    const capital=cuota-interes;
+    saldo=Math.max(0,saldo-capital);
+    amortData.push({mes:i,cuota,interes,capital,saldo});
+  }
+
+  const totalPagado=cuota*n;
+  const totalInteres=totalPagado-P;
+  const ratio=cuota/ingreso*100;
+
+  // Update KPIs
+  document.getElementById('rCuota').textContent=fCOP(cuota);
+  document.getElementById('rTotal').textContent=fCOP(totalPagado);
+  document.getElementById('rInteres').textContent=fCOP(totalInteres);
+  document.getElementById('rRatio').textContent=ratio.toFixed(1)+'%';
+
+  // Status
+  const st=document.getElementById('rStatus');
+  if(ratio<=20){
+    st.className='st-pill ok';st.textContent='✓ Cuota cómoda — Ratio '+ratio.toFixed(1)+'% (ideal < 20%)';
+  }else if(ratio<=30){
+    st.className='st-pill warn';st.textContent='⚠ Cuota ajustada — Ratio '+ratio.toFixed(1)+'% (límite 30%)';
+  }else{
+    st.className='st-pill bad';st.textContent='✗ Cuota riesgosa — Ratio '+ratio.toFixed(1)+'% (supera 30%)';
+  }
+
+  // Insight
+  const insightText=document.getElementById('insightText');
+  const insightVal=document.getElementById('insightVal');
+  const libre=ingreso-cuota;
+  if(ratio<=20){
+    insightText.textContent=`Tu cuota representa ${ratio.toFixed(1)}% de tu ingreso. Tienes ${fCOP(libre)} libres al mes. Buena capacidad de pago.`;
+    insightVal.textContent=fCOP(libre)+'/mes libre';
+    insightVal.style.color='var(--ok)';
+  }else if(ratio<=30){
+    insightText.textContent=`Tu cuota es ${ratio.toFixed(1)}% de tu ingreso. Te quedan ${fCOP(libre)} libres. Es ajustado pero viable si controlas gastos.`;
+    insightVal.textContent=fCOP(libre)+'/mes libre';
+    insightVal.style.color='var(--gold)';
+  }else{
+    insightText.textContent=`¡Cuidado! Tu cuota es ${ratio.toFixed(1)}% de tu ingreso. Solo te quedarían ${fCOP(libre)}. Considera monto menor o plazo más largo.`;
+    insightVal.textContent=fCOP(libre)+'/mes libre';
+    insightVal.style.color='var(--red)';
+  }
+
+  // Update donut
+  updateDonut(P,totalInteres);
+
+  // Update ficheros
+  updateFicheros();
+
+  // Render chart
+  renderChart();
+  // Render table
+  amortPage=0;
+  renderTable();
+}
+
+// === RENDER CHART ===
+function renderChart(){
+  const chart=document.getElementById('amortChart');
+  const n=amortData.length;
+  const step=n<=24?1:n<=60?2:n<=120?4:6;
+  const maxCuota=Math.max(...amortData.map(d=>d.cuota));
+  let html='';
+  for(let i=0;i<n;i+=step){
+    const d=amortData[i];
+    const hK=(d.capital/maxCuota*100).toFixed(1);
+    const hI=(d.interes/maxCuota*100).toFixed(1);
+    html+=`<div class="ac-bar"><div class="ac-cap">Mes ${d.mes}: ${fCOP(d.cuota)}</div><div class="ac-k" style="height:${hK}%"></div><div class="ac-i" style="height:${hI}%"></div></div>`;
+  }
+  chart.innerHTML=html;
+}
+
+// === RENDER TABLE ===
+function renderTable(){
+  const body=document.getElementById('amortBody');
+  const start=amortPage*PER_PAGE;
+  const slice=amortData.slice(start,start+PER_PAGE);
+  body.innerHTML=slice.map(d=>`<tr><td>${d.mes}</td><td>${fCOP(d.cuota)}</td><td class="ao">${fCOP(d.interes)}</td><td class="ag">${fCOP(d.capital)}</td><td>${fCOP(d.saldo)}</td></tr>`).join('');
+
+  const totalPages=Math.ceil(amortData.length/PER_PAGE);
+  const pag=document.getElementById('amortPag');
+  if(totalPages<=1){pag.innerHTML='';return;}
+  let ph='';
+  const maxShow=5;
+  let s=Math.max(0,amortPage-Math.floor(maxShow/2));
+  let e=Math.min(totalPages,s+maxShow);s=Math.max(0,e-maxShow);
+  if(amortPage>0)ph+=`<button class="apg" onclick="goPage(${amortPage-1})">‹</button>`;
+  for(let i=s;i<e;i++)ph+=`<button class="apg${i===amortPage?' on':''}" onclick="goPage(${i})">${i+1}</button>`;
+  if(amortPage<totalPages-1)ph+=`<button class="apg" onclick="goPage(${amortPage+1})">›</button>`;
+  pag.innerHTML=ph;
+}
+function goPage(p){amortPage=p;renderTable();}
+
+// === TYPE CHANGE ===
+document.getElementById('tipoCred').addEventListener('change',function(){
+  const tasa=+this.value;
+  document.getElementById('rTasa').value=tasa;
+  const plazo=document.getElementById('rPlazo');
+  if(tasa<=14){plazo.max=360;plazo.value=Math.min(+plazo.value,360);}
+  else if(tasa<=16){plazo.max=60;plazo.value=Math.min(+plazo.value,60);}
+  else{plazo.max=84;plazo.value=Math.min(+plazo.value,84);}
+  calcular();
+});
+
+// === ENTER KEY FOR GASTOS ===
+document.getElementById('etVal').addEventListener('keydown',function(e){if(e.key==='Enter')addGasto();});
+document.getElementById('etName').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('etVal').focus();});
+
+// === INIT ===
+renderGastos();
+calcular();
+</script>
+</body>
+</html>

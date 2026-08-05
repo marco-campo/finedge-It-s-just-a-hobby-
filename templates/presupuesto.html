@@ -1,0 +1,2529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planificador de Presupuesto — FinEdge · SENA Grupo Angely</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================
+   FINEDGE — PRESUPUESTO · HYPRLAND v2.0
+   Tablas blancas · Contraste corregido
+   Consistente con index principal
+   ============================================ */
+
+:root {
+  --bg:      #05030a;
+  --bg0:     #08060e;
+  --bg1:     #0a0812;
+  --bg2:     #0d0b16;
+  --s0:      #100e1a;
+  --s1:      #141122;
+  --s2:      #1a1630;
+  --s3:      #211c3e;
+  --s4:      #2a2350;
+  --b0:      #2e255a;
+  --b1:      #3d3272;
+  --b2:      #524494;
+  --b3:      #6858b0;
+  --p:       #9333ea;
+  --p0:      #7c22ce;
+  --p1:      #a855f7;
+  --p2:      #b87afc;
+  --p3:      #cda4fd;
+  --glow:    rgba(147,51,234,.5);
+  --glow-s:  rgba(147,51,234,.25);
+  --faint:   rgba(147,51,234,.06);
+  --faint2:  rgba(147,51,234,.03);
+  --line:    rgba(147,51,234,.22);
+  --line-s:  rgba(147,51,234,.12);
+  --cy:      #22d3ee;
+  --cy-g:    rgba(34,211,238,.06);
+  --cy-l:    rgba(34,211,238,.22);
+  --txt:     #f0ecff;
+  --txt2:    #c9bdf5;
+  --txt3:    #a991e0;
+  --muted:   #7a6da8;
+  --dim:     #50447a;
+  --dim2:    #3a305e;
+  --gold:    #fbbf24;
+  --gold-g:  rgba(251,191,36,.12);
+  --red:     #f87171;
+  --red-g:   rgba(248,113,113,.1);
+  --ok:      #34d399;
+  --ok-g:    rgba(52,211,153,.1);
+  --blue:    #60a5fa;
+  --blue-g:  rgba(96,165,250,.1);
+  --orange:  #f97316;
+  --mono:    'JetBrains Mono', 'Fira Code', monospace;
+  --sans:    'Space Grotesk', 'Inter', sans-serif;
+  --gap:     1px;
+  --shadow:  0 8px 32px rgba(0,0,0,.4), 0 2px 8px rgba(0,0,0,.3);
+  --shadow-lg: 0 16px 64px rgba(0,0,0,.5), 0 4px 16px rgba(0,0,0,.4);
+  --border-window: 1px solid var(--b0);
+  --transition: all .2s cubic-bezier(.4,0,.2,1);
+  /* Tablas claras */
+  --tbl-bg:       #f8f6ff;
+  --tbl-bg-alt:   #ffffff;
+  --tbl-border:   #e2d9f5;
+  --tbl-header:   #1a1230;
+  --tbl-text:     #2d2040;
+  --tbl-text2:    #5e4d78;
+  --tbl-accent:   #7c3aed;
+  --tbl-hover:    #f0ecff;
+  --tbl-stripe:   #faf7ff;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--b1) var(--bg);
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--txt);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,.015) 2px,
+    rgba(0,0,0,.015) 4px
+  );
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(147,51,234,.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: .6;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--b1); }
+::-webkit-scrollbar-thumb:hover { background: var(--p); }
+
+::selection {
+  background: rgba(147,51,234,.3);
+  color: var(--txt);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ══════════════════════════════════════════
+   BADGE & TAGS
+   ══════════════════════════════════════════ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: .6rem;
+  font-weight: 600;
+  color: var(--p2);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border: var(--border-window);
+  background: var(--faint);
+  padding: 4px 12px;
+}
+
+.badge .pulse {
+  width: 5px;
+  height: 5px;
+  background: var(--p1);
+  border-radius: 50%;
+  animation: blinkDot 2s ease-in-out infinite;
+  box-shadow: 0 0 8px var(--glow-s);
+}
+
+@keyframes blinkDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .3; transform: scale(.7); }
+}
+
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: .58rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border: var(--border-window);
+  color: var(--muted);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  background: var(--faint2);
+}
+
+.tag.green { color: var(--ok); border-color: rgba(52,211,153,.25); background: var(--ok-g); }
+.tag.gold { color: var(--gold); border-color: rgba(251,191,36,.25); background: var(--gold-g); }
+.tag.red { color: var(--red); border-color: rgba(248,113,113,.25); background: var(--red-g); }
+.tag.blue { color: var(--blue); border-color: rgba(96,165,250,.25); background: var(--blue-g); }
+
+/* ══════════════════════════════════════════
+   NAVBAR — WAYBAR
+   ══════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: 42px;
+  background: rgba(8,6,14,.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: var(--border-window);
+  box-shadow: 0 4px 24px rgba(0,0,0,.4);
+  transition: var(--transition);
+}
+
+nav.scrolled {
+  background: rgba(5,3,10,.96);
+  border-bottom-color: var(--b1);
+  box-shadow: 0 4px 32px rgba(0,0,0,.6);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.logo:hover { filter: brightness(1.1); }
+
+.logo-mark {
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(135deg, var(--p0), var(--p1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: .65rem;
+  font-weight: 800;
+  color: #fff;
+  border: 1px solid var(--p1);
+  flex-shrink: 0;
+  clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
+  box-shadow: 0 0 12px var(--glow-s);
+}
+
+.logo-text {
+  font-family: var(--mono);
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--txt);
+  letter-spacing: .04em;
+}
+
+.logo-text span {
+  color: var(--p1);
+  text-shadow: 0 0 20px var(--glow-s);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  list-style: none;
+  background: var(--s0);
+  border: var(--border-window);
+  padding: 2px;
+  height: 28px;
+}
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 10px;
+  height: 24px;
+  font-family: var(--mono);
+  font-size: .62rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: var(--transition);
+  letter-spacing: .04em;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: var(--txt2);
+  background: var(--s1);
+  border-color: var(--b0);
+}
+
+.nav-links a.active {
+  color: var(--p2);
+  background: var(--faint);
+  border-color: var(--b1);
+  box-shadow: inset 0 0 12px var(--faint);
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: var(--p1);
+  box-shadow: 0 0 8px var(--glow-s);
+}
+
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  height: 26px;
+  font-family: var(--mono);
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  transition: var(--transition);
+  background: linear-gradient(135deg, var(--p0), var(--p));
+  color: #fff;
+  border: 1px solid var(--p1);
+  box-shadow: 0 0 20px var(--glow-s);
+}
+
+.btn-nav:hover {
+  background: linear-gradient(135deg, var(--p), var(--p1));
+  box-shadow: 0 0 32px var(--glow);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  padding: 6px;
+  background: none;
+  border: var(--border-window);
+  height: 28px;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.hamburger:hover {
+  border-color: var(--p);
+  background: var(--faint);
+}
+
+.hamburger span {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: var(--txt2);
+  transition: var(--transition);
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 42px;
+  left: 0;
+  right: 0;
+  background: rgba(8,6,14,.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: var(--border-window);
+  padding: 8px 18px 16px;
+  z-index: 199;
+  flex-direction: column;
+  gap: var(--gap);
+  box-shadow: var(--shadow-lg);
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a,
+.mobile-menu .btn {
+  display: block;
+  padding: 8px 12px;
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--muted);
+  text-decoration: none;
+  border: var(--border-window);
+  transition: var(--transition);
+  width: 100%;
+  text-align: left;
+  background: transparent;
+}
+
+.mobile-menu a:hover {
+  color: var(--p2);
+  border-color: var(--b1);
+  background: var(--s1);
+}
+
+.mobile-menu .btn-primary {
+  margin-top: 8px;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--p0), var(--p));
+  color: #fff;
+  border-color: var(--p1);
+}
+
+/* ══════════════════════════════════════════
+   REVEAL
+   ══════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.rev-1 { transition-delay: .1s; }
+.rev-2 { transition-delay: .2s; }
+.rev-3 { transition-delay: .3s; }
+.rev-4 { transition-delay: .4s; }
+
+/* ══════════════════════════════════════════
+   HERO
+   ══════════════════════════════════════════ */
+.hero {
+  padding: 72px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(147,51,234,.1), transparent 70%);
+  pointer-events: none;
+  animation: glowPulse 8s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: .6; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 48px;
+  align-items: center;
+  min-height: 85vh;
+}
+
+.hero-title {
+  font-family: var(--sans);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: -.04em;
+  margin-bottom: 18px;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--p1);
+  text-shadow: 0 0 30px var(--glow-s);
+}
+
+.hero-desc {
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.8;
+  max-width: 460px;
+  margin-bottom: 28px;
+}
+
+/* Hero dashboard — Hyprland window */
+.dashboard-preview {
+  background: var(--s0);
+  border: var(--border-window);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg), 0 0 60px rgba(147,51,234,.08);
+  transition: var(--transition);
+}
+
+.dashboard-preview::before {
+  content: 'finedge — resumen_financiero.dashboard [active]';
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  height: 28px;
+  font-family: var(--mono);
+  font-size: .56rem;
+  color: var(--dim);
+  letter-spacing: .05em;
+  background: var(--s1);
+  border-bottom: var(--border-window);
+}
+
+.dashboard-preview::after {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--p0), var(--p1), var(--cy), transparent);
+  box-shadow: 0 0 12px var(--glow-s);
+}
+
+.db-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 0;
+  margin-top: 10px;
+}
+
+.db-title {
+  font-family: var(--sans);
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--txt);
+}
+
+.db-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--ok);
+  box-shadow: 0 0 8px rgba(52,211,153,.5);
+  animation: blinkDot 2s infinite;
+}
+
+.db-mini-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+  background: var(--b0);
+  border-top: var(--border-window);
+  margin: 14px 0;
+}
+
+.db-mc {
+  background: var(--s0);
+  padding: 14px;
+  transition: var(--transition);
+}
+
+.db-mc:hover { background: var(--s1); }
+
+.db-mc-val {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--txt);
+  line-height: 1;
+}
+
+.db-mc-val.purple { color: var(--p1); }
+.db-mc-val.gold { color: var(--gold); }
+.db-mc-val.blue { color: var(--blue); }
+
+.db-mc-lbl {
+  font-family: var(--mono);
+  font-size: .6rem;
+  color: var(--dim);
+  margin-top: 4px;
+}
+
+.db-bar-preview {
+  background: var(--s0);
+  border-top: var(--border-window);
+  padding: 14px 18px 18px;
+}
+
+.db-bp-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.db-bp-row:last-child { margin-bottom: 0; }
+
+.db-bp-name {
+  font-family: var(--mono);
+  font-size: .66rem;
+  color: var(--txt2);
+  min-width: 100px;
+}
+
+.db-bp-track {
+  flex: 1;
+  height: 6px;
+  background: var(--s3);
+  overflow: hidden;
+}
+
+.db-bp-fill {
+  height: 100%;
+  position: relative;
+}
+
+.db-bp-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: rgba(255,255,255,.08);
+}
+
+.db-bp-fill.purple {
+  background: linear-gradient(90deg, var(--p3), var(--p1));
+  box-shadow: 0 0 8px var(--glow-s);
+}
+
+.db-bp-fill.blue {
+  background: linear-gradient(90deg, #1d4ed8, var(--blue));
+  box-shadow: 0 0 8px rgba(96,165,250,.3);
+}
+
+.db-bp-fill.gold {
+  background: linear-gradient(90deg, #92620a, var(--gold));
+  box-shadow: 0 0 8px rgba(251,191,36,.3);
+}
+
+.db-bp-val {
+  font-family: var(--mono);
+  font-size: .66rem;
+  font-weight: 700;
+  color: var(--p1);
+  min-width: 32px;
+  text-align: right;
+}
+
+.db-bp-val.blue { color: var(--blue); }
+.db-bp-val.gold { color: var(--gold); }
+
+/* Float badge */
+.float-acc {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  background: var(--s0);
+  border: var(--border-window);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--txt2);
+  box-shadow: var(--shadow);
+  z-index: 2;
+  animation: floatH 6s ease-in-out infinite;
+}
+
+.float-acc::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--p1), transparent);
+}
+
+@keyframes floatH {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.float-acc .dot {
+  width: 7px;
+  height: 7px;
+  background: var(--ok);
+  box-shadow: 0 0 7px var(--ok);
+}
+
+/* ══════════════════════════════════════════
+   SECTIONS
+   ══════════════════════════════════════════ */
+.section {
+  padding: 88px 0;
+  position: relative;
+}
+
+.section-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--b1), transparent);
+  margin: 0;
+}
+
+.section-header {
+  margin-bottom: 52px;
+}
+
+.section-header .badge {
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: var(--sans);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  margin-bottom: 12px;
+  line-height: 1.12;
+}
+
+.section-title em {
+  font-style: normal;
+  color: var(--p1);
+}
+
+.section-desc {
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.75;
+  max-width: 520px;
+}
+
+.section-header.center {
+  text-align: center;
+}
+
+.section-header.center .section-desc {
+  margin: 0 auto;
+}
+
+/* ══════════════════════════════════════════
+   GRIDS
+   ══════════════════════════════════════════ */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  background: var(--b0);
+  border: var(--border-window);
+  box-shadow: var(--shadow);
+}
+
+/* ══════════════════════════════════════════
+   CARD BASE
+   ══════════════════════════════════════════ */
+.card {
+  background: var(--s0);
+  border: var(--border-window);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--p0), var(--p1));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+}
+
+.card:hover::before { transform: scaleX(1); }
+.card:hover { border-color: var(--b1); }
+
+.card-title {
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--txt);
+  margin-bottom: 6px;
+  padding: 28px 28px 0;
+}
+
+.card-sub {
+  font-size: .8rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  padding: 0 28px;
+}
+
+/* ══════════════════════════════════════════
+   INPUTS
+   ══════════════════════════════════════════ */
+.input-group {
+  margin-bottom: 18px;
+  padding: 0 28px;
+}
+
+.input-group label {
+  display: block;
+  font-family: var(--mono);
+  font-size: .6rem;
+  color: var(--muted);
+  margin-bottom: 7px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.budget-input {
+  width: 100%;
+  background: var(--s1);
+  border: var(--border-window);
+  padding: 10px 14px;
+  color: var(--txt);
+  font-family: var(--mono);
+  font-size: .88rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+.budget-input:focus {
+  border-color: var(--p1);
+  box-shadow: 0 0 0 3px var(--faint);
+}
+
+.budget-input::placeholder {
+  color: var(--dim2);
+}
+
+.input-hint {
+  font-family: var(--mono);
+  font-size: .62rem;
+  color: var(--dim);
+  margin-top: 5px;
+}
+
+/* ══════════════════════════════════════════
+   RESULT PANEL
+   ══════════════════════════════════════════ */
+.result-panel {
+  background: var(--s1);
+  border: var(--border-window);
+  margin: 0 28px 18px;
+}
+
+.rp-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: var(--border-window);
+  font-size: .84rem;
+}
+
+.rp-row:last-child { border: none; }
+
+.rp-lbl { color: var(--muted); }
+.rp-val {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: .92rem;
+}
+
+.rp-val.green { color: var(--ok); }
+.rp-val.gold { color: var(--gold); }
+.rp-val.red { color: var(--red); }
+.rp-val.blue { color: var(--blue); }
+
+.result-main {
+  background: var(--faint);
+  border: var(--border-window);
+  margin: 14px 28px 0;
+  padding: 16px;
+  text-align: center;
+}
+
+.result-main-lbl {
+  font-family: var(--mono);
+  font-size: .64rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.result-main-val {
+  font-family: var(--mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--p1);
+}
+
+.result-main.warn {
+  background: var(--red-g);
+  border-color: rgba(248,113,113,.25);
+}
+
+.result-main.warn .result-main-val { color: var(--red); }
+
+/* ══════════════════════════════════════════
+   CALLOUT
+   ══════════════════════════════════════════ */
+.callout {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--faint);
+  border: var(--border-window);
+  padding: 14px 16px;
+  font-size: .8rem;
+  color: var(--txt2);
+  line-height: 1.6;
+  margin: 14px 28px 0;
+}
+
+.callout .ico {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.callout.warn {
+  background: var(--gold-g);
+  border-color: rgba(251,191,36,.25);
+}
+
+.callout.danger {
+  background: var(--red-g);
+  border-color: rgba(248,113,113,.25);
+}
+
+.callout.info {
+  background: var(--blue-g);
+  border-color: rgba(96,165,250,.25);
+}
+
+/* ══════════════════════════════════════════
+   HORIZONTAL BARS
+   ══════════════════════════════════════════ */
+.h-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 28px 28px;
+}
+
+.h-bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.h-bar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.h-bar-name {
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--txt2);
+}
+
+.h-bar-pct {
+  font-family: var(--mono);
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--p1);
+}
+
+.h-bar-track {
+  height: 8px;
+  background: var(--s3);
+  overflow: hidden;
+}
+
+.h-bar-fill {
+  height: 100%;
+  width: 0;
+  transition: width 1.4s cubic-bezier(.22,1,.36,1);
+  position: relative;
+}
+
+.h-bar-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: inherit;
+  filter: brightness(1.4);
+  box-shadow: 0 0 8px currentColor;
+}
+
+.hb-purple { background: linear-gradient(90deg, var(--p3), var(--p1)); box-shadow: 0 0 8px var(--glow-s); }
+.hb-gold { background: linear-gradient(90deg, #92620a, var(--gold)); box-shadow: 0 0 8px rgba(251,191,36,.3); }
+.hb-red { background: linear-gradient(90deg, #b91c1c, var(--red)); box-shadow: 0 0 8px rgba(248,113,113,.3); }
+.hb-blue { background: linear-gradient(90deg, #1d4ed8, var(--blue)); box-shadow: 0 0 8px rgba(96,165,250,.3); }
+.hb-orange { background: linear-gradient(90deg, #c2410c, var(--orange)); }
+
+/* ══════════════════════════════════════════
+   DONUT CHART
+   ══════════════════════════════════════════ */
+.mini-donut-wrap {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px;
+  background: var(--s1);
+  border: var(--border-window);
+  margin: 0 28px 0;
+}
+
+.mini-donut {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+}
+
+.mini-donut svg { transform: rotate(-90deg); }
+
+.mini-donut-pct {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  pointer-events: none;
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--txt);
+}
+
+.mini-donut-title {
+  font-family: var(--sans);
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--txt);
+  margin-bottom: 4px;
+}
+
+.mini-donut-sub {
+  font-size: .72rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ══════════════════════════════════════════
+   STEPS
+   ══════════════════════════════════════════ */
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.steps-list::before {
+  content: '';
+  position: absolute;
+  left: 23px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--p), rgba(147,51,234,.04));
+  z-index: 0;
+}
+
+.step-row {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 18px;
+  padding-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.step-row:last-child { padding-bottom: 0; }
+
+.step-num {
+  width: 48px;
+  height: 48px;
+  background: var(--faint);
+  border: var(--border-window);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--p1);
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.step-body { padding-top: 10px; }
+
+.step-title {
+  font-family: var(--sans);
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--txt);
+  margin-bottom: 5px;
+}
+
+.step-text {
+  font-size: .82rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* ══════════════════════════════════════════
+   TABS — Tiled
+   ══════════════════════════════════════════ */
+.tabs-bar {
+  display: flex;
+  gap: var(--gap);
+  background: var(--b0);
+  border: var(--border-window);
+  margin-bottom: var(--gap);
+  padding: var(--gap);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 8px;
+  font-family: var(--mono);
+  font-size: .62rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: var(--s0);
+  color: var(--muted);
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.tab-btn:hover {
+  color: var(--txt2);
+  background: var(--s1);
+}
+
+.tab-btn.active {
+  color: var(--p2);
+  background: var(--faint);
+  box-shadow: inset 0 0 12px var(--faint);
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fadeIn .4s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ══════════════════════════════════════════
+   TRACKER
+   ══════════════════════════════════════════ */
+.tracker-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 0 28px 28px;
+}
+
+.tracker-list::-webkit-scrollbar { width: 3px; }
+.tracker-list::-webkit-scrollbar-thumb { background: var(--b1); }
+
+.tracker-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--s0);
+  border: var(--border-window);
+  padding: 10px 12px;
+  transition: var(--transition);
+}
+
+.tracker-item:hover {
+  border-color: var(--b1);
+  background: var(--s1);
+}
+
+.tracker-item-ico {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  background: var(--faint);
+  border: var(--border-window);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .85rem;
+}
+
+.tracker-item-name {
+  flex: 1;
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--txt2);
+}
+
+.tracker-item-amount {
+  font-family: var(--mono);
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--txt);
+}
+
+.tracker-item-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dim);
+  font-size: .9rem;
+  transition: color .2s;
+  padding: 4px;
+}
+
+.tracker-item-delete:hover { color: var(--red); }
+
+/* ══════════════════════════════════════════
+   BUDGET DONUT
+   ══════════════════════════════════════════ */
+.budget-donut-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 28px;
+}
+
+.budget-donut-wrap {
+  position: relative;
+  width: 160px;
+  height: 160px;
+}
+
+.budget-donut-wrap svg { transform: rotate(-90deg); }
+
+.budget-donut-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+}
+
+.budget-donut-num {
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--txt);
+  display: block;
+}
+
+.budget-donut-sub {
+  font-family: var(--mono);
+  font-size: .66rem;
+  color: var(--dim);
+}
+
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 28px 0;
+}
+
+.dl-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .82rem;
+}
+
+.dl-dot {
+  width: 10px;
+  height: 10px;
+  min-width: 10px;
+  flex-shrink: 0;
+}
+
+.dl-lbl { color: var(--muted); flex: 1; }
+.dl-val { font-family: var(--mono); font-weight: 700; color: var(--txt); }
+
+/* ══════════════════════════════════════════
+   PROGRESS METERS
+   ══════════════════════════════════════════ */
+.progress-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 28px 28px;
+}
+
+.progress-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .82rem;
+}
+
+.progress-name {
+  font-weight: 500;
+  color: var(--txt2);
+}
+
+.progress-val {
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--txt);
+}
+
+.progress-track {
+  height: 8px;
+  background: var(--s3);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width 1.4s cubic-bezier(.22,1,.36,1);
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: inherit;
+  filter: brightness(1.4);
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* ══════════════════════════════════════════
+   ALERT BOX
+   ══════════════════════════════════════════ */
+.alert-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--red-g);
+  border: 1px solid rgba(248,113,113,.25);
+  margin: 20px 28px 0;
+  padding: 16px;
+}
+
+.alert-ico {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.alert-title {
+  font-family: var(--sans);
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--red);
+  margin-bottom: 4px;
+}
+
+.alert-text {
+  font-size: .82rem;
+  color: var(--txt2);
+  line-height: 1.5;
+}
+
+/* ══════════════════════════════════════════
+   SUMMARY CARD
+   ══════════════════════════════════════════ */
+.summary-card {
+  background: linear-gradient(145deg, var(--s0), var(--s1));
+  border: var(--border-window);
+  padding: 36px;
+  margin: 0 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--p1), transparent);
+}
+
+.summary-glow {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(147,51,234,.08), transparent 70%);
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════
+   CTA
+   ══════════════════════════════════════════ */
+.cta-band {
+  background: linear-gradient(145deg, var(--s0), var(--s1));
+  border: var(--border-window);
+  padding: 56px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.cta-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(147,51,234,.09) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.cta-band::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--p1), var(--cy), transparent);
+  box-shadow: 0 0 20px var(--glow-s);
+}
+
+.cta-title {
+  font-family: var(--sans);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -.025em;
+  margin-bottom: 12px;
+  line-height: 1.1;
+  position: relative;
+}
+
+.cta-title em {
+  font-style: normal;
+  color: var(--p1);
+  text-shadow: 0 0 30px var(--glow-s);
+}
+
+.cta-desc {
+  color: var(--muted);
+  font-size: .9rem;
+  max-width: 440px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+  position: relative;
+}
+
+.cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 28px;
+  height: 34px;
+  font-family: var(--mono);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  background: linear-gradient(135deg, var(--p0), var(--p));
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid var(--p1);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 0 24px var(--glow-s);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--p), var(--p1));
+  box-shadow: 0 0 36px var(--glow);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 22px;
+  height: 34px;
+  font-family: var(--mono);
+  font-size: .82rem;
+  font-weight: 600;
+  background: transparent;
+  color: var(--p1);
+  border: var(--border-window);
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-outline:hover {
+  background: var(--faint);
+  border-color: var(--p);
+}
+
+.btn-danger {
+  background: var(--red);
+  color: #fff;
+  padding: 0 18px;
+  height: 30px;
+  font-family: var(--mono);
+  font-size: .72rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-danger:hover { opacity: .85; }
+
+.btn-small {
+  background: linear-gradient(135deg, var(--p0), var(--p));
+  color: #fff;
+  padding: 0 18px;
+  height: 30px;
+  font-family: var(--mono);
+  font-size: .72rem;
+  font-weight: 700;
+  border: 1px solid var(--p1);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-small:hover {
+  box-shadow: 0 0 16px var(--glow-s);
+}
+
+/* ══════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════ */
+footer {
+  border-top: var(--border-window);
+  padding: 44px 0 28px;
+  position: relative;
+  z-index: 1;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--b1), transparent);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.copy {
+  font-family: var(--mono);
+  font-size: .6rem;
+  color: var(--dim);
+  letter-spacing: .04em;
+}
+
+.sena-badge {
+  font-family: var(--mono);
+  font-size: .6rem;
+  color: var(--p1);
+  background: var(--faint);
+  border: var(--border-window);
+  padding: 4px 14px;
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .dashboard-preview { display: none; }
+  .two-col { grid-template-columns: 1fr; }
+  .three-col { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav-links,
+  .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .two-col { grid-template-columns: 1fr; }
+  .three-col { grid-template-columns: 1fr; }
+  .section { padding: 64px 0; }
+  .cta-band { padding: 36px 22px; }
+  .cta-actions { flex-direction: column; align-items: stretch; }
+}
+
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .cta-actions .btn-primary,
+  .cta-actions .btn-outline { justify-content: center; }
+}
+
+/* ══════════════════════════════════════════
+   ACCESSIBILITY
+   ══════════════════════════════════════════ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 1px solid var(--p1);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <!-- Cambia index.html por url_for('inicio') o como se llame tu función principal -->
+    <a href="{{ url_for('inicio') }}" class="logo">
+      <div class="logo-mark">F</div>
+      <span class="logo-text">Fin<span>Edge</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="{{ url_for('inicio') }}">Inicio</a></li>
+      <li><a href="{{ url_for('presupuesto') }}" class="active">Presupuesto</a></li>
+      <li><a href="{{ url_for('estadisticas') }}">Estadísticas</a></li>
+      <li><a href="{{ url_for('finn') }}">Finn</a></li>
+    </ul>
+    <a href="{{ url_for('inicio') }}#chat" class="btn-nav">Probar Finn IA →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="reveal">
+        <div class="badge"><span class="pulse"></span> Herramienta gratuita · SENA Grupo Finedge</div>
+        <p style="margin-bottom:10px;"></p>
+        <h1 class="hero-title">Tu dinero bajo<br><em>control total</em></h1>
+        <p class="hero-desc">El módulo de presupuesto más completo para emprendedores jóvenes en Colombia. Calcula, planifica y toma decisiones financieras inteligentes desde hoy. Todo en tiempo real, sin registros, sin costo.</p>
+        
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="{{ url_for('inicio') }}#simuladores" class="btn-primary">Ir a los simuladores →</a>
+          
+          <a href="{{ url_for('estadisticas') }}" class="btn-outline">Ver estadísticas</a>
+        </div>
+      </div>
+      
+      <div class="reveal rev-2" style="position:relative;">
+        <div class="float-acc"><span class="dot"></span>Calculando en tiempo real</div>
+        <div class="dashboard-preview">
+          <div class="db-header"><div class="db-title">📊 Resumen financiero</div><div class="db-dot"></div></div>
+          <div class="db-mini-cards">
+            <div class="db-mc"><div class="db-mc-val">$1.200.000</div><div class="db-mc-lbl">Ingresos estimados</div></div>
+            <div class="db-mc"><div class="db-mc-val" style="color:var(--green);">$240.000</div><div class="db-mc-lbl">Ahorro generado</div></div>
+            <div class="db-mc"><div class="db-mc-val" style="color:var(--gold);">$360.000</div><div class="db-mc-lbl">Gastos controlados</div></div>
+            <div class="db-mc"><div class="db-mc-val" style="color:var(--blue);">62</div><div class="db-mc-lbl">Unidades a vender</div></div>
+          </div>
+          <div class="db-bar-preview">
+            <div class="db-bp-row"><span class="db-bp-name">Operación (50%)</span><div class="db-bp-track"><div class="db-bp-fill" style="width:50%"></div></div><span class="db-bp-val">50%</span></div>
+            <div class="db-bp-row"><span class="db-bp-name">Crecimiento (30%)</span><div class="db-bp-track"><div class="db-bp-fill" style="width:30%;background:linear-gradient(90deg,#1d4ed8,#3b82f6)"></div></div><span class="db-bp-val" style="color:var(--blue);">30%</span></div>
+            <div class="db-bp-row"><span class="db-bp-name">Ahorro (20%)</span><div class="db-bp-track"><div class="db-bp-fill" style="width:20%;background:linear-gradient(90deg,#b8860b,#f0b429)"></div></div><span class="db-bp-val" style="color:var(--gold);">20%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SIMULADORES SECTION -->
+<section class="section" id="simuladores">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="badge"><span class="pulse"></span> 5 herramientas interactivas</div>
+      <h2 class="section-title">Simuladores <em>financieros</em><br>para tu negocio</h2>
+      <p class="section-desc">Cada herramienta funciona en tiempo real. Ingresa tus datos y ve los resultados al instante. No necesitas ser contador — solo necesitas querer aprender.</p>
+    </div>
+
+    <div class="tabs-bar">
+      <button class="tab-btn active" onclick="showTab('balance',this)">💼 Balance 50/30/20</button>
+      <button class="tab-btn" onclick="showTab('punto',this)">🎯 Punto de Equilibrio</button>
+      <button class="tab-btn" onclick="showTab('hormiga',this)">🐜 Gasto Hormiga</button>
+      <button class="tab-btn" onclick="showTab('tracker',this)">📋 Registro de Gastos</button>
+      <button class="tab-btn" onclick="showTab('credito',this)">🏦 Simulador Crédito</button>
+    </div>
+
+    <!-- TAB 1: BALANCE 50/30/20 -->
+    <div id="tab-balance" class="tab-panel active">
+      <div class="two-col">
+        <div class="card reveal">
+          <div class="card-title">💼 Regla de Balance Operativo 50/30/20</div>
+          <div class="card-sub">La fórmula financiera más usada por emprendedores exitosos para controlar su negocio sin volverse loco con los números.</div>
+
+          <div class="input-group">
+            <label>💰 Ingresos mensuales totales del negocio ($)</label>
+            <input type="number" id="ingresoBalance" class="budget-input" placeholder="Ej: 1.500.000" oninput="calcBalance()">
+            <div class="input-hint">Suma todas tus ventas del mes, incluyendo domicilios y ventas por redes.</div>
+          </div>
+          <div class="input-group">
+            <label>🏠 Gastos fijos ya comprometidos ($)</label>
+            <input type="number" id="gastosFijos" class="budget-input" placeholder="Ej: 300.000 (arriendo, servicios)" oninput="calcBalance()">
+            <div class="input-hint">Arriendo, servicios públicos, internet, cuotas fijas.</div>
+          </div>
+
+          <div class="result-panel">
+            <div class="rp-row"><span class="rp-lbl">Insumos y operación (50%)</span><span class="rp-val green" id="resOp">$0</span></div>
+            <div class="rp-row"><span class="rp-lbl">Gastos variables / emergencias (30%)</span><span class="rp-val gold" id="resVar">$0</span></div>
+            <div class="rp-row"><span class="rp-lbl">Ahorro neto obligatorio (20%)</span><span class="rp-val blue" id="resAhorro">$0</span></div>
+            <div class="rp-row"><span class="rp-lbl">Gastos fijos comprometidos</span><span class="rp-val red" id="resFijos">$0</span></div>
+          </div>
+          <div class="result-main" id="resultMain">
+            <div class="result-main-lbl">Tu margen real disponible</div>
+            <div class="result-main-val" id="resFinal">Ingresa tus datos →</div>
+          </div>
+
+          <div class="callout" style="margin-top:16px;">
+            <span class="ico">💡</span>
+            <div>La regla 50/30/20 es tu escudo. <strong>50%</strong> para lo que necesitas para operar, <strong>30%</strong> para lo flexible, <strong>20%</strong> para el ahorro que nadie puede quitarte. ¡Aplícala desde el primer peso!</div>
+          </div>
+        </div>
+
+        <div class="card reveal rev-1">
+          <div class="card-title">📊 Distribución visual de tus ingresos</div>
+          <div class="card-sub">Así se ve tu dinero distribuido. El verde es lo que construye tu futuro.</div>
+
+          <div class="budget-donut-container">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:20px;">
+              <div class="budget-donut-wrap">
+                <svg width="160" height="160" viewBox="0 0 160 160">
+                  <circle cx="80" cy="80" r="60" fill="none" stroke="rgba(147,51,234,.08)" stroke-width="18"/>
+                  <circle cx="80" cy="80" r="60" fill="none" stroke="url(#dg1)" stroke-width="18"
+                    stroke-dasharray="376.99" stroke-dashoffset="376.99" stroke-linecap="round" id="donut50"/>
+                  <circle cx="80" cy="80" r="60" fill="none" stroke="url(#dg2)" stroke-width="18"
+                    stroke-dasharray="376.99" stroke-dashoffset="376.99" stroke-linecap="round" id="donut30" style="opacity:.85"/>
+                  <circle cx="80" cy="80" r="60" fill="none" stroke="url(#dg3)" stroke-width="18"
+                    stroke-dasharray="376.99" stroke-dashoffset="376.99" stroke-linecap="round" id="donut20" style="opacity:.7"/>
+                  <defs>
+                    <linearGradient id="dg1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#6b21a8"/><stop offset="100%" stop-color="#9333ea"/></linearGradient>
+                    <linearGradient id="dg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#1d4ed8"/><stop offset="100%" stop-color="#3b82f6"/></linearGradient>
+                    <linearGradient id="dg3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#b8860b"/><stop offset="100%" stop-color="#f0b429"/></linearGradient>
+                  </defs>
+                </svg>
+                <div class="budget-donut-label">
+                  <span class="budget-donut-num" id="donutCenter">100%</span>
+                  <span class="budget-donut-sub">Tu dinero</span>
+                </div>
+              </div>
+              <div class="donut-legend" style="width:100%;max-width:260px;">
+                <div class="dl-row"><span class="dl-dot" style="background:var(--green)"></span><span class="dl-lbl">Operación (50%)</span><span class="dl-val green" id="legOp">$0</span></div>
+                <div class="dl-row"><span class="dl-dot" style="background:var(--blue)"></span><span class="dl-lbl">Variable (30%)</span><span class="dl-val blue" id="legVar">$0</span></div>
+                <div class="dl-row"><span class="dl-dot" style="background:var(--gold)"></span><span class="dl-lbl">Ahorro (20%)</span><span class="dl-val gold" id="legAhorro">$0</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;">
+            <div class="card-title" style="font-size:.92rem;margin-bottom:12px;">📈 Proyección de ahorro con esta regla</div>
+            <div class="h-bars" id="proyeccionAhorro"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card reveal" style="margin-top:24px;">
+        <div class="card-title">🗺️ ¿Por qué separar el dinero del negocio del personal?</div>
+        <div class="card-sub">El error #1 de emprendedores jóvenes: mezclar las dos contabilidades. Así termina generalmente:</div>
+        <div class="three-col">
+          <div style="padding:20px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;text-align:center;">
+            <div style="font-size:1.8rem;margin-bottom:10px;">😰</div>
+            <div style="font-family:var(--font-display);font-size:.95rem;font-weight:600;margin-bottom:8px;">Mes 1-3</div>
+            <div style="font-size:.82rem;color:var(--gray);line-height:1.5;">Todo parece bien. El negocio vende y hay dinero en la bolsa. Se mezcla todo y se gasta sin control.</div>
+          </div>
+          <div style="padding:20px;background:rgba(240,180,41,.07);border:1px solid rgba(240,180,41,.2);border-radius:12px;text-align:center;">
+            <div style="font-size:1.8rem;margin-bottom:10px;">😬</div>
+            <div style="font-family:var(--font-display);font-size:.95rem;font-weight:600;margin-bottom:8px;color:var(--gold);">Mes 4-8</div>
+            <div style="font-size:.82rem;color:var(--gray);line-height:1.5;">El negocio necesita insumos pero no hay plata. Se acude al crédito informal. Empieza la trampa.</div>
+          </div>
+          <div style="padding:20px;background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);border-radius:12px;text-align:center;">
+            <div style="font-size:1.8rem;margin-bottom:10px;">😱</div>
+            <div style="font-family:var(--font-display);font-size:.95rem;font-weight:600;margin-bottom:8px;color:var(--red);">Mes 9-12</div>
+            <div style="font-size:.82rem;color:var(--gray);line-height:1.5;">Las deudas superan las ventas. El negocio cierra. Esto le pasa al 58% sin educación financiera.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: PUNTO DE EQUILIBRIO -->
+    <div id="tab-punto" class="tab-panel">
+      <div class="two-col">
+        <div class="card reveal">
+          <div class="card-title">🎯 Calculadora de Punto de Equilibrio</div>
+          <div class="card-sub">Descubre exactamente cuántas unidades debes vender para no perder ni ganar — y cuánto para que el negocio sea rentable de verdad.</div>
+
+          <div class="input-group">
+            <label>🏠 Gastos fijos mensuales ($) — No cambian aunque no vendas nada</label>
+            <input type="number" id="peGastosFijos" class="budget-input" placeholder="Ej: 450.000" oninput="calcPunto()">
+            <div class="input-hint">Arriendo, nómina fija, servicios, suscripciones.</div>
+          </div>
+          <div class="input-group">
+            <label>💵 Precio de venta por unidad ($)</label>
+            <input type="number" id="pePrecio" class="budget-input" placeholder="Ej: 12.000" oninput="calcPunto()">
+            <div class="input-hint">¿Cuánto le cobras a tu cliente por cada producto o servicio?</div>
+          </div>
+          <div class="input-group">
+            <label>🧾 Costo variable por unidad ($) — Lo que gastas para producir UNA unidad</label>
+            <input type="number" id="peCosto" class="budget-input" placeholder="Ej: 5.000" oninput="calcPunto()">
+            <div class="input-hint">Ingredientes, empaque, transporte por unidad.</div>
+          </div>
+          <div class="input-group">
+            <label>🎯 Meta de ganancia mensual deseada ($)</label>
+            <input type="number" id="peMeta" class="budget-input" placeholder="Ej: 800.000" oninput="calcPunto()">
+            <div class="input-hint">¿Cuánto quieres ganar por mes con este negocio?</div>
+          </div>
+
+          <div class="result-panel">
+            <div class="rp-row"><span class="rp-lbl">Margen de contribución por unidad</span><span class="rp-val green" id="peMargen">$0</span></div>
+            <div class="rp-row"><span class="rp-lbl">Punto de equilibrio (no perder)</span><span class="rp-val gold" id="pePuntEq">0 unidades</span></div>
+            <div class="rp-row"><span class="rp-lbl">Ventas para tu meta de ganancia</span><span class="rp-val blue" id="peParaMeta">0 unidades</span></div>
+            <div class="rp-row"><span class="rp-lbl">Ingresos totales requeridos</span><span class="rp-val" id="peIngresoReq">$0</span></div>
+          </div>
+          <div class="result-main" id="peResultMain">
+            <div class="result-main-lbl">Unidades diarias necesarias</div>
+            <div class="result-main-val" id="peDiario">— / día</div>
+          </div>
+
+          <div class="callout" style="margin-top:16px;"><span class="ico">🎓</span>El punto de equilibrio es el mínimo de ventas para sobrevivir. Tu meta real siempre debe estar <strong>muy por encima</strong> de ese número.</div>
+        </div>
+
+        <div class="card reveal rev-1">
+          <div class="card-title">📊 Visualización de rentabilidad</div>
+          <div class="card-sub">Qué pasa en cada escenario de ventas</div>
+
+          <div style="padding:20px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;">
+            <canvas id="rentabilidadChart" height="200" style="width:100%;display:block;"></canvas>
+          </div>
+
+          <div class="card-title" style="font-size:.92rem;margin-bottom:16px;">💡 Escenarios de tu negocio</div>
+          <div class="progress-group" id="escenarios">
+            <div class="progress-item">
+              <div class="progress-header"><span class="progress-name">🔴 Zona de pérdida</span><span class="progress-val red">0 - PE unidades</span></div>
+              <div class="progress-track"><div class="progress-fill hb-red" id="esc1" style="width:30%;background:linear-gradient(90deg,#b91c1c,#ef4444)"></div></div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-header"><span class="progress-name">🟡 Zona de supervivencia</span><span class="progress-val gold">PE = Sin pérdida</span></div>
+              <div class="progress-track"><div class="progress-fill" id="esc2" style="width:60%;background:linear-gradient(90deg,#b8860b,#f0b429)"></div></div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-header"><span class="progress-name">🟢 Zona de ganancias</span><span class="progress-val green">PE + = Rentable</span></div>
+              <div class="progress-track"><div class="progress-fill" id="esc3" style="width:85%;background:linear-gradient(90deg,var(--green-3),var(--green))"></div></div>
+            </div>
+          </div>
+
+          <div class="callout info" style="margin-top:16px;"><span class="ico">📌</span>Si la cantidad diaria que necesitas vender te parece imposible, reconsidera el precio de venta o busca bajar los costos variables. Nunca recortes en calidad.</div>
+        </div>
+      </div>
+
+      <div class="card reveal" style="margin-top:24px;">
+        <div class="card-title">📋 Los 5 pasos para calcular si tu negocio es viable</div>
+        <div class="card-sub">Antes de invertir un peso, haz este ejercicio. Te puede ahorrar meses de frustración.</div>
+        <div class="steps-list">
+          <div class="step-row"><div class="step-num">01</div><div class="step-body"><div class="step-title">Calcula todos tus gastos fijos reales</div><div class="step-text">Incluye todo lo que debes pagar aunque no vendas nada: arriendo, servicios, internet, suscripciones, nómina fija. Sé honesto — sumar solo lo conveniente te jugará en contra.</div></div></div>
+          <div class="step-row"><div class="step-num">02</div><div class="step-body"><div class="step-title">Define tu precio con base en el costo, no en la intuición</div><div class="step-text">Costo de producción + margen de ganancia = precio de venta. El 60% de emprendedores pone el precio "a ojo" y descubre meses después que está vendiendo a pérdida.</div></div></div>
+          <div class="step-row"><div class="step-num">03</div><div class="step-body"><div class="step-title">Calcula tu punto de equilibrio con esta calculadora</div><div class="step-text">Úsala arriba. Si el resultado dice que debes vender 200 unidades diarias de algo que haces a mano, ese negocio tiene un problema estructural antes de empezar.</div></div></div>
+          <div class="step-row"><div class="step-num">04</div><div class="step-body"><div class="step-title">Compara con tu capacidad real de producción</div><div class="step-text">¿Puedes producir lo que necesitas? ¿Tienes el tiempo, el espacio y los insumos? Si hay una brecha, busca cómo cerrarla antes de abrir.</div></div></div>
+          <div class="step-row"><div class="step-num">05</div><div class="step-body"><div class="step-title">Monitorea cada semana, no cada año</div><div class="step-text">Los negocios que sobreviven revisan sus números semanalmente. Usa el rastreador de gastos de esta plataforma para no perder el control.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: GASTO HORMIGA -->
+    <div id="tab-hormiga" class="tab-panel">
+      <div class="two-col">
+        <div class="card reveal">
+          <div class="card-title">🐜 Detector de Gastos Hormiga</div>
+          <div class="card-sub">Los gastos hormiga son los que no ves venir. Pequeños, frecuentes y devastadores. Regístralos todos y mira la realidad.</div>
+
+          <div class="input-group">
+            <label>☕ Tinto, agua, gaseosa o snacks diarios ($)</label>
+            <input type="number" id="hTinto" class="budget-input" placeholder="Ej: 3.000" oninput="calcHormiga()">
+          </div>
+          <div class="input-group">
+            <label>🚌 Transporte extra o "antojitos" de movilidad ($)</label>
+            <input type="number" id="hTransporte" class="budget-input" placeholder="Ej: 5.000" oninput="calcHormiga()">
+          </div>
+          <div class="input-group">
+            <label>📱 Recargas, datos extra, suscripciones pequeñas ($)</label>
+            <input type="number" id="hCelular" class="budget-input" placeholder="Ej: 4.000" oninput="calcHormiga()">
+          </div>
+          <div class="input-group">
+            <label>🍟 Comidas extras fuera del plan (no del negocio) ($)</label>
+            <input type="number" id="hComida" class="budget-input" placeholder="Ej: 8.000" oninput="calcHormiga()">
+          </div>
+          <div class="input-group">
+            <label>🎮 Entretenimiento, juegos, sorpresas pequeñas ($)</label>
+            <input type="number" id="hEntrete" class="budget-input" placeholder="Ej: 5.000" oninput="calcHormiga()">
+          </div>
+          <div class="input-group">
+            <label>🛒 Otros gastos diarios que recuerdas ($)</label>
+            <input type="number" id="hOtros" class="budget-input" placeholder="Ej: 2.000" oninput="calcHormiga()">
+          </div>
+
+          <div class="result-panel">
+            <div class="rp-row"><span class="rp-lbl">Total gasto hormiga diario</span><span class="rp-val gold" id="hDiario">$0 / día</span></div>
+            <div class="rp-row"><span class="rp-lbl">Fuga silenciosa al mes</span><span class="rp-val red" id="hMes">$0 / mes</span></div>
+            <div class="rp-row"><span class="rp-lbl">Destrucción anual de capital</span><span class="rp-val red" id="hAnio">$0 / año</span></div>
+            <div class="rp-row"><span class="rp-lbl">En 5 años equivale a</span><span class="rp-val" id="hCinco">$0</span></div>
+          </div>
+          <div class="result-main warn" id="horResultMain">
+            <div class="result-main-lbl">Con ese dinero podrías tener</div>
+            <div class="result-main-val" id="hPotencial">Ingresa tus datos →</div>
+          </div>
+        </div>
+
+        <div class="card reveal rev-1">
+          <div class="card-title">📊 ¿A qué equivale tu gasto hormiga?</div>
+          <div class="card-sub">Cuando ves el impacto acumulado, cambia la perspectiva completamente.</div>
+
+          <div class="h-bars" id="hormigas-comparativa" style="margin-bottom:20px;"></div>
+
+          <div class="card-title" style="font-size:.92rem;margin-bottom:12px;">🎯 ¿Qué podrías lograr con ese dinero?</div>
+          <div id="horPotencial" style="display:flex;flex-direction:column;gap:10px;">
+            <div style="padding:14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;font-size:.84rem;color:var(--gray);">
+              Ingresa tus gastos diarios para ver el potencial...
+            </div>
+          </div>
+
+          <div class="callout warn" style="margin-top:16px;"><span class="ico">⚡</span>El gasto hormiga no es el problema. El problema es <strong>no saber cuánto es</strong>. Una vez lo ves en números, tu comportamiento cambia automáticamente. Ese es el poder del registro.</div>
+        </div>
+      </div>
+
+      <div class="card reveal" style="margin-top:24px;">
+        <div class="card-title">🛡️ Plan de control del gasto hormiga en 30 días</div>
+        <div class="card-sub">Un plan concreto y realista para recuperar ese dinero sin sentirte miserable</div>
+        <div class="three-col">
+          <div style="padding:20px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;">
+            <div style="font-size:1.5rem;margin-bottom:10px;">📸</div>
+            <div style="font-family:var(--font-display);font-size:.95rem;font-weight:600;margin-bottom:8px;color:var(--green);">Semana 1-2: Registra todo</div>
+            <div style="font-size:.82rem;color:var(--gray);line-height:1.5;">Sin juzgar ni cambiar nada todavía. Solo anota cada gasto en el día en que ocurre. Un cuaderno, un Excel o una nota en el celular sirven.</div>
+          </div>
+          <div style="padding:20px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;">
+            <div style="font-size:1.5rem;margin-bottom:10px;">✂️</div>
+            <div style="font-family:var(--font-display);font-size:.95rem;font-weight:600;margin-bottom:8px;color:var(--gold);">Semana 3: Elimina el 50%</div>
+            <div style="font-size:.82rem;color:var(--gray);line-height:1.5;">Identifica los 2 o 3 gastos más frecuentes y reduce a la mitad. No elimines todo de golpe — el cambio brusco no es sostenible.</div>
+          </div>
+          <div style="padding:20px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;">
+            <div style="font-size:1.5rem;margin-bottom:10px;">🏦</div>
+            <div style="font-family:var(--font-display);font-size:.95rem;font-weight:600;margin-bottom:8px;color:var(--blue);">Semana 4: Mueve el ahorro</div>
+            <div style="font-size:.82rem;color:var(--gray);line-height:1.5;">Lo que dejaste de gastar, muévelo de inmediato a una cuenta de ahorros o fondo de emergencia. Si no lo haces el mismo día, desaparece.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: RASTREADOR -->
+    <div id="tab-tracker" class="tab-panel">
+      <div class="two-col">
+        <div class="card reveal">
+          <div class="card-title">📋 Registro de Gastos del Negocio</div>
+          <div class="card-sub">Añade cada gasto en tiempo real. El control comienza con el registro.</div>
+
+          <div class="input-group">
+            <label>📝 Descripción del gasto</label>
+            <input type="text" id="tDesc" class="budget-input" placeholder="Ej: Compra de harina, pago de arriendo">
+          </div>
+          <div class="input-group">
+            <label>💰 Monto ($)</label>
+            <input type="number" id="tMonto" class="budget-input" placeholder="Ej: 45.000">
+          </div>
+          <div class="input-group">
+            <label>📂 Categoría</label>
+            <select id="tCat" class="budget-input">
+              <option value="operacion">⚙️ Operación (materia prima, insumos)</option>
+              <option value="fijo">🏠 Gasto fijo (arriendo, servicios)</option>
+              <option value="marketing">📣 Marketing y ventas</option>
+              <option value="personal">👤 Gasto personal</option>
+              <option value="ahorro">🏦 Ahorro o inversión</option>
+              <option value="otro">📦 Otro</option>
+            </select>
+          </div>
+          <button class="btn-small" onclick="addGasto()" style="width:100%;justify-content:center;padding:13px;">+ Registrar gasto</button>
+
+          <div style="margin-top:20px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+              <div style="font-family:var(--font-display);font-size:.9rem;font-weight:600;">Gastos registrados</div>
+              <button class="btn-danger" onclick="clearGastos()" style="font-size:.75rem;padding:6px 12px;">Limpiar todo</button>
+            </div>
+            <div class="tracker-list" id="trackerList">
+              <div style="text-align:center;padding:24px;color:var(--gray);font-size:.84rem;">
+                Aún no hay gastos registrados.<br>¡Empieza ahora!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal rev-1">
+          <div class="card-title">📊 Resumen de tu mes</div>
+          <div class="card-sub">Distribución automática de todo lo que has registrado.</div>
+
+          <div class="result-panel" style="margin-bottom:16px;">
+            <div class="rp-row"><span class="rp-lbl">Total registrado este mes</span><span class="rp-val" id="totalReg">$0</span></div>
+            <div class="rp-row"><span class="rp-lbl">⚙️ Operación</span><span class="rp-val green" id="totalOp">$0</span></div>
+            <div class="rp-row"><span class="rp-lbl">🏠 Gastos fijos</span><span class="rp-val gold" id="totalFijo">$0</span></div>
+            <div class="rp-row"><span class="rp-lbl">📣 Marketing</span><span class="rp-val blue" id="totalMkt">$0</span></div>
+            <div class="rp-row"><span class="rp-lbl">👤 Personal</span><span class="rp-val red" id="totalPers">$0</span></div>
+            <div class="rp-row"><span class="rp-lbl">🏦 Ahorro</span><span class="rp-val green" id="totalAho">$0</span></div>
+          </div>
+
+          <div class="card-title" style="font-size:.88rem;margin-bottom:12px;">📈 Distribución porcentual</div>
+          <div class="h-bars" id="trackerBars"></div>
+
+          <div class="callout" style="margin-top:16px;"><span class="ico">🎯</span>Si el gasto personal supera el 30% del total, hay un problema de separación de finanzas. Si operación supera el 60%, revisa tus costos de producción.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: SIMULADOR CRÉDITO -->
+    <div id="tab-credito" class="tab-panel">
+      <div class="two-col">
+        <div class="card reveal">
+          <div class="card-title">🏦 Simulador de Crédito para el Negocio</div>
+          <div class="card-sub">Antes de pedir un crédito, simula exactamente cuánto vas a pagar. Así no hay sorpresas.</div>
+
+          <div class="input-group">
+            <label>💰 Monto que necesitas pedir ($)</label>
+            <input type="number" id="crMonto" class="budget-input" placeholder="Ej: 2.000.000" oninput="calcCredito()">
+            <div class="input-hint">¿Para qué lo vas a usar? (materia prima, equipo, capital de trabajo)</div>
+          </div>
+          <div class="input-group">
+            <label>📅 Plazo en meses para pagar</label>
+            <input type="number" id="crPlazo" class="budget-input" placeholder="Ej: 12" oninput="calcCredito()">
+            <div class="input-hint">Más plazo = cuota más baja pero más intereses en total.</div>
+          </div>
+          <div class="input-group">
+            <label>📊 Tipo de crédito</label>
+            <select id="crTipo" class="budget-input" onchange="actualizarTasa()">
+              <option value="18">🏦 Microcrédito bancario (18% EA)</option>
+              <option value="14">🌟 Bancóldex Jóvenes (14% EA)</option>
+              <option value="28">💳 Crédito de consumo (28% EA)</option>
+              <option value="32">🟡 Tarjeta de crédito (32% EA)</option>
+              <option value="100">🔴 Informal / vecino (100% EA)</option>
+              <option value="240">⛔ Gota a gota ilegal (240% EA)</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>📈 Tasa efectiva anual (%)</label>
+            <input type="number" id="crTasa" class="budget-input" value="18" step="0.5" oninput="calcCredito()">
+            <div class="input-hint">Se actualiza automáticamente según el tipo. Puedes modificarla.</div>
+          </div>
+
+          <div class="result-panel">
+            <div class="rp-row"><span class="rp-lbl">Tasa mensual equivalente</span><span class="rp-val" id="crTasaMes">0%</span></div>
+            <div class="rp-row"><span class="rp-lbl">Cuota mensual a pagar</span><span class="rp-val green" id="crCuota">$0</span></div>
+            <div class="rp-row"><span class="rp-lbl">Total a pagar (capital + intereses)</span><span class="rp-val gold" id="crTotal">$0</span></div>
+            <div class="rp-row"><span class="rp-lbl">Total solo en intereses</span><span class="rp-val red" id="crIntereses">$0</span></div>
+          </div>
+          <div class="result-main" id="crResultMain">
+            <div class="result-main-lbl">Costo real del crédito</div>
+            <div class="result-main-val" id="crCostoPct">— %</div>
+          </div>
+
+          <div class="alert-box" id="crAlerta" style="display:none;margin-top:14px;">
+            <div class="alert-ico">🚨</div>
+            <div>
+              <div class="alert-title">¡Advertencia! Crédito de alto riesgo</div>
+              <div class="alert-text" id="crAlertaText">Este tipo de crédito puede destruir tu negocio.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal rev-1">
+          <div class="card-title">📊 Comparativa de créditos disponibles</div>
+          <div class="card-sub">Si pides $2.000.000 a 12 meses, esto es lo que pagas con cada opción</div>
+
+          <div class="h-bars" id="crCompara" style="margin-bottom:20px;"></div>
+
+          <div class="card-title" style="font-size:.88rem;margin-bottom:12px;">✅ ¿Cuándo SÍ tiene sentido pedir un crédito?</div>
+          <div class="steps-list">
+            <div class="step-row" style="padding-bottom:14px;">
+              <div class="step-num" style="width:36px;height:36px;font-size:.82rem;">✓</div>
+              <div class="step-body"><div class="step-title" style="font-size:.88rem;">Cuando lo vas a usar para generar más de lo que pagas</div><div class="step-text">Si el crédito te cuesta $200.000/mes en intereses pero genera $600.000 extra, tiene sentido matemático.</div></div>
+            </div>
+            <div class="step-row" style="padding-bottom:14px;">
+              <div class="step-num" style="width:36px;height:36px;font-size:.82rem;">✓</div>
+              <div class="step-body"><div class="step-title" style="font-size:.88rem;">Cuando tienes un plan claro de pago</div><div class="step-text">Saber exactamente de dónde saldrá el dinero para cada cuota, antes de firmarlo.</div></div>
+            </div>
+            <div class="step-row" style="padding-bottom:0;">
+              <div class="step-num" style="width:36px;height:36px;font-size:.82rem;">✗</div>
+              <div class="step-body"><div class="step-title" style="font-size:.88rem;color:var(--red);">Nunca para cubrir gastos personales con crédito de negocio</div><div class="step-text">El crédito para el negocio debe quedarse en el negocio. Mezclarlos es el error más caro que existe.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- RESUMEN FINAL -->
+<section class="section" id="resumen">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="badge"><span class="pulse"></span> Tu kit de supervivencia financiera</div>
+      <h2 class="section-title">Las 3 reglas de oro<br>para <em>emprendedores SENA</em></h2>
+    </div>
+    <div class="three-col">
+      <div class="summary-card reveal">
+        <div class="summary-glow"></div>
+        <div style="font-size:2.5rem;margin-bottom:16px;">💼</div>
+        <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:10px;">Separa siempre</div>
+        <div style="font-size:.88rem;color:var(--white-2);line-height:1.6;margin-bottom:16px;">La cuenta del negocio y la personal jamás deben mezclarse. Usa la regla 50/30/20 para distribuir cada peso que entra.</div>
+        <div style="font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--green);">50/30/20</div>
+        <div style="font-size:.75rem;color:var(--gray);">Operación / Variable / Ahorro</div>
+      </div>
+      <div class="summary-card reveal rev-1">
+        <div class="summary-glow"></div>
+        <div style="font-size:2.5rem;margin-bottom:16px;">🐜</div>
+        <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:10px;">Registra todo</div>
+        <div style="font-size:.88rem;color:var(--white-2);line-height:1.6;margin-bottom:16px;">Cada peso que sale del negocio debe estar registrado. Lo que no mides, no puedes mejorar. El registro diario salva negocios.</div>
+        <div style="font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--green);">$1.460.000</div>
+        <div style="font-size:.75rem;color:var(--gray);">Pérdida anual por $4.000 diarios sin registrar</div>
+      </div>
+      <div class="summary-card reveal rev-2">
+        <div class="summary-glow"></div>
+        <div style="font-size:2.5rem;margin-bottom:16px;">🏦</div>
+        <div style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;margin-bottom:10px;">Crédito formal siempre</div>
+        <div style="font-size:.88rem;color:var(--white-2);line-height:1.6;margin-bottom:16px;">El gota a gota cobra 240% anual. El Fondo Emprender SENA puede ser 0% y condonable. La diferencia entre las dos opciones puede ser tu negocio.</div>
+        <div style="font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--green);">0% vs 240%</div>
+        <div style="font-size:.75rem;color:var(--gray);">Fondo Emprender vs. Gota a gota</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- CTA -->
+<section class="section" style="padding-bottom:96px;">
+  <div class="container">
+    <div class="cta-band reveal">
+      <div class="cta-glow"></div>
+      <div class="badge" style="margin-bottom:20px;"><span class="pulse"></span> Aplícalo desde hoy</div>
+      <h2 class="cta-title">Tu negocio puede <em>sobrevivir y crecer</em></h2>
+      <p class="cta-desc">Con las herramientas correctas y el conocimiento del SENA, eres parte del 42% de emprendedores que sí logran pasar el primer año. Empieza ahora.</p>
+      <div class="cta-actions">
+        <a href="{{ url_for('estadisticas') }}" class="btn-primary">Ver estadísticas →</a>
+        <a href="{{ url_for('finn') }}" class="btn-outline">Hablar con Finn IA</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="copy">© 2026 FinEdge — Todos los derechos reservados</div>
+      <div class="sena-badge">Proyecto SENA · <span>Grupo Finedge</span> · IE Santo Domingo · Caucasia, Antioquia</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// === NAVBAR ===
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+
+// === REVEAL ===
+const reveals = document.querySelectorAll('.reveal');
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+reveals.forEach(el => revObs.observe(el));
+
+// === TABS ===
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  setTimeout(() => {
+    if (id === 'punto') drawRentabilidad();
+    if (id === 'credito') renderCrCompara();
+  }, 100);
+}
+
+// === FORMAT MONEY ===
+function fmt(v) {
+  return '$' + parseFloat(v).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+}
+
+// === BALANCE 50/30/20 ===
+function calcBalance() {
+  const ing = parseFloat(document.getElementById('ingresoBalance').value) || 0;
+  const fij = parseFloat(document.getElementById('gastosFijos').value) || 0;
+  const op = ing * 0.5, vari = ing * 0.3, aho = ing * 0.2;
+  const margen = ing - fij;
+  document.getElementById('resOp').textContent = fmt(op);
+  document.getElementById('resVar').textContent = fmt(vari);
+  document.getElementById('resAhorro').textContent = fmt(aho);
+  document.getElementById('resFijos').textContent = fmt(fij);
+  document.getElementById('legOp').textContent = fmt(op);
+  document.getElementById('legVar').textContent = fmt(vari);
+  document.getElementById('legAhorro').textContent = fmt(aho);
+  const rm = document.getElementById('resultMain');
+  const rf = document.getElementById('resFinal');
+  if (ing > 0) {
+    rf.textContent = fmt(margen);
+    rm.className = 'result-main' + (margen < 0 ? ' warn' : '');
+  }
+  // Proyeccion
+  if (ing > 0) {
+    const ahoMes = aho;
+    const bars = [
+      { name: '3 meses', pct: Math.min((ahoMes*3/5000000)*100,95), label: fmt(ahoMes*3), cls: 'hb-green' },
+      { name: '6 meses', pct: Math.min((ahoMes*6/5000000)*100,95), label: fmt(ahoMes*6), cls: 'hb-green' },
+      { name: '1 año', pct: Math.min((ahoMes*12/5000000)*100,95), label: fmt(ahoMes*12), cls: 'hb-blue' },
+      { name: '2 años', pct: Math.min((ahoMes*24/5000000)*100,95), label: fmt(ahoMes*24), cls: 'hb-gold' },
+    ];
+    renderBars('proyeccionAhorro', bars);
+  }
+}
+
+// === PUNTO DE EQUILIBRIO ===
+function calcPunto() {
+  const fijos = parseFloat(document.getElementById('peGastosFijos').value) || 0;
+  const precio = parseFloat(document.getElementById('pePrecio').value) || 0;
+  const costo = parseFloat(document.getElementById('peCosto').value) || 0;
+  const meta = parseFloat(document.getElementById('peMeta').value) || 0;
+  const margen = precio - costo;
+  document.getElementById('peMargen').textContent = margen > 0 ? fmt(margen) : '$0';
+  if (margen > 0) {
+    const pe = Math.ceil(fijos / margen);
+    const paraMeta = Math.ceil((fijos + meta) / margen);
+    const ingresoReq = paraMeta * precio;
+    const diario = Math.ceil(paraMeta / 30);
+    document.getElementById('pePuntEq').textContent = pe + ' unidades';
+    document.getElementById('peParaMeta').textContent = paraMeta + ' unidades';
+    document.getElementById('peIngresoReq').textContent = fmt(ingresoReq);
+    document.getElementById('peDiario').textContent = diario + ' / día';
+  }
+  drawRentabilidad();
+}
+
+function drawRentabilidad() {
+  const c = document.getElementById('rentabilidadChart');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  const W = c.parentElement.clientWidth;
+  c.width = W; c.height = 200;
+  const fijos = parseFloat(document.getElementById('peGastosFijos').value) || 450000;
+  const precio = parseFloat(document.getElementById('pePrecio').value) || 12000;
+  const costo = parseFloat(document.getElementById('peCosto').value) || 5000;
+  const margen = precio - costo;
+  const maxU = margen > 0 ? Math.ceil(fijos / margen) * 2 + 20 : 200;
+  const pad = { t: 16, r: 16, b: 28, l: 52 };
+  const cW = W - pad.l - pad.r, cH = 200 - pad.t - pad.b;
+  const minY = -fijos, maxY = margen > 0 ? maxU * margen - fijos : fijos;
+  const xP = u => pad.l + (u / maxU) * cW;
+  const yP = v => pad.t + cH - ((v - minY) / (maxY - minY)) * cH;
+  ctx.clearRect(0, 0, W, 200);
+  // Grid
+  ctx.strokeStyle = 'rgba(147,51,234,.06)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(pad.l, yP(0)); ctx.lineTo(pad.l + cW, yP(0));
+  ctx.strokeStyle = 'rgba(147,51,234,.2)'; ctx.stroke();
+  // Revenue line
+  ctx.beginPath(); ctx.moveTo(xP(0), yP(-fijos));
+  ctx.lineTo(xP(maxU), yP(maxU * margen - fijos));
+  ctx.strokeStyle = '#9333ea'; ctx.lineWidth = 2.5; ctx.stroke();
+  // Labels
+  ctx.fillStyle = 'rgba(255,255,255,.3)'; ctx.font = '11px Satoshi'; ctx.textAlign = 'center';
+  ctx.fillText('0', xP(0), 200 - 8);
+  ctx.fillText(maxU + ' u.', xP(maxU), 200 - 8);
+  ctx.fillStyle = 'rgba(239,68,68,.6)'; ctx.font = 'bold 11px Satoshi';
+  ctx.fillText('Pérdida', xP(0) + 30, yP(-fijos / 2));
+  ctx.fillStyle = 'rgba(147,51,234,.8)';
+  ctx.fillText('Ganancia', xP(maxU) - 40, yP((maxU * margen - fijos) / 2));
+}
+
+// === GASTO HORMIGA ===
+function calcHormiga() {
+  const vals = ['hTinto','hTransporte','hCelular','hComida','hEntrete','hOtros'].map(id => parseFloat(document.getElementById(id).value) || 0);
+  const total = vals.reduce((a,b) => a+b, 0);
+  const mes = total * 30, anio = total * 365, cinco = total * 365 * 5;
+  document.getElementById('hDiario').textContent = fmt(total) + ' / día';
+  document.getElementById('hMes').textContent = fmt(mes) + ' / mes';
+  document.getElementById('hAnio').textContent = fmt(anio) + ' / año';
+  document.getElementById('hCinco').textContent = fmt(cinco);
+  // Comparativa
+  if (total > 0) {
+    const bars = [
+      { name: 'Por día', pct: Math.min((total/50000)*100,95), label: fmt(total), cls: 'hb-gold' },
+      { name: 'Por mes', pct: Math.min((mes/3000000)*100,95), label: fmt(mes), cls: 'hb-orange' },
+      { name: 'Por año', pct: Math.min((anio/15000000)*100,95), label: fmt(anio), cls: 'hb-red' },
+      { name: 'En 5 años', pct: Math.min((cinco/50000000)*100,95), label: fmt(cinco), cls: 'hb-red' },
+    ];
+    renderBars('hormigas-comparativa', bars);
+    // Potencial
+    const p = document.getElementById('horPotencial');
+    p.innerHTML = [
+      { ico: '🛒', txt: `Capital para empezar un negocio de alimentos`, val: fmt(anio), ok: anio >= 200000 },
+      { ico: '📱', txt: `Un celular nuevo de gama media`, val: '$800.000', ok: anio >= 800000 },
+      { ico: '🎓', txt: `Un curso o capacitación técnica`, val: '$500.000', ok: anio >= 500000 },
+      { ico: '🏦', txt: `Fondo de emergencia para 1 mes`, val: fmt(mes*3), ok: anio >= mes*3 },
+    ].map(item => `
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--surface2);border:1px solid ${item.ok ? 'var(--green-line)' : 'var(--border)'};border-radius:10px;">
+        <span style="font-size:1.1rem;">${item.ico}</span>
+        <span style="font-size:.82rem;flex:1;color:var(--white-2);">${item.txt}</span>
+        <span style="font-family:var(--font-display);font-size:.85rem;font-weight:700;color:${item.ok ? 'var(--green)' : 'var(--gray)'};">${item.ok ? '✓ ' : ''}${item.val}</span>
+      </div>`).join('');
+    document.getElementById('hPotencial').textContent = fmt(anio);
+  }
+}
+
+// === TRACKER ===
+let gastos = [];
+const cats = {
+  operacion: { label: '⚙️ Operación', color: 'green' },
+  fijo: { label: '🏠 Fijos', color: 'gold' },
+  marketing: { label: '📣 Marketing', color: 'blue' },
+  personal: { label: '👤 Personal', color: 'red' },
+  ahorro: { label: '🏦 Ahorro', color: 'green' },
+  otro: { label: '📦 Otro', color: 'gray' }
+};
+function addGasto() {
+  const desc = document.getElementById('tDesc').value.trim();
+  const monto = parseFloat(document.getElementById('tMonto').value) || 0;
+  const cat = document.getElementById('tCat').value;
+  if (!desc || monto <= 0) { alert('Completa la descripción y el monto.'); return; }
+  gastos.push({ id: Date.now(), desc, monto, cat });
+  document.getElementById('tDesc').value = '';
+  document.getElementById('tMonto').value = '';
+  renderTracker();
+}
+function deleteGasto(id) {
+  gastos = gastos.filter(g => g.id !== id);
+  renderTracker();
+}
+function clearGastos() { if (confirm('¿Limpiar todos los gastos registrados?')) { gastos = []; renderTracker(); } }
+function renderTracker() {
+  const list = document.getElementById('trackerList');
+  if (gastos.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:24px;color:var(--gray);font-size:.84rem;">Aún no hay gastos registrados.<br>¡Empieza ahora!</div>';
+  } else {
+    list.innerHTML = gastos.slice().reverse().map(g => `
+      <div class="tracker-item">
+        <div class="tracker-item-ico">${cats[g.cat]?.label.split(' ')[0] || '📦'}</div>
+        <span class="tracker-item-name">${g.desc}</span>
+        <span class="tracker-item-amount ${cats[g.cat]?.color || ''}">${fmt(g.monto)}</span>
+        <button class="tracker-item-delete" onclick="deleteGasto(${g.id})">✕</button>
+      </div>`).join('');
+  }
+  // Totals
+  const total = gastos.reduce((a,g) => a+g.monto, 0);
+  const totals = {};
+  Object.keys(cats).forEach(k => totals[k] = gastos.filter(g=>g.cat===k).reduce((a,g)=>a+g.monto,0));
+  document.getElementById('totalReg').textContent = fmt(total);
+  document.getElementById('totalOp').textContent = fmt(totals.operacion);
+  document.getElementById('totalFijo').textContent = fmt(totals.fijo);
+  document.getElementById('totalMkt').textContent = fmt(totals.marketing);
+  document.getElementById('totalPers').textContent = fmt(totals.personal);
+  document.getElementById('totalAho').textContent = fmt(totals.ahorro);
+  // Bars
+  if (total > 0) {
+    const bars = Object.entries(totals).filter(([,v])=>v>0).map(([k,v]) => ({
+      name: cats[k].label, pct: Math.round(v/total*100),
+      label: fmt(v) + ' (' + Math.round(v/total*100) + '%)',
+      cls: 'hb-' + cats[k].color
+    }));
+    renderBars('trackerBars', bars);
+  }
+}
+
+// === CREDITO ===
+function actualizarTasa() {
+  const v = document.getElementById('crTipo').value;
+  document.getElementById('crTasa').value = v;
+  calcCredito();
+}
+function calcCredito() {
+  const monto = parseFloat(document.getElementById('crMonto').value) || 0;
+  const plazo = parseFloat(document.getElementById('crPlazo').value) || 0;
+  const tasa = parseFloat(document.getElementById('crTasa').value) || 0;
+  if (monto <= 0 || plazo <= 0 || tasa <= 0) return;
+  const r = Math.pow(1 + tasa/100, 1/12) - 1;
+  const cuota = monto * (r * Math.pow(1+r,plazo)) / (Math.pow(1+r,plazo)-1);
+  const totalPagar = cuota * plazo;
+  const intereses = totalPagar - monto;
+  const costoPct = (intereses/monto*100).toFixed(1);
+  document.getElementById('crTasaMes').textContent = (r*100).toFixed(2) + '%';
+  document.getElementById('crCuota').textContent = fmt(cuota);
+  document.getElementById('crTotal').textContent = fmt(totalPagar);
+  document.getElementById('crIntereses').textContent = fmt(intereses);
+  document.getElementById('crCostoPct').textContent = costoPct + '%';
+  const alerta = document.getElementById('crAlerta');
+  const alertaTxt = document.getElementById('crAlertaText');
+  if (tasa >= 100) {
+    alerta.style.display = 'flex';
+    alertaTxt.textContent = `Con una tasa del ${tasa}%, pagarás ${fmt(intereses)} SOLO en intereses sobre un préstamo de ${fmt(monto)}. Busca siempre el Fondo Emprender SENA o crédito bancario formal.`;
+  } else {
+    alerta.style.display = 'none';
+  }
+}
+function renderCrCompara() {
+  const monto = 2000000, plazo = 12;
+  const tipos = [
+    { name: '🌟 Fondo Emprender', tasa: 0, cls: 'hb-green' },
+    { name: '🏦 Bancóldex Jóvenes', tasa: 14, cls: 'hb-green' },
+    { name: '🏦 Microcrédito bancario', tasa: 18, cls: 'hb-blue' },
+    { name: '💳 Crédito consumo', tasa: 28, cls: 'hb-gold' },
+    { name: '🟡 Tarjeta crédito', tasa: 32, cls: 'hb-orange' },
+    { name: '⛔ Gota a gota', tasa: 240, cls: 'hb-red' },
+  ];
+  const bars = tipos.map(t => {
+    let total;
+    if (t.tasa === 0) { total = monto; }
+    else {
+      const r = Math.pow(1 + t.tasa/100, 1/12) - 1;
+      const cuota = monto * (r * Math.pow(1+r,plazo)) / (Math.pow(1+r,plazo)-1);
+      total = cuota * plazo;
+    }
+    const base = tipos[tipos.length-1];
+    const r2 = Math.pow(1 + base.tasa/100, 1/12) - 1;
+    const cMax = monto * (r2 * Math.pow(1+r2,plazo)) / (Math.pow(1+r2,plazo)-1);
+    const maxTotal = cMax * plazo;
+    return { name: t.name, pct: Math.max(Math.round(total/maxTotal*100), 5), label: fmt(total), cls: t.cls };
+  });
+  renderBars('crCompara', bars);
+}
+
+// === GENERIC BAR RENDERER ===
+function renderBars(containerId, data) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  c.innerHTML = data.map((d, i) => `
+    <div class="h-bar-row">
+      <div class="h-bar-top">
+        <span class="h-bar-name">${d.name}</span>
+        <span class="h-bar-pct">${d.label || d.pct + '%'}</span>
+      </div>
+      <div class="h-bar-track">
+        <div class="h-bar-fill ${d.cls || 'hb-green'}" id="hb-${containerId}-${i}"></div>
+      </div>
+    </div>`).join('');
+  setTimeout(() => data.forEach((d, i) => {
+    const el = document.getElementById(`hb-${containerId}-${i}`);
+    if (el) el.style.width = d.pct + '%';
+  }), 150);
+}
+
+// === INIT ===
+window.addEventListener('load', () => {
+  renderTracker();
+  renderCrCompara();
+});
+</script>
+</body>
+</html>
