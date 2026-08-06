@@ -1,4 +1,5 @@
-Flask==3.1.0
-gunicorn==23.0.0
-groq==0.11.0
-python-dotenv==1.0.1
+Flask
+groq
+python-dotenv
+gunicorn
+httpx<0.28.0
