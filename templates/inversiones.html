@@ -422,25 +422,25 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:1px solid var(-
       <span class="logo-text">Fin<span>Edge</span></span>
     </a>
     <ul class="nav-links">
-      <li><a href="#">Inicio</a></li>
-      <li><a href="#">Estadísticas</a></li>
-      <li><a href="#">Presupuesto</a></li>
-      <li><a href="#">Créditos</a></li>
-      <li><a href="#" class="active">Inversiones</a></li>
-      <li><a href="#">Emprendimiento</a></li>
+      <li><a href="{{ url_for('inicio') }}">Inicio</a></li>
+      <li><a href="{{ url_for('estadisticas') }}">Estadísticas</a></li>
+      <li><a href="{{ url_for('presupuesto') }}">Presupuesto</a></li>
+      <li><a href="{{ url_for('credito_casa') }}">Créditos</a></li>
+      <li><a href="{{ url_for('inversiones') }}" class="active">Inversiones</a></li>
+      <li><a href="{{ url_for('emprendimiento') }}">Emprendimiento</a></li>
     </ul>
     <a href="#" class="btn-nav">Hablar con Finn →</a>
     <button class="hbg" id="hbg" aria-label="Menú"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mm" id="mm">
-  <a href="#">Inicio</a>
-  <a href="#">Estadísticas</a>
-  <a href="#">Presupuesto</a>
-  <a href="#">Créditos</a>
-  <a href="#" class="active">Inversiones</a>
-  <a href="#">Emprendimiento</a>
-  <a href="#" class="btn-nav">Hablar con Finn →</a>
+  <a href="{{ url_for('inicio') }}">Inicio</a>
+  <a href="{{ url_for('estadisticas') }}">Estadísticas</a>
+  <a href="{{ url_for('presupuesto') }}">Presupuesto</a>
+  <a href="{{ url_for('credito_casa') }}">Créditos</a>
+  <a href="{{ url_for('inversiones') }}" class="active">Inversiones</a>
+  <a href="{{ url_for('emprendimiento') }}">Emprendimiento</a>
+  <a href="{{ url_for('finn') }}" class="btn-nav">Hablar con Finn →</a>
 </div>
 
 <!-- HERO -->
