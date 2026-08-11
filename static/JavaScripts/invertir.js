@@ -154,5 +154,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ═══ COMPARADOR — FILAS EXPANDIBLES (ACORDEÓN) ═══
+  document.querySelectorAll('.comp-asset-row').forEach(row => {
+    row.addEventListener('click', () => {
+     const assetKey = row.dataset.asset;
+     const detailRow = row.nextElementSibling;
+
+     // Verificar que la siguiente fila sea el detalle correspondiente
+     if (!detailRow || !detailRow.classList.contains('comp-detail-row')) return;
+
+     const isOpen = detailRow.classList.contains('open');
+
+     // Cerrar TODAS las demás filas de detalle en la misma tabla
+     const table = row.closest('table');
+     if (table) {
+      table.querySelectorAll('.comp-detail-row.open').forEach(dr => {
+        dr.classList.remove('open');
+      });
+      table.querySelectorAll('.comp-asset-row.active').forEach(ar => {
+        ar.classList.remove('active');
+      });
+     }
+
+     // Si no estaba abierto, abrirlo
+     if (!isOpen) {
+      detailRow.classList.add('open');
+      row.classList.add('active');
+     }
+   });
+  });
+
+    
+
   console.log(" FinEdge JS cargado e inicializado sin errores.");
 });
