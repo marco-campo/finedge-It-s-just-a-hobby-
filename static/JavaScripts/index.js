@@ -141,6 +141,56 @@ document.addEventListener('DOMContentLoaded', () => {
     chatInput.addEventListener('keydown', e => { if (e.key === 'Enter') handleSend(); });
   }
 
+  // ---- MODAL: EDUCACIÓN FINANCIERA ----
+  const eduTrigger = document.getElementById('eduModalTrigger');
+  const eduModal = document.getElementById('eduModal');
+  const eduModalOverlay = document.getElementById('eduModalOverlay');
+  const eduModalClose = document.getElementById('eduModalClose');
+
+  function openEduModal() {
+    if (!eduModal) return;
+    eduModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeEduModal() {
+    if (!eduModal) return;
+    eduModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if (eduTrigger && eduModal) {
+    eduTrigger.addEventListener('click', openEduModal);
+    eduTrigger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openEduModal();
+      }
+    });
+  }
+
+  if (eduModalClose) eduModalClose.addEventListener('click', closeEduModal);
+  if (eduModalOverlay) eduModalOverlay.addEventListener('click', closeEduModal);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && eduModal && eduModal.classList.contains('open')) {
+      closeEduModal();
+    }
+  });
+
+  // Tabs dentro del modal
+  document.querySelectorAll('.edu-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.edu-tab').forEach(t => t.classList.remove('on'));
+      document.querySelectorAll('.edu-panel').forEach(p => p.classList.remove('on'));
+      tab.classList.add('on');
+      const targetPanel = document.getElementById('edu-' + tab.dataset.edu);
+      if (targetPanel) targetPanel.classList.add('on');
+      const card = eduModal?.querySelector('.edu-modal-card');
+      if (card) card.scrollTop = 0;
+    });
+  });
+
   // ---- SMOOTH SCROLL ----
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {

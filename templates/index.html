@@ -172,7 +172,7 @@
 
     <div class="modules-grid">
 
-      <div class="module-card featured reveal">
+      <div class="module-card featured reveal" id="eduModalTrigger" role="button" tabindex="0" aria-haspopup="dialog" style="cursor:pointer;">
         <div class="module-arrow">→</div>
         <div class="module-icon">📚</div>
         <div class="module-name">Educación Financiera</div>
@@ -591,6 +591,102 @@
     </div>
   </div>
 </footer>
+
+<!-- ============ MODAL: EDUCACIÓN FINANCIERA ============ -->
+<div class="edu-modal" id="eduModal" role="dialog" aria-modal="true" aria-labelledby="eduModalTitle">
+  <div class="edu-modal-overlay" id="eduModalOverlay"></div>
+  <div class="edu-modal-card">
+    <button class="edu-modal-close" id="eduModalClose" aria-label="Cerrar">✕</button>
+
+    <div class="edu-modal-head">
+      <div class="edu-modal-icon">📚</div>
+      <div>
+        <div class="edu-modal-title" id="eduModalTitle">Educación Financiera</div>
+        <div class="edu-modal-sub">Módulo base · FinEdge</div>
+      </div>
+    </div>
+
+    <div class="edu-tabs">
+      <button class="edu-tab on" data-edu="que-es">¿Qué es?</button>
+      <button class="edu-tab" data-edu="ahorro">Ahorro</button>
+      <button class="edu-tab" data-edu="emergencia">Fondo de emergencia</button>
+      <button class="edu-tab" data-edu="negociacion">Negociación</button>
+    </div>
+
+    <div class="edu-panels">
+
+      <div class="edu-panel on" id="edu-que-es">
+        <h3>¿Qué es la Educación Financiera y por qué importa?</h3>
+        <p>Es la oportunidad de aprender las habilidades básicas para manejar tu dinero: identificar qué crees sobre las finanzas y descubrir cuál es tu verdadera situación financiera hoy. Con esas bases desarrollas dominio en temas clave como el ahorro, el presupuesto, el manejo de deudas y la negociación.</p>
+        <p>Cuando adquieres estas habilidades, quedas mejor preparado para mejorar tu calidad de vida y tomar decisiones de inversión acertadas que hagan crecer tu patrimonio a largo plazo.</p>
+        <div class="edu-highlight">
+          <span class="edu-highlight-tag">El poder de las creencias</span>
+          <p>Los modelos mentales que tenemos sobre el dinero influyen directamente en las decisiones financieras que tomamos. Por eso el primer paso siempre es preguntarte: <strong>¿qué significado tiene el dinero para ti?</strong></p>
+        </div>
+      </div>
+
+      <div class="edu-panel" id="edu-ahorro">
+        <h3>Ahorro: ¿qué es?</h3>
+        <p>Ahorrar es reservar parte de tus ingresos actuales para asegurar tu futuro. Implica priorizar tu "yo futuro" sobre tu "yo presente" — un ejercicio que no resulta nada sencillo para el cerebro, pero que se entrena con el hábito.</p>
+
+        <h4 class="edu-subhead">Metas de ahorro</h4>
+        <div class="edu-mini-grid">
+          <div class="edu-mini-card"><span class="edu-mini-tag">Corto plazo</span><p>Se cumplen en menos de 1 año. Ej: pagar los gastos de la escuela.</p></div>
+          <div class="edu-mini-card"><span class="edu-mini-tag">Mediano plazo</span><p>Se cumplen entre 1 y 3 años. Ej: ahorrar para los gastos de fin de año.</p></div>
+          <div class="edu-mini-card"><span class="edu-mini-tag">Largo plazo</span><p>Toman más de 3 años. Ej: comprar una casa o un vehículo.</p></div>
+        </div>
+
+        <h4 class="edu-subhead">Tipos de ahorro</h4>
+        <div class="edu-mini-grid">
+          <div class="edu-mini-card">
+            <span class="edu-mini-num purple">1</span>
+            <strong>Ahorro formal</strong>
+            <p>Tu dinero es canalizado por entidades financieras reguladas, que garantizan su seguridad. Ej: CDT, CDAT, cuentas de ahorro.</p>
+          </div>
+          <div class="edu-mini-card">
+            <span class="edu-mini-num green">2</span>
+            <strong>Ahorro informal</strong>
+            <p>Lo manejas tú directamente, sin supervisión de ningún ente regulador del Estado. Ej: alcancía, especies, propiedades.</p>
+          </div>
+        </div>
+
+        <p class="edu-quote">"No se trata de cuánto ganamos… es lo que hacemos con lo que ganamos."</p>
+      </div>
+
+      <div class="edu-panel" id="edu-emergencia">
+        <h3>Fondo de emergencia</h3>
+        <p>Es un ahorro separado del resto de tus metas, que se utiliza únicamente para cubrir o compensar el gasto de una situación imprevista. Tenerlo listo evita que tengas que endeudarte cuando algo sale mal.</p>
+
+        <h4 class="edu-subhead">Tipos de emergencias más comunes</h4>
+        <div class="edu-check-list">
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Desastres naturales</div>
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Robo</div>
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Pandemias</div>
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Enfermedad</div>
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Accidente</div>
+        </div>
+      </div>
+
+      <div class="edu-panel" id="edu-negociacion">
+        <h3>Recomendaciones para una buena negociación</h3>
+        <p>Ya sea negociando un préstamo, un salario o un acuerdo comercial, estas prácticas te dan más control sobre el resultado:</p>
+        <div class="edu-check-list edu-check-list-col">
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Prepárate con anticipación.</div>
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Ten claro cuál es tu objetivo en la negociación.</div>
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Averigua los intereses y motivaciones de la otra parte.</div>
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Desarrolla buenas relaciones y trabaja con responsabilidad.</div>
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Sustenta tu punto de vista con información sólida; eso te dará confianza.</div>
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Sé flexible y escucha a la otra parte.</div>
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Usa habilidades de comunicación efectivas, incluso si la otra parte no lo hace.</div>
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Propón soluciones que puedan aceptar ambas partes.</div>
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>Reconoce cuándo detener la negociación si las opciones no son aceptables.</div>
+          <div class="edu-check-item"><span class="edu-check-ico">✔</span>No te desvíes del objetivo principal de la negociación.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <!-- ============ JAVASCRIPT ============ -->
 <script src="{{ url_for('static', filename='JavaScripts/index.js') }}" defer></script>
