@@ -489,7 +489,7 @@ nav.scrolled {
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: .12em;
-  padding:620px 20px 12px;
+  padding: 16px 20px 12px;
 }
 
 .kpi-list {
@@ -545,7 +545,7 @@ nav.scrolled {
 /* === COUNTER STRIP === */
 
 .c-strip {
-  border: var(--border+window);
+  border: var(--border-window);
   background: var(--b0);
   box-shadow: var(--shadow);
   margin-top: 48px;
